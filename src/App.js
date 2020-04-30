@@ -1,26 +1,35 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import { StateProvider } from './state-context';
+import './index.scss';
 
-function App() {
+import DesktopView from './components/views/DesktopView';
+
+const App = (props) => {
+  const initialState = {
+    theme: { primary: 'green' }
+  };
+
+  const reducer = (state, action) => {
+    switch (action.type) {
+      case 'changeTheme':
+        return {
+          ...state,
+          theme: action.newTheme
+        };
+
+      default:
+        return state;
+    }
+  };
+  // return (
+  //   <StateProvider initialState={initialState} reducer={reducer}>
+  //     // App content ...
+  //     <DesktopView />
+  //   </StateProvider>
+  // )
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    <DesktopView />
+  )
 }
 
-export default App;
+export default App
