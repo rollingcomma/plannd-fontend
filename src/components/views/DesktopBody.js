@@ -19,7 +19,7 @@ import {data} from '../../services/data'
     // console.log(note)
     
     return (
-      <div className="app">
+      <div className="app justify-content">
         <Menu></Menu>
         <Nav featureName="Notes" feature={data.note}></Nav>
       </div>

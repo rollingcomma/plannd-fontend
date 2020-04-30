@@ -45,23 +45,23 @@ exports.data = {
       {
         "_id": "5ea3176eeb66b629f682345e",
         "title": "Place to Visit",
-        "note": "Wall-E&location=Earth&about=%7B%22ops%22%3A%5B%7B%22attributes%22%3A%7B%22bold%22%3Atrue%7D%2C%22insert%22%3A%22Lovely+People%22%7D%2C%7B%22insert%22%3A%22%5Cn%22%7D%2C%7B%22attributes%22%3A%7B%22color%22%3A%22%23d4d1cb%22%7D%2C%22insert%22%3A%22Max+is+the+owner+and+we+decided+to+go+with+him+after+receiving+multiple+quotes+from+other+companies.+He's+responsive%2C+organized%2C+and+attentive+to+the+details.%22%7D%2C%7B%22insert%22%3A%22%5Cn%22%7D%5D%7D ",
+        "note": "<h2><strong>Pura Tanah Lot</strong></h2><p>About 20 kilometers northwest of Kuta, Pura Tanah Lot (\"Pura\" means temple in Balinese) is one of Bali's most iconic temples thanks to its spectacular seaside setting on a rocky islet surrounded by crashing waves.</p><p><br></p>",
         "created_at": "2020-04-24T16:44:30.994Z",
         "updated_at": "2020-04-24T16:44:30.994Z"
       },
       {
         "_id": "5ea3179b1cb7c42a0cdb1ef9",
         "title": "Travel Notes",
-        "note": "Wall-E&location=Earth&about=%7B%22ops%22%3A%5B%7B%22attributes%22%3A%7B%22bold%22%3Atrue%7D%2C%22insert%22%3A%22Lovely+People%22%7D%2C%7B%22insert%22%3A%22%5Cn%22%7D%2C%7B%22attributes%22%3A%7B%22color%22%3A%22%23d4d1cb%22%7D%2C%22insert%22%3A%22Max+is+the+owner+and+we+decided+to+go+with+him+after+receiving+multiple+quotes+from+other+companies.+He's+responsive%2C+organized%2C+and+attentive+to+the+details.%22%7D%2C%7B%22insert%22%3A%22%5Cn%22%7D%5D%7D ",
-        "created_at": "2020-04-24T16:45:15.579Z",
-        "updated_at": "2020-04-24T16:45:15.579Z"
+        "note": "<h2><strong>Trip to Bali</strong></h2><p>One week trip, Lovely place. blablabla...</p><p><br></p>",
+        "created_at": "2020-04-26T16:45:15.579Z",
+        "updated_at": "2020-04-26T16:45:15.579Z"
       },
       {
         "_id": "5ea317c50fd8442a21bcfdc8",
         "title": "Sightseeing",
-        "note": "testing data",
-        "created_at": "2020-04-24T16:45:57.371Z",
-        "updated_at": "2020-04-24T16:45:57.371Z"
+        "note": "<h1>testing data</h1>",
+        "created_at": "2020-04-27T16:45:57.371Z",
+        "updated_at": "2020-04-27T16:45:57.371Z"
       },
       {
         "_id": "5ea317dab68e642a36634c16",

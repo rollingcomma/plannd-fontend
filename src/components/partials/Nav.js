@@ -6,17 +6,21 @@ import ContentContainer from './ContentContainer'
   //   super();
   // }
 const Nav = (props) => {
-    const {featureName, feature} = props
-    // debugger
-    const [content, setContent] = useState(feature.notebooks[0]);
-    const handleUpdateState = useCallback((id, contentArr) => setContent(contentArr.filter(element=>element._id == id)),[content])
+  const {featureName, feature} = props
+  // debugger
+  const [content, setContent] = useState(feature.notebooks[0]);
+  const handleUpdateState = useCallback((id, contentArr) => { 
+    const arr = contentArr.filter(element => element._id == id)
+    if(arr.length === 1) setContent(arr[0])
+  },[])
+    // const handleUpdateState = useCallback((id, contentArr) => setContent(contentArr[id]),[content])
 
     return (
-      <div className="d-flex flex-row">
+      <div className="d-flex flex-row w-75">
         <div className="categories-nav">
           <div className="top-function-name">
             <div className="rectangle"></div>
-            <p className="function-name">{featureName}</p>
+            <p id={feature._id} className="function-name">{featureName}</p>
             <div className="text-banner"></div>
           </div>
           <div className="saved-elements-list">
@@ -33,7 +37,7 @@ const Nav = (props) => {
           </div>
         </div>
 
-        <ContentContainer content={content} />
+        <ContentContainer featureId={feature._id} content={content} />
         
       </div>
     )

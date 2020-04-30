@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Footer from '../partials/Footer';
 import Header from '../partials/Header';
 import DesktopBody from './DesktopBody';
-import {user} from '../../services/data'
+import {data} from '../../services/data'
 
 class DesktopView extends React.Component {
   // constructor(feature) {
@@ -17,7 +17,7 @@ class DesktopView extends React.Component {
   render() {
     return (
       <div>
-        <Header user={user} />
+        <Header user={data.user} />
         <DesktopBody/>
         <Footer/>
       </div>

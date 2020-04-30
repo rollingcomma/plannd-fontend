@@ -9,16 +9,18 @@ import Editor from './Editor'
 
   //   render() {
       // const {content} = selectState(this.context)
-    const ContentContainer = ({content}) => {
+    const ContentContainer = (props) => {
+      const {featureId, content} = props
       // content = props.note
+      // debugger
       return (
         <div className="content">
           <div id="space-around-content">
             <div className="content-title"><p>{content.title}</p></div>
-            <div className="date-created"><p>{content.created_at.substr(10)}</p></div>
+            <div className="date-created"><p>{content.created_at.substr(0, 10)}</p></div>
             <hr />
             <div className="content-text">
-              <Editor {...content.note}></Editor>
+              <Editor featureId={featureId} content={content.note}></Editor>
             </div>
           </div>
         </div>

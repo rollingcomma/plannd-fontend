@@ -3,7 +3,9 @@ body {
     background-color: rgb(240, 240, 240);
     font-family: 'Nunito Sans', sans-serif;
 }
-
+p {
+    margin-top: 1rem;
+}
 .app {
     display: flex;
     justify-content: center;
@@ -13,6 +15,7 @@ body {
 .top-banner {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     height: 100px;
     width: 100vw;
     background-color: white;
@@ -126,8 +129,8 @@ hr {
 
 .content {
     height: 50vh;
-    width: 60%;
-    max-width: 625px;
+    width: 70%;
+    max-width: 1000px;
     background-color: white;
     box-shadow: 0px 0px 10px rgb(197, 197, 197);
     border-radius: 5px;
@@ -156,20 +159,49 @@ hr {
 .header_logo {
     display: flex;
     width: 140px;
-    margin-left: 20%;
+    margin-left: 40%;
+}
+
+.current-trip {
+    display: flex; 
+    margin-left: 9%;
+    align-items: center; 
+}
+
+#bali-text { 
+    font-weight: bold; 
+}
+
+.vertical-line {
+    border-left: 1px solid black; 
+    height: 40px; 
+    margin-left: 50px; 
 }
 
 .dashboard-link {
     display: inline-flex; 
     align-items: center;
     flex-direction: row; 
-    margin-left: 7%
+    margin-left: 3%
+}
+
+.project-link {
+    display: inline-flex; 
+    align-items: center;
+    flex-direction: row; 
+    margin-left: 3%; 
+}
+
+.project-icon {
+    height: 16px; 
+    margin-right: 8px; 
+    box-shadow: 1px 1px 0.5px grey; 
 }
 
 .login {
     display: flex; 
     align-items: center;
-    margin-left: 68%;
+    margin-right: 5%;
 }
 
 .dashboard-icon { 

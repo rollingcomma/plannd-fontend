@@ -1,8 +1,10 @@
 import React from 'react';
 import ReactQuill from 'react-quill'; 
-import PropTypes from 'prop-types'
+import PropTypes from 'prop-types';
 // import ContentContainer from './ContentContainer';
-
+const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
+Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
+ReactQuill.Quill.register(Font, true);
 /*
  * Simple editor component that takes placeholder text as a prop
 */
@@ -10,30 +12,58 @@ class Editor extends React.Component {
   constructor(props) {
     super(props)
     // const{content} = this.props
-    this.state = { text: this.props, theme: 'snow' }
+    
+    this.state = {
+      featureId: this.props.featureId,
+      contentHtml: this.props.content, 
+      theme: 'snow' 
+    }
+    // this.textInput = React.createRef();
+    this.handleBlur = this.handleBlur.bind(this);
     this.handleChange = this.handleChange.bind(this)
+
   }
 
-  handleChange(value) {
-    this.setState({ text: value });
+  componentDidUpdate(prevProps) {
+    if (this.props.content !== prevProps.content) {
+      // debugger
+      this.setState(
+        {
+          featureId: this.props.featureId,
+          contentHtml: this.props.content,
+          theme: this.state.theme
+        }
+      )
+    }
+  }
+  
+  handleChange = (value)  => {
+    this.setState({ contentHtml: value });  
   }
 
-  handleThemeChange(newTheme) {
+  handleThemeChange = (newTheme) => {
     if (newTheme === "core") newTheme = null;
     this.setState({ theme: newTheme })
   }
 
+  handleBlur = () => {
+    const val = this.state.contentHtml.replace(/"/g, '\\"')
+    console.log(val)
+  }
+  
   render() {
+    // debugger
     return (
       <div>
         <ReactQuill
           theme={this.state.theme}
           onChange={this.handleChange}
-          value={this.state.text}
+          onBlur={this.handleBlur}
+          value={this.state.contentHtml}
           modules={Editor.modules}
           formats={Editor.formats}
           bounds={'.app'}
-          placeholder={this.props.placeholder}
+          placeholder="Start typing something..."
         />
         <div className="themeSwitcher">
           <label>Theme </label>
@@ -41,7 +71,6 @@ class Editor extends React.Component {
             this.handleThemeChange(e.target.value)}>
             <option value="snow">Snow</option>
             <option value="bubble">Bubble</option>
-            <option value="core">Core</option>
           </select>
         </div>
       </div>
@@ -75,8 +104,7 @@ Editor.modules = {
 Editor.formats = [
   'header', 'font', 'size',
   'bold', 'italic', 'underline', 'strike', 'blockquote',
-  'list', 'bullet', 'indent',
-  'link', 'image', 'video'
+  'list', 'bullet', 'indent'
 ]
 
 /* 
