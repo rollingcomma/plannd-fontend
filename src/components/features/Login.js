@@ -23,7 +23,7 @@ class Login extends React.Component {
         <div class="bottom-container">
           <div class="row">
             <div class="col">
-              <a href="#" style="color:white" class="btn">Register Now </a>
+              <a href="/#" style="color:white" class="btn">Register Now </a>
             </div>
           </div>
         </div>

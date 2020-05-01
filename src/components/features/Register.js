@@ -28,7 +28,7 @@ className Register extends React.Component {
             <label>Remember me</label>
             <input type="checkbox" id="rm" name="remember" style="margin-bottom:15px"/>
               <p>By creating an account you agree to our
-           <a href="#" style="color:dodgerblue">Terms and Privacy</a>.</p> */}
+           <a href="/#" style="color:dodgerblue">Terms and Privacy</a>.</p> */}
          </form>
       </div>
     )
