@@ -1,17 +1,9 @@
 import React from 'react';
 // import DropdownMenu from './DropDownMenu'
 // import {data} from '../../services/data'
-// class Header extends React.Component {
-  // constructor(username) {
-  //   // debugger
-  //   super();
-  //   this.state = {
-  //     username: username
-  //   }
-  // }
-const Header = ({user}) =>{
 
-  // render() {
+const Header = ({user}) =>{
+debugger
     return (
       <div className="top-banner">
         <div className="d-flex w-75">
@@ -43,9 +35,8 @@ const Header = ({user}) =>{
         </div>
       </div>
     )
-  // }
+ 
 }
   
-// }
 
 export default Header;

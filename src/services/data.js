@@ -39,7 +39,7 @@ exports.data = {
       "updated_at": "2020-04-23T07:00:00.000Z"
     }],
 
-  note: {
+  notes: {
     "_id": "5ea3175aed33b229e2327d96",
     "project": "5ea2098bce2a4e12abfcf052",
     "notebooks": [

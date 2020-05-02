@@ -1,9 +1,10 @@
 import React from 'react';
 // import Editor from '../partials/Editor'
 import {StateContext} from './state-context'
+import { BrowserRouter as Router } from 'react-router-dom';
+import Routes from '../../services/Routes';
 
-const ContentContainer = (Component) =>({content}) => {
-  
+const FeatureContainer = ({content}) => {
       // const { content } = props
       debugger
       return (
@@ -15,7 +16,9 @@ const ContentContainer = (Component) =>({content}) => {
                 <div className="date-created"><p>{content.created_at.substr(0,10)}</p></div>
                 <hr />
                 <div className="content-text">
-                  <Component {...content}></Component>
+                <Router>
+                  <Routes content={content} />
+                </Router>
                 </div>
               </div>
             {/* }
@@ -30,4 +33,4 @@ const ContentContainer = (Component) =>({content}) => {
   // return ContentContainer
 // }
 
-export default ContentContainer
+export default FeatureContainer

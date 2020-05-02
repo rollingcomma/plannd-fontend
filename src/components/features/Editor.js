@@ -1,94 +1,65 @@
-import React, { useState} from 'react';
-import ReactQuill from 'react-quill'; 
+import React from 'react';
+import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
-import ContentContainer from '../HOC/ContentContainer';
-
+// import ContentContainer from '../HOC/ContentContainer';
 const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
 Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
 /*
  * Simple editor component that takes placeholder text as a prop
 */
-
-// class Editor extends React.Component {
-  // constructor(props) {
-  //   super(props)
+class Editor extends React.Component {
+  constructor(props) {
+    super(props)
     // const{content} = this.props
-  const Editor = (props) =>{
-    // state = {
-    //   featureId: this.props._id,
-    //   editorHtml: this.props.note, 
-    //   theme: 'snow' 
-    // }
-    const [content, setContent] = useState({
-      featureId: props._id,
-      editorHtml: props.note,
+
+    this.state = {
+      documentId: this.props.content._id,
+      editorHtml: this.props.content.note,
       theme: 'snow'
-    })
+    }
     // this.textInput = React.createRef();
-  //   this.handleBlur = this.handleBlur.bind(this);
-  //   this.handleChange = this.handleChange.bind(this)
+    this.handleBlur = this.handleBlur.bind(this);
+    this.handleChange = this.handleChange.bind(this)
 
-  // }
-  
-  // componentWillReceiveProps() {
-  //   if (this.props.content !== this.state.content) {
-  //     debugger
-  //     this.setState(
-  //       {
-  //         featureId: this.props._id,
-  //         editorHtml: this.props.note,
-  //         theme: this.state.theme
-  //       }
-  //     )
-  //   }
-  // }
-
-  // static getDerivedStateFromProps(props, state) {
-  //   if (props.content !== state.content) {
-  //     debugger
-  //     return {
-  //         featureId: props._id,
-  //         editorHtml: props.note,
-  //         theme: state.theme
-  //       }
-  //     // )
-  //   }
-  // }
-
-  // 
-  const handleChange = (value)  => {
-    setContent(
-      { 
-        featureId: content.featureId,
-        editorHtml: value,
-        theme:content.theme 
-      });  
   }
 
-  const handleThemeChange = (newTheme) => {
+  componentDidUpdate(prevProps) {
+    if (this.props.content !== prevProps.content) {
+      // debugger
+      this.setState(
+        {
+          documentId: this.props.content._id,
+          editorHtml: this.props.content.note,
+          theme: this.state.theme
+        }
+      )
+    }
+  }
+
+  handleChange = (value) => {
+    this.setState({ editorHtml: value });
+  }
+
+  handleThemeChange = (newTheme) => {
     if (newTheme === "core") newTheme = null;
-    setContent({
-      featureId: content.featureId,
-      editorHtml: content.editorHtml,
-      theme: newTheme
-    });  
+    this.setState({ theme: newTheme })
   }
 
-  const handleBlur = () => {
-    const val = content.editorHtml.replace(/"/g, '\\"')
+  handleBlur = () => {
+    const val = this.state.editorHtml.replace(/"/g, '\\"')
     console.log(val)
   }
-  
-  // render() {
+
+  render() {
     debugger
     return (
       <div>
         <ReactQuill
-          theme={content.theme}
-          onChange={handleChange}
-          onBlur={handleBlur}
-          value={content.editorHtml}
+          theme={this.state.theme}
+          onChange={this.handleChange}
+          onBlur={this.handleBlur}
+          value={this.state.editorHtml}
           modules={Editor.modules}
           formats={Editor.formats}
           bounds={'.app'}
@@ -104,7 +75,7 @@ ReactQuill.Quill.register(Font, true);
         </div>
       </div>
     )
-  // }
+  }
 }
 
 /* 
@@ -142,5 +113,5 @@ Editor.formats = [
 Editor.propTypes = {
   placeholder: PropTypes.string,
 }
-// Editor.contextType = StateContext
-export default ContentContainer(Editor)
+
+export default Editor

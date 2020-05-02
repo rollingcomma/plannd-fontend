@@ -1,36 +1,28 @@
 import React from 'react'
+import IndexContainer from '../HOC/IndexContainer'
+const Register = (props) => {
+  return (
+    <div className="d-flex flex-column justify-content-center align-items-center side-container">
+      <img src="/assets/logo-text.png" className="logo-text mt-4 mb-2" alt="" />
+      <form className="d-flex flex-column align-items-center justify-content- center w-100" method="post" name="login" action="/login">
+        <label className="control-label" htmlFor="email"><b>Email</b></label>
+        <span id="emailErr" className="error"></span>
+        <input type="email" className="form-control" name="email" required />
 
-className Register extends React.Component {
-  
-  render() {
-    return (
-      <div >
-        <form className="container modal-content animate" method="post" name="register" action="/register">
-          <p>Please fill in this form to create an account</p>
+        <label className="control-label" htmlFor="username"><b>Username</b></label>
+        <span id="emailErr" className="error"></span>
+        <input type="email" className="form-control" name="email" required />
+        
+        <label className="control-label" htmlFor="password"><b>Password</b></label>
+        <span id="pwdErr" className="error"></span>
+        <input type="password" className="form-control" id="password" name="password" required />
 
-          <label for="username"><b>Username</b></label>
-          <span id="usrErr" className="error"></span>
-          <input type="text" className="form-control" id="usr" name="username" required/>
-
-          <label for="password"><b>Password</b></label>
-          <span id="pwdErr" className="error"></span>
-          <input type="password" className="form-control" id="password" name="password" required/>
-
-          <label for="password-repeat"><b>Repeat Password</b></label>
-          <span id="pwdRpErr" className="error"></span>
-          <input type="password" className="form-control" id="passwordrp" name="passwordRp" required/>
-
-          <label for="email"><b>Email</b></label>
-          <span id="emailErr" className="error"></span>
-          <input type="email" className="form-control" name="email" required/>
-          
-          {/* <hr>
-            <label>Remember me</label>
-            <input type="checkbox" id="rm" name="remember" style="margin-bottom:15px"/>
-              <p>By creating an account you agree to our
-           <a href="/#" style="color:dodgerblue">Terms and Privacy</a>.</p> */}
-         </form>
-      </div>
-    )
-  }
+        <label className="control-label" htmlFor="password-reapeat"><b>Repeat Password</b></label>
+        <span id="pwdErr" className="error"></span>
+        <input type="password" className="form-control" id="password" name="password" required />
+        <input type="submit" className="form-control my-3 btn btn-info" name="Register" value="Register"/>
+      </form>
+    </div>
+  )
 }
+export default IndexContainer(Register)

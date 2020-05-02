@@ -28,7 +28,7 @@ const App = () => {
   //   </StateProvider>
   // )
   return (
-    <DesktopView />
+    <DesktopView isLoggedIn={true}/>
   )
 }
 

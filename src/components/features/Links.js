@@ -1,5 +1,5 @@
 import React from 'react'
-import ContentContainer from '../HOC/ContentContainer';
+import ContentContainer from '../HOC/FeatureContainer';
 
 class Links extends React.Component {
 
@@ -15,4 +15,4 @@ class Links extends React.Component {
   }
 }
 
-export default ContentContainer(Links)
+export default Links
