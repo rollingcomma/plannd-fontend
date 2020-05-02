@@ -1,5 +1,5 @@
 import React from 'react'
-import ContentContainer from '../HOC/FeatureContainer';
+import FeatureContainer from '../HOC/FeatureContainer';
 
 class Checklist extends React.Component {
 
@@ -14,4 +14,4 @@ class Checklist extends React.Component {
   }
 }
 
-export default Checklist
+export default FeatureContainer(Checklist)

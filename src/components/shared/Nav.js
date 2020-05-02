@@ -1,5 +1,7 @@
 import React from 'react';
-import FeatureContainer from '../HOC/FeatureContainer';
+import {BrowserRouter as Router} from 'react-router-dom';
+import Routes from '../../services/Routes'
+// import FeatureContainer from '../HOC/FeatureContainer';
 
 // const Nav = ({feature}) => {
   
@@ -59,31 +61,32 @@ class Nav extends React.Component {
   debugger
   return (
     <div className="d-flex flex-row w-75">
-        <div className="categories-nav">
-          <div className="top-function-name">
-            <div className="rectangle"></div>
-          <p id={this.state.id} className="function-name">{this.state.name}</p>
-            <div className="text-banner"></div>
-          </div>
-          <div className="saved-elements-list">
-            {this.state.contentArr.map(element =>
-            <div key={element._id}>
-                <p className="pointer" onClick={() => this.handleUpdateState(element._id, this.state.contentArr)} id={element._id}>{element.title}</p>
-              <hr/>
-            </div> 
-            )}
-            <div className="create-icon">
-              <img src="/assets/add-icon.svg" alt="add" />
-              <p>Create</p>
-            </div>
+      <div className="categories-nav">
+        <div className="top-function-name">
+          <div className="rectangle"></div>
+        <p id={this.state.id} className="function-name">{this.state.name}</p>
+          <div className="text-banner"></div>
+        </div>
+        <div className="saved-elements-list">
+          {this.state.contentArr.map(element =>
+          <div key={element._id}>
+              <p className="pointer" onClick={() => this.handleUpdateState(element._id, this.state.contentArr)} id={element._id}>{element.title}</p>
+            <hr/>
+          </div> 
+          )}
+          <div className="create-icon">
+            <img src="/assets/add-icon.svg" alt="add" />
+            <p>Create</p>
           </div>
         </div>
-      <FeatureContainer content={this.state.currentContent} />
+      </div>
       {/* <StateContext.Provider value={content}> */}
-        {/* <Router>
-          <Routes content={content}/>
-        </Router> */}
+      <Router>
+        <Routes content={this.state.currentContent} />
+      </Router>
       {/* </StateContext.Provider> */}
+      {/* <FeatureContainer content={this.state.currentContent} /> */}
+     
     </div>
   )
   }

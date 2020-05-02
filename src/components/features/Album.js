@@ -1,5 +1,5 @@
 import React from 'react'
-import ContentContainer from '../HOC/FeatureContainer';
+import FeatureContainer from '../HOC/FeatureContainer';
 
 class Album extends React.Component {
 
@@ -14,4 +14,4 @@ class Album extends React.Component {
   }
 }
 
-export default Album
+export default FeatureContainer(Album)

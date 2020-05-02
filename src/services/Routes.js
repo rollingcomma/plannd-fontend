@@ -5,22 +5,22 @@ import Links from '../components/features/Links'
 import Album from '../components/features/Album'
 import Checklist from '../components/features/Checklist'
 
-const Routes =(props) => {
+const Routes =({content}) => {
   debugger
   return(
     <Switch>
       
       <Route path="/notes">
-        <Editor content={props.content}/>
+        <Editor content={content}/>
       </Route>
       <Route path="/todos">
-        <Checklist content={props.content}/>
+        <Checklist content={content}/>
       </Route>
       <Route path="/links">
-        <Links content={props.content}/>
+        <Links content={content}/>
       </Route>
       <Route path="/gallery">
-        <Album content={props.content}/>
+        <Album content={content}/>
       </Route>
     </Switch> 
   )
