@@ -1,5 +1,5 @@
 import React from 'react'
-import {useHistory} from 'react-router-dom'
+import {useHistory, Redirect} from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form';
 import useUserState from '../../helpers/customerHook';
 import IndexContainer from '../HOC/IndexContainer';
@@ -11,6 +11,7 @@ const Login = (props) => {
   const handleRedirectClick =() =>{
     history.push('/register')
   }
+
   const { handleSubmit, register, errors} = useForm();
   const [userState, dispatch] = useUserState();
   const onSubmit = async (formData) => {
@@ -86,7 +87,7 @@ const Login = (props) => {
           </ErrorMessage>
         </div>
         <div className="form-group">
-          <label className="control-label" htmlFor="password"><b>Username</b></label>
+          <label className="control-label" htmlFor="password"><b>Password</b></label>
           <input type="password" name="password" className="form-control"
             ref={register({
               required: "Password is required",

@@ -7,26 +7,22 @@ import IndexHeader from '../shared/IndexHeader';
 import DesktopBody from './DesktopBody';
 import RoutesIndex from '../../services/RoutesIndex';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { UserStateProvider} from '../HOC/Provider';
+import { UserStateProvider } from '../HOC/Provider';
 // import { initStore } from '../../store/store'
 import useUserState from '../../helpers/customerHook';
-import {data} from '../../store/data'
+import { data } from '../../store/data'
 
-const DesktopView = (props) => {
-  const [userState, dispatch] = useUserState();
+const PrivateView = ({data}) => {
+  // const [userState, dispatch] = useUserState();
   debugger
   // const history = useHistory()
   // const header = userState.isLoggedIn ? Header : IndexHeader
   return (
     <UserStateProvider>
-      <IndexHeader/>
-      <Router>
-        <RoutesIndex data={data}/>
-      </Router>
+      <Header user={data.user} />
+      <DesktopBody data={data} />
       <Footer />
     </UserStateProvider >
   )
 }
-
-
-export default DesktopView
+export default PrivateView

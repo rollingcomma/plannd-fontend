@@ -1,6 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router} from 'react-router-dom';
 import Routes from '../../services/Routes'
+import RoutesIndex from '../../services/RoutesIndex';
 // import FeatureContainer from '../HOC/FeatureContainer';
 
 // const Nav = ({feature}) => {

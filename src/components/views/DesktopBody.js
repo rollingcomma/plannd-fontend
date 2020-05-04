@@ -51,10 +51,10 @@ import Nav from '../shared/Nav'
     return (
       <div className="app justify-content">
         <div className="side-nav">
-          <a href="/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></a>
-          <a href="/todos" onClick={()=> handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></a>
-          <a href="/links" onClick={()=> handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></a>
-          <a href="/gallery" onClick={()=> handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></a>
+          <p href="/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></p>
+          <p href="/todos" onClick={()=> handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></p>
+          <p href="/links" onClick={()=> handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></p>
+          <p href="/gallery" onClick={()=> handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></p>
         </div>
         <Nav feature={feature}></Nav>
       </div>
