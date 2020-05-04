@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text*/
 import React, { useState, useEffect, useCallback } from 'react';
-
+import { BrowserRouter as Router, Link} from 'react-router-dom'
 import Nav from '../shared/Nav'
 
   const DesktopBody = ({data}) => {
@@ -13,6 +13,7 @@ import Nav from '../shared/Nav'
       });
 
     const handleFeatureSwitch = (featureName) => {
+      
       switch (featureName) {
         case "notes":
           setFeature({
@@ -33,7 +34,6 @@ import Nav from '../shared/Nav'
             name: "links",
             contentId: data.links._id,
             contentArr: data.links.categories
-            
           });
           return;
         case "gallery":
@@ -42,7 +42,7 @@ import Nav from '../shared/Nav'
             contentId: data.gallery._id,
             contentArr: data.gallery.albums
           });
-          return;
+         return;
         default:
       }
     }
@@ -51,10 +51,12 @@ import Nav from '../shared/Nav'
     return (
       <div className="app justify-content">
         <div className="side-nav">
-          <a href="/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></a>
-          <a href="/todos" onClick={()=> handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></a>
-          <a href="/links" onClick={()=> handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></a>
-          <a href="/gallery" onClick={()=> handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></a>
+          <Router>
+          <Link to="/notes" onClick={(e)=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
+          <Link to="/todos" onClick={(e) => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
+          <Link to="/links" onClick={(e) => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
+          <Link to="/gallery" onClick={(e) => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
+          </Router>
         </div>
         <Nav feature={feature}></Nav>
       </div>
