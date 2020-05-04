@@ -69,22 +69,18 @@ class DropdownMenu extends React.Component {
     // }
 
     return (
-      <BaseMenu {...this.props} open={this.state.open} toggle={this.toggle}/>
+      <BaseMenu {...this.props} open={this.state.open} toggle={this.toggleMenu}/>
     );
   }
 }
 
 DropdownMenu.propTypes = {
-  icon: PropTypes.string,
-  label: PropTypes.string,
   links: PropTypes.shape({}).isRequired,
   // linkClickHandler: PropTypes.func.isRequired,
   open: PropTypes.bool
 };
 
 DropdownMenu.defaultProps = {
-  icon: undefined,
-  label: undefined,
   open: false
 };
 

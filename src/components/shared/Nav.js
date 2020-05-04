@@ -10,7 +10,7 @@ import Routes from '../../services/Routes'
 //   useEffect (() => {
 //     debugger
 //     setContent(feature.contentArr[0])
-//   }, [feature.contentArr[0]])
+//   }, [])
 
 //   const handleUpdateState = useCallback((id, contentArr) => {
 //     const arr = contentArr.filter(element => element._id === id)
@@ -91,6 +91,5 @@ class Nav extends React.Component {
   )
   }
 }
-
 
 export default Nav

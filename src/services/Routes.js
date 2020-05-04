@@ -1,12 +1,14 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
+import Login from '../components/features/Login'
+import Register from '../components/features/Register'
 import Editor from '../components/features/Editor'
 import Links from '../components/features/Links'
 import Album from '../components/features/Album'
 import Checklist from '../components/features/Checklist'
 
 const Routes =({content}) => {
-  debugger
+  // debugger
   return(
     <Switch>
       
@@ -22,6 +24,7 @@ const Routes =({content}) => {
       <Route path="/gallery">
         <Album content={content}/>
       </Route>
+      
     </Switch> 
   )
 }

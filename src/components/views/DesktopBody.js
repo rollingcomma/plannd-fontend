@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text*/
 import React, { useState, useEffect, useCallback } from 'react';
-
+// import connect from '../HOC/connect'
 import Nav from '../shared/Nav'
 
   const DesktopBody = ({data}) => {
@@ -46,7 +46,7 @@ import Nav from '../shared/Nav'
         default:
       }
     }
-
+    //todo
     debugger
     return (
       <div className="app justify-content">

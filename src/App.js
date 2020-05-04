@@ -28,8 +28,9 @@ const App = () => {
   //   </StateProvider>
   // )
   return (
-    <DesktopView isLoggedIn={true}/>
+    <DesktopView />
   )
+  
 }
 
 export default App
