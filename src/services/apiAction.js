@@ -23,10 +23,13 @@ export const loginGoogle = () => {
 }
 
 export const postUser = (formData) => {
+  debugger
   return axios({
     method:'post',
-    url:'/api/index/signup',
-    data:formData})}
+    url:'/api/index/register/',
+    data:formData
+  })
+}
     
   
   

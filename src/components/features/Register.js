@@ -4,7 +4,7 @@ import { useForm, ErrorMessage} from 'react-hook-form'
 import IndexContainer from '../HOC/IndexContainer'
 import { sameAs } from '../../helpers/validator'
 import useUserState from '../../helpers/customerHook';
-import { getUser } from '../../services/apiAction'
+import { postUser } from '../../services/apiAction'
 const Register = (props) => { 
 
   const history = useHistory()
@@ -16,13 +16,14 @@ const Register = (props) => {
   const [userState, dispatch] = useUserState();
   
   const onSubmit = async (formData) => {
-    getUser(formData)
+    debugger
+    postUser(formData)
       .then(res => {
         const user = res.data
-        if (user.auth) {
+        if (user) {
           dispatch({
             isLoggedIn: true,
-            user: user.user
+            user: user
           })
           debugger
           history.push('/')
@@ -86,7 +87,7 @@ const Register = (props) => {
           minLength: {
             value: 4, message: "Minimum length of password is 4 characters!"
           },
-          validate: { sameAs: sameAs('password', getValues), message:"Password doesn't match"} 
+          validate: sameAs('password', getValues)
         })} />
           <ErrorMessage errors={errors} name="password-confirm">
             {({ message }) => <p className="text-danger">{message}</p>}

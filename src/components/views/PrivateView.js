@@ -12,7 +12,7 @@ import { UserStateProvider } from '../HOC/Provider';
 import useUserState from '../../helpers/customerHook';
 import { data } from '../../store/data'
 
-const PrivateView = ({data}) => {
+const PrivateView = () => {
   // const [userState, dispatch] = useUserState();
   debugger
   // const history = useHistory()
@@ -21,7 +21,6 @@ const PrivateView = ({data}) => {
     <UserStateProvider>
       <Header user={data.user} />
       <DesktopBody data={data} />
-      <Footer />
     </UserStateProvider >
   )
 }

@@ -10,23 +10,18 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import { UserStateProvider} from '../HOC/Provider';
 // import { initStore } from '../../store/store'
 import useUserState from '../../helpers/customerHook';
-import {data} from '../../store/data'
 
-const DesktopView = (props) => {
+
+const DesktopView = ({component}) => {
   const [userState, dispatch] = useUserState();
   debugger
   // const history = useHistory()
   // const header = userState.isLoggedIn ? Header : IndexHeader
   return (
     <UserStateProvider>
-      <IndexHeader/>
-      <Router>
-        <RoutesIndex data={data}/>
-      </Router>
-      <Footer />
+     
+      
     </UserStateProvider >
   )
 }
-
-
 export default DesktopView

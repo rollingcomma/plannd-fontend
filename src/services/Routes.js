@@ -6,7 +6,7 @@ import Album from '../components/features/Album'
 import Checklist from '../components/features/Checklist'
 import PrivateRoute from '../services/PrivateRoute'
 const Routes =({content}) => {
-  // debugger
+  debugger
   return(
     <Switch>
       <Route path="/notes">

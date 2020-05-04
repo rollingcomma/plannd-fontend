@@ -3,6 +3,7 @@ import {useHistory, Redirect} from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form';
 import useUserState from '../../helpers/customerHook';
 import IndexContainer from '../HOC/IndexContainer';
+
 import { getUser, loginFacebook, loginGoogle } from '../../services/apiAction'
 
 const Login = (props) => {
@@ -14,6 +15,7 @@ const Login = (props) => {
 
   const { handleSubmit, register, errors} = useForm();
   const [userState, dispatch] = useUserState();
+  
   const onSubmit = async (formData) => {
     getUser(formData)
       .then(res => {
