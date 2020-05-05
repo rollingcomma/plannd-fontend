@@ -1,6 +1,12 @@
 import React from 'react';
-import {BrowserRouter as Router} from 'react-router-dom';
-import Routes from '../../services/Routes'
+// import {BrowserRouter as Router} from 'react-router-dom';
+// import Routes from '../../services/Routes'
+import Checklist from '../features/Checklist';
+import Editor from '../features/Editor'
+import Links from '../features/Links'
+import Album from '../features/Album'
+import NotFound from '../features/NotFound'
+
 // import FeatureContainer from '../HOC/FeatureContainer';
 
 // const Nav = ({feature}) => {
@@ -10,7 +16,7 @@ import Routes from '../../services/Routes'
 //   useEffect (() => {
 //     debugger
 //     setContent(feature.contentArr[0])
-//   }, [feature.contentArr[0]])
+//   }, [])
 
 //   const handleUpdateState = useCallback((id, contentArr) => {
 //     const arr = contentArr.filter(element => element._id === id)
@@ -57,6 +63,21 @@ class Nav extends React.Component {
     }
   }
 
+  renderSwitch(featureName, content) {
+    switch (featureName) {
+      case 'notes':
+        return <Editor content={content} />;
+      case 'todos':
+        return <Checklist content={content} />;
+      case 'links':
+        return <Links content={content} />;
+      case 'gallery':
+        return <Album content={content} />;
+      default:
+        return <NotFound />;
+    }
+  }
+
   render() {
   debugger
   return (
@@ -70,7 +91,7 @@ class Nav extends React.Component {
         <div className="saved-elements-list">
           {this.state.contentArr.map(element =>
           <div key={element._id}>
-              <p className="pointer" onClick={() => this.handleUpdateState(element._id, this.state.contentArr)} id={element._id}>{element.title}</p>
+              <p to className="pointer" onClick={() => this.handleUpdateState(element._id, this.state.contentArr)} id={element._id}>{element.title}</p>
             <hr/>
           </div> 
           )}
@@ -81,9 +102,7 @@ class Nav extends React.Component {
         </div>
       </div>
       {/* <StateContext.Provider value={content}> */}
-      <Router>
-        <Routes content={this.state.currentContent} />
-      </Router>
+      {this.renderSwitch(this.state.name, this.state.currentContent)}
       {/* </StateContext.Provider> */}
       {/* <FeatureContainer content={this.state.currentContent} /> */}
      
@@ -91,6 +110,5 @@ class Nav extends React.Component {
   )
   }
 }
-
 
 export default Nav

@@ -1,9 +1,11 @@
 import React from 'react';
-// import { StateProvider } from './state-context';
+
 import './index.scss';
-
-import DesktopView from './components/views/DesktopView';
-
+import Footer from './components/shared/Footer';
+import Routes from './services/Routes';
+import { UserStateProvider } from './components/HOC/Provider';
+// import DesktopView from './components/views/DesktopView';
+import { BrowserRouter as Router } from 'react-router-dom';
 const App = () => {
   // const initialState = {
   //   theme: { primary: 'green' }
@@ -28,8 +30,14 @@ const App = () => {
   //   </StateProvider>
   // )
   return (
-    <DesktopView isLoggedIn={true}/>
+    <UserStateProvider>
+      <Router>
+        <Routes />
+      </Router>
+      <Footer />
+    </UserStateProvider >
   )
+  
 }
 
 export default App

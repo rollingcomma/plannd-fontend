@@ -2,6 +2,8 @@ import React from 'react';
 import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
 import FeatureContainer from '../HOC/FeatureContainer';
+
+
 const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
 Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
