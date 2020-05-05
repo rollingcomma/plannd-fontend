@@ -1,29 +1,45 @@
 import React from 'react'
 import { Switch, Route } from 'react-router-dom'
-import Editor from '../components/features/Editor'
-import Links from '../components/features/Links'
-import Album from '../components/features/Album'
-import Checklist from '../components/features/Checklist'
-import PrivateRoute from '../services/PrivateRoute'
-const Routes =({content}) => {
-  debugger
-  return(
+import Login from '../components/features/Login';
+import Register from '../components/features/Register';
+import IndexHeader from '../components/shared/IndexHeader';
+import PrivateRoute from './PrivateRoute'
+import PrivateView from '../components/views/PrivateView';
+import Profile from '../components/features/Profile'
+import Dashboard from '../components/features/Dashboard'
+import NotFound from '../components/features/NotFound';
+
+const Routes = () => {
+  // debugger
+  return (
     <Switch>
-      <Route path="/notes">
-        <Editor content={content}/>
+      <Route path="/register">
+        <div>
+        <IndexHeader />
+        <Register/>
+        </div>
       </Route>
-      <Route path="/todos">
-        <Checklist content={content}/>
+      <Route exact path={["/", "/login"]}>
+        <div>
+          <IndexHeader />
+          <Login />
+        </div>
       </Route>
-      <Route path="/links">
-        <Links content={content}/>
+      <PrivateRoute path="/user">
+        <PrivateView />
+      </PrivateRoute>
+      <PrivateRoute path="/user/profile">
+        <Profile />
+      </PrivateRoute>
+      <PrivateRoute path="/user/dashboard">
+        <Dashboard />
+      </PrivateRoute>
+      <Route>
+        <IndexHeader />
+        <NotFound />
       </Route>
-      <Route path="/gallery">
-        <Album content={content}/>
-      </Route>
-      
-    </Switch> 
+    </Switch>
   )
 }
-export default Routes
 
+export default Routes

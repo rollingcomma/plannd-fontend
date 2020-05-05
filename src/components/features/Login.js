@@ -26,7 +26,7 @@ const Login = (props) => {
             user:user.user
           })
           debugger
-          history.push('/')
+          history.push('/user')
         }
       })
       .catch(err =>{

@@ -1,8 +1,8 @@
 import React from 'react';
-// import { StateProvider } from './state-context';
+
 import './index.scss';
 import Footer from './components/shared/Footer';
-import RoutesIndex from './services/RoutesIndex';
+import Routes from './services/Routes';
 import { UserStateProvider } from './components/HOC/Provider';
 // import DesktopView from './components/views/DesktopView';
 import { BrowserRouter as Router } from 'react-router-dom';
@@ -32,7 +32,7 @@ const App = () => {
   return (
     <UserStateProvider>
       <Router>
-        <RoutesIndex />
+        <Routes />
       </Router>
       <Footer />
     </UserStateProvider >

@@ -2,10 +2,10 @@
 import React from 'react';
 import Footer from '../shared/Footer';
 import Header from '../shared/Header';
-import HeaderContainer from '../shared/HeaderContainer';
+
 import IndexHeader from '../shared/IndexHeader';
 import DesktopBody from './DesktopBody';
-import RoutesIndex from '../../services/RoutesIndex';
+import Routes from '../../services/Routes';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { UserStateProvider} from '../HOC/Provider';
 // import { initStore } from '../../store/store'
