@@ -1,19 +1,14 @@
 /* eslint-disable jsx-a11y/alt-text*/
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Link } from 'react-router-dom';
+import { Link, Switch } from 'react-router-dom';
 import Nav from '../shared/Nav'
-
+import PrivateRoute from '../../services/PrivateRoute'
+import Dashboard from '../features/Dashboard'
   const DesktopBody = ({data}) => {
     
-    const [feature, setFeature] = useState(
-      {
-        name: "notes",
-        contentId: data.notes._id,
-        contentArr:data.notes.notebooks
-      });
+    const [feature, setFeature] = useState(null);
 
     const handleFeatureSwitch = (featureName) => {
-      
       switch (featureName) {
         case "notes":
           setFeature({
@@ -44,24 +39,33 @@ import Nav from '../shared/Nav'
           });
          return;
         default:
+          setFeature(null)
       }
     }
+
     //todo
     debugger
     return (
       <div className="app justify-content">
         <div className="side-nav">
-          <Router>
-            <Link to="/user/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
-            <Link to="/user/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
-            <Link to="/user/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
-            <Link to="/user/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
-          </Router>
+          <Link to="/user/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
+          <Link to="/user/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
+          <Link to="/user/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
+          <Link to="/user/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
         </div>
-        <Nav feature={feature}></Nav>
+        <Switch>
+          <PrivateRoute path="/user/dashboard" >
+            <Dashboard />
+          </PrivateRoute>
+          <PrivateRoute >
+            <Nav feature={feature}/>
+          </PrivateRoute>
+        </Switch>
+        {/* {feature?
+          <Nav feature={feature}></Nav>:<Dashboard />
+        } */}
       </div>
     )
   }
 
-
-export default DesktopBody
+  export default DesktopBody

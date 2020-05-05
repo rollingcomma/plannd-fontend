@@ -17,21 +17,26 @@ const Login = (props) => {
   const [userState, dispatch] = useUserState();
   
   const onSubmit = async (formData) => {
-    getUser(formData)
-      .then(res => {
-        const user = res.data
-        if (user.auth) {
-          dispatch({
-            isLoggedIn:true,
-            user:user.user
-          })
-          debugger
-          history.push('/user')
-        }
-      })
-      .catch(err =>{
-        console.log(err.message)
-      })
+    dispatch({
+      isLoggedIn:true,
+      user:"1234567"
+    })
+    history.push('/user/dashboard')
+    // getUser(formData)
+    //   .then(res => {
+    //     const user = res.data
+    //     if (user.auth) {
+    //       dispatch({
+    //         isLoggedIn:true,
+    //         user:user.user
+    //       })
+    //       debugger
+    //       history.push('/user')
+    //     }
+    //   })
+    //   .catch(err =>{
+    //     console.log(err.message)
+    //   })
   }
 
   const onClickFacebook = () =>{

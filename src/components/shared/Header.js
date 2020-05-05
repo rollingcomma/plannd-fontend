@@ -2,7 +2,7 @@ import React from 'react';
 // import connect from '../HOC/connect'
 // import DropdownMenu from './DropDownMenu'
 // import {data} from '../../services/data'
-
+import { BrowserRouter as Router, Link } from 'react-router-dom';
 const Header = ({user}) =>{
   // props.dispatch({ type: "FETCH_USER" });
   debugger
@@ -19,7 +19,9 @@ const Header = ({user}) =>{
         </div>
         <div className="dashboard-link">
           <img alt="" src="/assets/dashboard-icon.svg" className="dashboard-icon" />
-            <p className="pointer">Dashboard</p>
+            <Link to="/user/dashboard" className="pointer">Dashboard</Link>
+            
+           
         </div>
         <div className="project-link">
           <img alt="" src="/assets/project-icon.png" className="project-icon"/>
@@ -29,7 +31,8 @@ const Header = ({user}) =>{
       </div>
       <div className="login">
         <img alt="" src="/assets/profile-photo.jpg" className="profile-photo" />
-        <p className="account-name">{user.username}</p>
+        <Link to="/user/profile" className="account-name">{user.username}</Link>
+        
         {/* <DropdownMenu items={data.user_dropdown} offsetTop={20} closeOnOutsideClick closeOnEscape> */}
           <div className="pointer"><img alt="" src="/assets/downarrow-icon.png" className="downarrow-icon" /></div>
         {/* </DropdownMenu>, */}

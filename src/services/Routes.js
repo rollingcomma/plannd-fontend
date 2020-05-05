@@ -28,12 +28,6 @@ const Routes = () => {
       <PrivateRoute path="/user">
         <PrivateView />
       </PrivateRoute>
-      <PrivateRoute path="/user/profile">
-        <Profile />
-      </PrivateRoute>
-      <PrivateRoute path="/user/dashboard">
-        <Dashboard />
-      </PrivateRoute>
       <Route>
         <IndexHeader />
         <NotFound />

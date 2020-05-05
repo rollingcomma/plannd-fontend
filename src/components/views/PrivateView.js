@@ -2,18 +2,26 @@
 import React from 'react';
 import Header from '../shared/Header';
 import DesktopBody from './DesktopBody';
-import { UserStateProvider } from '../HOC/Provider';
-// import { initStore } from '../../store/store'
+// import { UserStateProvider } from '../HOC/Provider';
+import { Switch } from 'react-router-dom';
+import PrivateRoute from '../../services/PrivateRoute'
+import Profile from '../features/Profile'
 import { data } from '../../store/data'
 
 const PrivateView = () => {
   debugger
-
   return (
-    <UserStateProvider>
+    <div>
       <Header user={data.user} />
-      <DesktopBody data={data} />
-    </UserStateProvider >
+      <Switch>
+        <PrivateRoute path='/user/profile'>
+          < Profile />  
+        </PrivateRoute>
+        <PrivateRoute >
+          <DesktopBody data={data} />
+        </PrivateRoute>
+      </Switch>    
+    </div>
   )
 }
 export default PrivateView
