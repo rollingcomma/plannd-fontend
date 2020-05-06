@@ -1,4 +1,5 @@
 import React from 'react'
+
 const BaseMenu = props => (
   <div ref={props.containerRef}>
     {props.children}

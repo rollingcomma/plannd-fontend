@@ -5,8 +5,8 @@ import IndexContainer from '../HOC/IndexContainer'
 import { sameAs } from '../../helpers/validator'
 import useUserState from '../../helpers/customerHook';
 import { postUser } from '../../services/apiAction'
-const Register = (props) => { 
 
+const Register = (props) => { 
   const history = useHistory()
   const handleRedirectClick = () => {
     history.push('/login')

@@ -60,6 +60,28 @@ export const addNotebook = (projectId, formData) => {
   })
 }
 
+export const updateNotebook = (projectId, formData) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/user/notes/notebook',
+    data: {
+      ...formData,
+      projectId: projectId
+    }
+  })
+}
+
+export const deleteNotebook = (projectId, notebookId) => {
+  return axios({
+    method: 'DELETE',
+    url: '/api/user/notes/notebook',
+    data: {
+      projectId: projectId,
+      notebookId: notebookId
+    }
+  })
+}
+
 //links related API actions
 export const getLinks = (projectId) => {
   return axios({
@@ -208,6 +230,83 @@ export const deleteItem = (projectId, checklistId, itemId) => {
   })
 }
 
+//gallery related API actions
+export const getGallery = (projectId) => {
+  return axios({
+    method: 'GET',
+    url: '/api/user/gallery/',
+    params: { projectId: projectId }
+  })
+}
+
+export const addAlbum = (projectId, formData) => {
+  return axios({
+    method: 'POST',
+    url: '/api/user/gallery/album',
+    data: {
+      ...formData,
+      projectId: projectId
+    }
+  })
+}
+
+export const updateAlbum = (projectId, formData) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/user/gallery/album',
+    data: {
+      ...formData,
+      projectId: projectId
+    }
+  })
+}
+
+export const deleteAlbum = (projectId, albumId) => {
+  return axios({
+    method: 'DELETE',
+    url: '/api/user/gallery/album',
+    data: {
+      projectId: projectId,
+      albumId: albumId
+    }
+  })
+}
+
+export const addPicture = (projectId, albumId, formData) => {
+  return axios({
+    method: 'POST',
+    url: '/api/user/gallery/album/photo',
+    data: {
+      ...formData,
+      albumId: albumId,
+      projectId: projectId
+    }
+  })
+}
+
+export const updatePicture = (projectId, albumId, formData) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/user/gallery/album/photo',
+    data: {
+      ...formData,
+      albumId: albumId,
+      projectId: projectId
+    }
+  })
+}
+
+export const deletePicture = (projectId, albumId, pictureIds) => {
+  return axios({
+    method: 'DELETE',
+    url: '/api/user/gallery/album/photo',
+    data: {
+      projectId: projectId,
+      albumId: albumId,
+      pictureIds: pictureIds
+    }
+  })
+}
 
     
   

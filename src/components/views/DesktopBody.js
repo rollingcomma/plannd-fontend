@@ -13,28 +13,28 @@ import Dashboard from '../features/Dashboard'
         case "notes":
           setFeature({
             name: "notes",
-            contentId: data.notes._id,
+            _id: data.notes._id,
             contentArr: data.notes.notebooks
           });
           return;
         case "todos":
           setFeature({
             name: "todos",
-            contentId: data.todos._id,
+            _id: data.todos._id,
             contentArr: data.todos.checklists
           });
           return;
         case "links":
           setFeature({
             name: "links",
-            contentId: data.links._id,
+            _id: data.links._id,
             contentArr: data.links.categories
           });
           return;
         case "gallery":
           setFeature({
             name: "gallery",
-            contentId: data.gallery._id,
+            _id: data.gallery._id,
             contentArr: data.gallery.albums
           });
          return;

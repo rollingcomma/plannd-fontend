@@ -40,7 +40,6 @@ export function initStore() {
       }
     },
     todos: (state = [], action) => {
-
       if (action.type === 'FETCH_TODOS') {
         return data.todos
 

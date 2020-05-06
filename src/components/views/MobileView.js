@@ -1,15 +1,9 @@
 import React, { useState } from 'react';
 
-class MobileView extends React.Component {
-  constructor(feature) {
-    // debugger
-    super();
-    this.state = {
-      username: username
-    }
-  }
+const MobileView = () => {
+  
 
-  render() {
+  
     return (
       <div className="app">
         <Menu></Menu>
@@ -17,7 +11,7 @@ class MobileView extends React.Component {
         <Content></Content>
       </div>
     )
-  }
+  
 }
 
 export default MobileView

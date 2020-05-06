@@ -2,6 +2,7 @@ import React from 'react';
 
 const FeatureContainer = (Component) => ({content}) => {
   debugger
+  
   return (
     <div className="content">
       <div id="space-around-content"> 

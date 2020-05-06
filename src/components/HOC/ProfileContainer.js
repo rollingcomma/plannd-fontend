@@ -2,11 +2,11 @@ import React from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
 
 const ProfileContainer = (Component) => ({ content }) => {
-
-
+  
   const handlePreferenceSwitch = (preferenceName) => {
 
   }
+
   return (
     <div className="app justify-content">
       <div className="side-nav">

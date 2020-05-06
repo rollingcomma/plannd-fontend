@@ -1,68 +1,59 @@
-import React from "react";
+import React,{useState} from "react";
 import ReactDOM from "react-dom";
 import BaseMenu from './BaseMenu';
 import PropTypes from 'prop-types'
 
-class DropdownMenu extends React.Component {
-  constructor(props) {
-    super(props);
+const DropdownMenu = (props) => {
+  
+    const [state, setState] = useState({open: props.open || false})
 
-    this.state = {
-      open: props.open || false
-    };
+    
+  // componentDidMount() {
+  //   if (window === 'undefined') return;
 
-    this.toggleMenu = this.toggleMenu.bind(this);
-    this.handleLinkClick = this.handleLinkClick.bind(this);
-    this.handleClickOutside = this.handleClickOutside.bind(this);
-    this.handleEscape = this.handleEscape(this);
-  }
+  //   document.addEventListener('click', this.handleClickOutside);
+  //   document.addEventListener('keydown', this.handleEscape);
+  // }
 
-  componentDidMount() {
-    if (window === 'undefined') return;
+  // componentWillUnmount() {
+  //   if (window === 'undefined') return;
 
-    document.addEventListener('click', this.handleClickOutside);
-    document.addEventListener('keydown', this.handleEscape);
-  }
+  //   document.removeEventListener('click', this.handleClickOutside);
+  //   document.removeEventListener('keydown', this.handleEscape);
+  // }
 
-  componentWillUnmount() {
-    if (window === 'undefined') return;
-
-    document.removeEventListener('click', this.handleClickOutside);
-    document.removeEventListener('keydown', this.handleEscape);
-  }
-
-  handleClickOutside(event) {
+  const handleClickOutside = (event) => {
     if (!this.rootNode.contains(event.target)) {
-      this.setState({ open: false });
+      setState({ open: false });
     }
   }
 
-  handleEscape(event) {
+  const handleEscape = (event) => {
     if (event.keyCode === 27) {
-      this.setState({ open: false });
+      setState({ open: false });
     }
   }
 
-  toggleMenu(event) {
+  const toggleMenu = (event) => {
     event.preventDefault();
 
-    this.setState({
-      open: !this.state.open
+    setState({
+      open: !state.open
     });
   }
 
-  handleLinkClick(link) {
-    this.setState({ open: false });
-    this.props.linkClickHandler(link);
+  const handleLinkClick= (link) => {
+    setState({ open: false });
+    props.linkClickHandler(link);
   }
 
-  render() {
-    const { props, state } = this;
-    const triggerClass = ['menu-trigger'];
-    const wrapperClasses = [
-      'menu-wrapper',
-      `menu-${state.open ? 'opened' : 'closed'}`
-    ];
+  
+  const { props, state } = this;
+  const triggerClass = ['menu-trigger'];
+  const wrapperClasses = [
+    'menu-wrapper',
+    `menu-${state.open ? 'opened' : 'closed'}`
+  ];
 
     // if (state.open) {
     //   triggerClass.push('color-primary');
@@ -71,7 +62,6 @@ class DropdownMenu extends React.Component {
     return (
       <BaseMenu {...this.props} open={this.state.open} toggle={this.toggleMenu}/>
     );
-  }
 }
 
 DropdownMenu.propTypes = {
