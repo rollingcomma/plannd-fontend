@@ -1,12 +1,13 @@
 import React from 'react'
+import { ReactTinyLink } from 'react-tiny-link'
 import FeatureContainer from '../HOC/FeatureContainer';
 
 const Links = (props) => {
   debugger
+  //props.content.links.map
   return (
     <div>
-    <h5> I'm a block of Links</h5>
-      <p>{JSON.stringify(props)}</p>
+      {props.content.link.map}
     </div>
     
   )

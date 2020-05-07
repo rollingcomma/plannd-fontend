@@ -54,7 +54,7 @@ import Dashboard from '../features/Dashboard'
           <Link to="/user/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
         </div>
         <Switch>
-          <PrivateRoute path="/user/dashboard" >
+          <PrivateRoute exact path= {["/", "/user/dashboard"]} >
             <Dashboard />
           </PrivateRoute>
           <PrivateRoute >

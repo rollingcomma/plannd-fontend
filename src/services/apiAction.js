@@ -9,17 +9,50 @@ export const getUser = (formData) => {
     data: formData
   })}
   
-export const loginFacebook = () =>{
+export const checkLoggedIn = () => {
+  debugger
   return axios({
+    url: '/api/users/login/success/',
     method: 'GET',
-    url: '/api/index/facebook/'
+    // headers: {
+    //   Accept: "application/json",
+    //   "Content-Type": "application/json",
+    //   "Access-Control-Allow-Credentials": true
+    // },
+    withCredentials: true
+  })
+}
+
+export const loginFacebook = () =>{
+  debugger
+  // window.open("http://localhost:3010/api/index/facebook", "_self");
+  return axios({
+    url: '/api/index/login/success/',
+    method: 'GET',
+    crossDomain: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
 export const loginGoogle = () => {
+  debugger
+  
   return axios({
+    url: 'http://localhost:3010/api/index/login/success',
     method: 'GET',
-    url: '/api/index/google/'
+    crossDomain: true,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
+    
   })
 }
 
