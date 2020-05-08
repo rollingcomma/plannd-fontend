@@ -1,5 +1,5 @@
 import React, {createContext, useReducer, useEffect} from 'react'
-import {useLocalStorage} from '../../helpers/customerHook'
+// import {useLocalStorage} from '../../helpers/customerHook'
 
 export const StateContext = React.createContext({})
 export const StateProvider = ({ children, store }) =>

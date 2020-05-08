@@ -3,14 +3,20 @@ import React from 'react';
 // import connect from '../HOC/connect'
 // import DropdownMenu from './DropDownMenu'
 // import {data} from '../../services/data'
-import { BrowserRouter as Router, Link } from 'react-router-dom';
-
+import { useHistory, Link } from 'react-router-dom';
+import { logout } from '../../services/apiAction'
 const Header = ({user}) =>{
   // props.dispatch({ type: "FETCH_USER" });
+  const history = useHistory();
+
   const handleLogout = () => {
     sessionStorage.clear();
-
+    logout()
+    .then(res => {
+      history.push('/')
+    })
   }
+
   debugger
   return (
     <div className="top-banner">

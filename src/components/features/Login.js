@@ -5,7 +5,7 @@ import { useForm, ErrorMessage} from 'react-hook-form';
 import useUserState from '../../helpers/customerHook';
 import IndexContainer from '../HOC/IndexContainer';
 
-import { getUser, loginFacebook, loginGoogle } from '../../services/apiAction'
+import { getUser} from '../../services/apiAction'
 
 const Login = (props) => {
 
@@ -18,11 +18,7 @@ const Login = (props) => {
   const [userState, dispatch] = useUserState();
   
   const onSubmit = async (formData) => {
-    // dispatch({
-    //   isLoggedIn:true,
-    //   user:"1234567"
-    // })
-    // history.push('/user/dashboard')
+    
     getUser(formData)
       .then(res => {
         const user = res.data
@@ -43,36 +39,10 @@ const Login = (props) => {
 
   const onClickFacebook = () =>{
     window.open("/api/index/facebook");
-    // loginFacebook()
-    //   .then(res => {
-    //     const user = res.data
-    //     if (user.auth) {
-    //       dispatch({
-    //         isLoggedIn: true,
-    //         user: user.user
-    //       })
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err.message)
-    //   })
   }
 
   const onClickGoogle = () => {
     window.location = ("/api/index/google");
-    // loginGoogle()
-    //   .then(res => {
-    //     const user = res.data
-    //     if (user.auth) {
-    //       dispatch({
-    //         isLoggedIn: true,
-    //         user: user
-    //       })
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log(err.message)
-    //   })
   }
 
   // debugger

@@ -23,9 +23,16 @@ export const checkLoggedIn = () => {
   })
 }
 
+export const logout = () => {
+  debugger
+  return axios({
+    url: '/api/users/logout',
+    method: 'GET'
+  })
+}
+
 export const loginFacebook = () =>{
   debugger
-  // window.open("http://localhost:3010/api/index/facebook", "_self");
   return axios({
     url: '/api/index/login/success/',
     method: 'GET',
@@ -41,7 +48,6 @@ export const loginFacebook = () =>{
 
 export const loginGoogle = () => {
   debugger
-  
   return axios({
     url: 'http://localhost:3010/api/index/login/success',
     method: 'GET',

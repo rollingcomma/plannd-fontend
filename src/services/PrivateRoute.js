@@ -7,7 +7,7 @@ const PrivateRoute = ({ children, ...rest }) =>{
 
   const [userState, dispatch] = useUserState();
 
-  if (!window.localStorage.getItem('isLoggedIn')) {
+  if (!sessionStorage.getItem('isLoggedIn')) {
     checkLoggedIn()
       .then(res => {
         debugger
