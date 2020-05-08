@@ -29,7 +29,8 @@ const Login = (props) => {
         if (user.auth) {
           dispatch({
             isLoggedIn:true,
-            user:user.userId
+            user:user.user,
+            projectId: '5ea2098bce2a4e12abfcf052'
           })
           debugger
           history.push('/user/dashboard')

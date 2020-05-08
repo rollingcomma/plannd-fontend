@@ -7,24 +7,22 @@ const PrivateRoute = ({ children, ...rest }) =>{
 
   const [userState, dispatch] = useUserState();
 
-  if (! userState.isLoggedIn) {
-  // useEffect(() => {
+  if (!window.localStorage.getItem('isLoggedIn')) {
     checkLoggedIn()
-    .then(res => {
-      debugger
-      const user = res.data
-      if (user.auth) {
-        dispatch({
-          isLoggedIn:true,
-          user: user
-        })
-        // window.localStorage.setItem('isLoggedIn', true)
-        // window.localStorage.setItem('user', user)
-      }
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
+      .then(res => {
+        debugger
+        const user = res.data
+        if (user.auth) {
+          dispatch({
+            isLoggedIn: true,
+            user: user.user,
+            projectId: '5ea2098bce2a4e12abfcf052'
+          })
+        }
+      })
+      .catch(err => {
+        console.log(err.message)
+      })
   }
 
   debugger

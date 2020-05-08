@@ -19,7 +19,7 @@ const Routes = () => {
         <Register/>
         </div>
       </Route>
-      <Route exact path="/login">
+      <Route exact path={["/", "/login"]}>
         <div>
           <IndexHeader />
           <Login />

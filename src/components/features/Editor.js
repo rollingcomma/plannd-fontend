@@ -3,7 +3,6 @@ import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
 import FeatureContainer from '../HOC/FeatureContainer';
 
-
 const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
 Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
@@ -61,7 +60,7 @@ class Editor extends React.Component {
           theme={this.state.theme}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
-          value={this.state.editorHtml}
+          value={this.state.editorHtml ||''}
           modules={Editor.modules}
           formats={Editor.formats}
           bounds={'.app'}

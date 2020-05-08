@@ -44,30 +44,30 @@ const Nav = ({feature}) => {
           <div className="text-banner"></div>
         </div>
         <div className="saved-elements-list">
-          {content.contentArr.map(element =>
+          {content.contentArr && 
+            content.contentArr.map(element =>
           <div key={element._id}>
               <p className="pointer" onClick={() => handleUpdateState(element._id, content.contentArr)} id={element._id}>{element.title}</p>
             <hr/>
           </div> 
           )}
           <div className="create-icon">
-            <img src="/assets/add-icon.svg" alt="add" />
-            <p>Create</p>
+            <button className="btn btn-link text-dark"><img src="/assets/add-icon.svg" alt="add" />Create</button>
           </div>
         </div>
       </div>
       
       <Switch>
-        <PrivateRoute path="/user/notes" >
+        <PrivateRoute path="/user/feature/notes" >
           <Editor content={content.currentContent} />
         </PrivateRoute>
-        <PrivateRoute path="/user/todos" >
+        <PrivateRoute path="/user/feature/todos" >
           <Checklist content={content.currentContent} />
         </PrivateRoute>
-        <PrivateRoute path="/user/links" >
+        <PrivateRoute path="/user/feature/links" >
           <Links content={content.currentContent} />
         </PrivateRoute>
-        <PrivateRoute path="/user/gallery" >
+        <PrivateRoute path="/user/feature/gallery" >
           <Album content={content.currentContent} />
         </PrivateRoute>
       </Switch>

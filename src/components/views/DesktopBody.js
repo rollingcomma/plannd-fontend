@@ -6,7 +6,13 @@ import PrivateRoute from '../../services/PrivateRoute'
 import Dashboard from '../features/Dashboard'
   const DesktopBody = ({data}) => {
     
-    const [feature, setFeature] = useState(null);
+    const [feature, setFeature] = useState(
+      {
+        name: "notes",
+        _id: data.notes._id,
+        contentArr: data.notes.notebooks
+      }
+    );
 
     const handleFeatureSwitch = (featureName) => {
       switch (featureName) {
@@ -48,16 +54,16 @@ import Dashboard from '../features/Dashboard'
     return (
       <div className="app justify-content">
         <div className="side-nav">
-          <Link to="/user/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
-          <Link to="/user/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
-          <Link to="/user/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
-          <Link to="/user/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
+          <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
+          <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
+          <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
+          <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
         </div>
         <Switch>
-          <PrivateRoute exact path= {["/", "/user/dashboard"]} >
+          <PrivateRoute path= "/user/dashboard" >
             <Dashboard />
           </PrivateRoute>
-          <PrivateRoute >
+          <PrivateRoute path="/user/feature" >
             <Nav feature={feature}/>
           </PrivateRoute>
         </Switch>
