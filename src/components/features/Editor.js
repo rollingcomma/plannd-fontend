@@ -12,12 +12,16 @@ ReactQuill.Quill.register(Font, true);
 class Editor extends React.Component {
   constructor(props) {
     super(props)
-    // const{content} = this.props
-
-    this.state = {
+  
+    this.state = props.content? {
       documentId: this.props.content._id,
       editorHtml: this.props.content.note,
       theme: 'snow'
+    }
+    :
+    {
+        editorHtml: '',
+        theme: 'snow'
     }
     // this.textInput = React.createRef();
     this.handleBlur = this.handleBlur.bind(this);
@@ -29,11 +33,14 @@ class Editor extends React.Component {
     if (this.props.content !== prevProps.content) {
       // debugger
       this.setState(
+        this.props.content?
         {
           documentId: this.props.content._id,
           editorHtml: this.props.content.note,
           theme: this.state.theme
         }
+        :
+        this.state
       )
     }
   }
@@ -57,7 +64,7 @@ class Editor extends React.Component {
     return (
       <div>
         <ReactQuill
-          theme={this.state.theme}
+          theme={this.state.theme || 'snow'}
           onChange={this.handleChange}
           onBlur={this.handleBlur}
           value={this.state.editorHtml ||''}

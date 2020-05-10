@@ -14,11 +14,11 @@ export const checkLoggedIn = () => {
   return axios({
     url: '/api/users/login/success/',
     method: 'GET',
-    // headers: {
-    //   Accept: "application/json",
-    //   "Content-Type": "application/json",
-    //   "Access-Control-Allow-Credentials": true
-    // },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -45,7 +45,8 @@ export const getProjects =(userId) => {
   return axios({
     method: 'GET',
     url: '/api/users/projects/',
-    params:{userId: userId}
+    params:{userId: userId},
+    withCredentials: true
   })
 }
 
@@ -54,7 +55,13 @@ export const getNotes = (projectId) => {
   return axios({
     method: 'GET',
     url: '/api/users/notes/',
-    params: { projectId: projectId }
+    params: { projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -95,7 +102,8 @@ export const getLinks = (projectId) => {
   return axios({
     method: 'GET',
     url: '/api/users/links/',
-    params: { projectId: projectId }
+    params: { projectId: projectId },
+    withCredentials: true
   })
 }
 
@@ -169,7 +177,8 @@ export const getTodos = (projectId) => {
   return axios({
     method: 'GET',
     url: '/api/users/todos/',
-    params: { projectId: projectId }
+    params: { projectId: projectId },
+    withCredentials: true
   })
 }
 
@@ -243,7 +252,8 @@ export const getGallery = (projectId) => {
   return axios({
     method: 'GET',
     url: '/api/users/gallery/',
-    params: { projectId: projectId }
+    params: { projectId: projectId },
+    withCredentials: true
   })
 }
 

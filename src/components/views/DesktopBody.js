@@ -1,51 +1,105 @@
 /* eslint-disable jsx-a11y/alt-text*/
-import React, { useState } from 'react';
-import { Link, Switch, Route } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link, Switch, Route, useHistory, useLocation } from 'react-router-dom';
 import Nav from '../shared/Nav';
 import PrivateRoute from '../../services/PrivateRoute';
 import Dashboard from '../features/Dashboard';
 import NotFound from '../features/NotFound';
-  
+import {getGallery, getNotes, getTodos, getLinks} from '../../services/apiAction'
+import { useUserState } from '../../helpers/customerHook';
+
 const DesktopBody = ({data}) => {
-    
-    const [feature, setFeature] = useState(
-      {
-        name: "notes",
-        _id: data.notes._id,
-        contentArr: data.notes.notebooks
-      }
-    );
+  
+  const history = useHistory();
+  const [userState, dispatch] = useUserState()
+  const [feature, setFeature] = useState(null)
+  const activeProjectId = userState.user.preference.activeProject
+  let location = useLocation()
+  useEffect(() => {
+    debugger
+    const featureName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+    if(featureName == 'dashboard')
+      getNotes(activeProjectId)
+      .then(res => {
+        const notes = res.data.notes
+        if(notes)
+        setFeature({
+          name:"Notes",
+          _id:notes._id,
+          contentArr:notes.notebooks
+        })
+        // history.push('/user/feature/notes')
+      })
+      .catch(err =>{
+        console.log(err.message)
+      })
+    else
+      handleFeatureSwitch(featureName)
+      history.push(`/user/feature/${featureName}`)
+  }, [userState.user.preference.activeProject])
 
     const handleFeatureSwitch = (featureName) => {
       switch (featureName) {
         case "notes":
-          setFeature({
-            name: "notes",
-            _id: data.notes._id,
-            contentArr: data.notes.notebooks
-          });
+          getNotes(activeProjectId)
+          .then(res => {
+            const notes = res.data.notes;
+            if(notes)
+            setFeature({
+              name: "Notes",
+              _id: data.notes._id,
+              contentArr: data.notes.notebooks
+            });
+          })
+          .catch(err =>{
+            console.log(err.message)
+          })
           return;
         case "todos":
-          setFeature({
-            name: "todos",
-            _id: data.todos._id,
-            contentArr: data.todos.checklists
-          });
+          getTodos(activeProjectId)
+            .then(res => {
+              const todos = res.data.todos;
+              if(todos)
+              setFeature({
+                name: "To-dos",
+                _id: todos._id,
+                contentArr: todos.checklists
+              });
+            })
+            .catch(err => {
+              console.log(err.message)
+            })
           return;
         case "links":
-          setFeature({
-            name: "links",
-            _id: data.links._id,
-            contentArr: data.links.categories
-          });
+          getLinks(activeProjectId)
+            .then(res => {
+              const links = res.data.links;
+              if(links)
+              setFeature({
+                name: "Notes",
+                _id: links._id,
+                contentArr: links.categories
+              });
+            })
+            .catch(err => {
+              console.log(err.message)
+            })
           return;
         case "gallery":
-          setFeature({
-            name: "gallery",
-            _id: data.gallery._id,
-            contentArr: data.gallery.albums
-          });
-         return;
+          getGallery(activeProjectId)
+            .then(res => {
+              const gallery = res.data.gallery;
+              if(gallery)
+                setFeature({
+                  name: "Image Gallery",
+                  _id: gallery._id,
+                  contentArr: gallery.albums
+                });
+            })
+            .catch(err => {
+              console.log(err.message)
+            })
+          return;
         default:
           setFeature(null)
       }
@@ -65,7 +119,7 @@ const DesktopBody = ({data}) => {
             <Dashboard />
           </PrivateRoute>
           <PrivateRoute path="/user/feature" >
-            <Nav feature={feature}/>
+            {feature && <Nav feature={feature}/>}
           </PrivateRoute>
           <Route >
             <NotFound />

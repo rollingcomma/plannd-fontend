@@ -12,8 +12,8 @@ const Checklist = ({content}) => {
   }
   return (
     <div className="d-flex flex-column overflow-auto ml-3">
-      { state.lists && 
-      state.lists.map((element, index) =>
+      { state && state.lists &&
+        state.lists.map((element, index) =>
         <div key={element._id} className="form-check my-2">
           <input className=" form-check-input checkbox" type="checkbox" name="checklistItem" id="exampleRadios1" value="option1" defaultChecked={element.is_checked} onChange={()=>{handleChangeChk()}}/>
           <label className="ml-2 form-check-label" htmlFor={"checklistItem"+index+1}>

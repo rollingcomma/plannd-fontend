@@ -13,13 +13,13 @@ const Nav = ({feature}) => {
   
   const [content, setContent] = useState(
     { ...feature,
-      currentContent: feature.contentArr[0]
+      currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
   
   useEffect (() => {
     setContent({
       ...feature,
-      currentContent: feature.contentArr[0]
+      currentContent: feature.contentArr.length > 0 ? feature.contentArr[0] : null
     })
   }, [feature])
 
@@ -45,7 +45,7 @@ const Nav = ({feature}) => {
           <div className="text-banner"></div>
         </div>
         <div className="saved-elements-list">
-          {content.contentArr && 
+          {content.contentArr.length > 0 && 
           content.contentArr.map(element =>
           <div key={element._id}>
               <p className="pointer" onClick={() => handleUpdateState(element._id, content.contentArr)} id={element._id}>{element.title}</p>
@@ -58,7 +58,7 @@ const Nav = ({feature}) => {
         </div>
       </div>
       <Switch>
-        <PrivateRoute path="/user/feature/notes" >
+        <PrivateRoute path= "/user/feature/notes">
           <Editor content={content.currentContent} />
         </PrivateRoute>
         <PrivateRoute path="/user/feature/todos" >
