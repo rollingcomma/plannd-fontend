@@ -31,37 +31,6 @@ export const logout = () => {
   })
 }
 
-export const loginFacebook = () =>{
-  debugger
-  return axios({
-    url: '/api/index/login/success/',
-    method: 'GET',
-    crossDomain: true,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Credentials": true
-    },
-    withCredentials: true
-  })
-}
-
-export const loginGoogle = () => {
-  debugger
-  return axios({
-    url: 'http://localhost:3010/api/index/login/success',
-    method: 'GET',
-    crossDomain: true,
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Credentials": true
-    },
-    withCredentials: true
-    
-  })
-}
-
 export const postUser = (formData) => {
   debugger
   return axios({
@@ -75,7 +44,7 @@ export const postUser = (formData) => {
 export const getProjects =(userId) => {
   return axios({
     method: 'GET',
-    url: '/api/user/links/',
+    url: '/api/users/projects/',
     params:{userId: userId}
   })
 }
@@ -84,7 +53,7 @@ export const getProjects =(userId) => {
 export const getNotes = (projectId) => {
   return axios({
     method: 'GET',
-    url: '/api/user/notes/',
+    url: '/api/users/notes/',
     params: { projectId: projectId }
   })
 }
@@ -92,7 +61,7 @@ export const getNotes = (projectId) => {
 export const addNotebook = (projectId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/notes/notebook',
+    url: '/api/users/notes/notebook',
     data: { 
       ...formData,
       projectId: projectId }
@@ -102,7 +71,7 @@ export const addNotebook = (projectId, formData) => {
 export const updateNotebook = (projectId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/notes/notebook',
+    url: '/api/users/notes/notebook',
     data: {
       ...formData,
       projectId: projectId
@@ -113,7 +82,7 @@ export const updateNotebook = (projectId, formData) => {
 export const deleteNotebook = (projectId, notebookId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/notes/notebook',
+    url: '/api/users/notes/notebook',
     data: {
       projectId: projectId,
       notebookId: notebookId
@@ -125,7 +94,7 @@ export const deleteNotebook = (projectId, notebookId) => {
 export const getLinks = (projectId) => {
   return axios({
     method: 'GET',
-    url: '/api/user/links/',
+    url: '/api/users/links/',
     params: { projectId: projectId }
   })
 }
@@ -133,7 +102,7 @@ export const getLinks = (projectId) => {
 export const addCategory = (projectId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/links/category',
+    url: '/api/users/links/category',
     data: { 
       ...formData,
       projectId: projectId }
@@ -143,7 +112,7 @@ export const addCategory = (projectId, formData) => {
 export const updateCategory = (projectId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/links/category',
+    url: '/api/users/links/category',
     data: { 
       ...formData,
       projectId: projectId }
@@ -153,7 +122,7 @@ export const updateCategory = (projectId, formData) => {
 export const deleteCategory = (projectId, categoryId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/links/category',
+    url: '/api/users/links/category',
     data: { 
       projectId: projectId, 
       categoryId: categoryId 
@@ -164,7 +133,7 @@ export const deleteCategory = (projectId, categoryId) => {
 export const addLink = (projectId, categoryId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/links/category/link',
+    url: '/api/users/links/category/link',
     data: { 
       ...formData,
       categoryId: categoryId,
@@ -175,7 +144,7 @@ export const addLink = (projectId, categoryId, formData) => {
 export const updateLink = (projectId, categoryId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/links/category/link',
+    url: '/api/users/links/category/link',
     data: { 
       ...formData,
       categoryId: categoryId,
@@ -186,7 +155,7 @@ export const updateLink = (projectId, categoryId, formData) => {
 export const deleteLink = (projectId, categoryId, linkId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/links/category/link',
+    url: '/api/users/links/category/link',
     data: { 
       projectId: projectId, 
       categoryId: categoryId,
@@ -199,7 +168,7 @@ export const deleteLink = (projectId, categoryId, linkId) => {
 export const getTodos = (projectId) => {
   return axios({
     method: 'GET',
-    url: '/api/user/todos/',
+    url: '/api/users/todos/',
     params: { projectId: projectId }
   })
 }
@@ -207,7 +176,7 @@ export const getTodos = (projectId) => {
 export const addChecklist = (projectId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/todos/checklist',
+    url: '/api/users/todos/checklist',
     data: { 
       ...formData,
       projectId: projectId }
@@ -217,7 +186,7 @@ export const addChecklist = (projectId, formData) => {
 export const updateChecklist = (projectId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/todos/checklist',
+    url: '/api/users/todos/checklist',
     data: { 
       ...formData,
       projectId: projectId }
@@ -227,7 +196,7 @@ export const updateChecklist = (projectId, formData) => {
 export const deleteChecklist = (projectId, checklistId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/todos/checklist',
+    url: '/api/users/todos/checklist',
     data: { 
       projectId: projectId, 
       checklistId: checklistId 
@@ -238,7 +207,7 @@ export const deleteChecklist = (projectId, checklistId) => {
 export const addItem = (projectId, checklistId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/todos/checklist/item',
+    url: '/api/users/todos/checklist/item',
     data: { 
       ...formData,
       checklistId: checklistId,
@@ -249,7 +218,7 @@ export const addItem = (projectId, checklistId, formData) => {
 export const updateItem = (projectId, checklistId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/todos/checklist/item',
+    url: '/api/users/todos/checklist/item',
     data: { 
       ...formData,
       checklistId: checklistId,
@@ -260,7 +229,7 @@ export const updateItem = (projectId, checklistId, formData) => {
 export const deleteItem = (projectId, checklistId, itemId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/todos/checklist/item',
+    url: '/api/users/todos/checklist/item',
     data: { 
       projectId: projectId, 
       checklistId: checklistId,
@@ -273,7 +242,7 @@ export const deleteItem = (projectId, checklistId, itemId) => {
 export const getGallery = (projectId) => {
   return axios({
     method: 'GET',
-    url: '/api/user/gallery/',
+    url: '/api/users/gallery/',
     params: { projectId: projectId }
   })
 }
@@ -281,7 +250,7 @@ export const getGallery = (projectId) => {
 export const addAlbum = (projectId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/gallery/album',
+    url: '/api/users/gallery/album',
     data: {
       ...formData,
       projectId: projectId
@@ -292,7 +261,7 @@ export const addAlbum = (projectId, formData) => {
 export const updateAlbum = (projectId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/gallery/album',
+    url: '/api/users/gallery/album',
     data: {
       ...formData,
       projectId: projectId
@@ -303,7 +272,7 @@ export const updateAlbum = (projectId, formData) => {
 export const deleteAlbum = (projectId, albumId) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/gallery/album',
+    url: '/api/users/gallery/album',
     data: {
       projectId: projectId,
       albumId: albumId
@@ -314,7 +283,7 @@ export const deleteAlbum = (projectId, albumId) => {
 export const addPicture = (projectId, albumId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/user/gallery/album/photo',
+    url: '/api/users/gallery/album/photo',
     data: {
       ...formData,
       albumId: albumId,
@@ -326,7 +295,7 @@ export const addPicture = (projectId, albumId, formData) => {
 export const updatePicture = (projectId, albumId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/user/gallery/album/photo',
+    url: '/api/users/gallery/album/photo',
     data: {
       ...formData,
       albumId: albumId,
@@ -338,7 +307,7 @@ export const updatePicture = (projectId, albumId, formData) => {
 export const deletePicture = (projectId, albumId, pictureIds) => {
   return axios({
     method: 'DELETE',
-    url: '/api/user/gallery/album/photo',
+    url: '/api/users/gallery/album/photo',
     data: {
       projectId: projectId,
       albumId: albumId,
@@ -347,6 +316,60 @@ export const deletePicture = (projectId, albumId, pictureIds) => {
   })
 }
 
-    
-  
-  
+export const updateActiveProject = (userId, projectId) => {
+  return axios({
+    method: 'PUT',
+    url:'/api/users/user',
+    data:{
+      userId:userId,
+      key:'preference.activeProject',
+      data:projectId
+    }
+  })
+}
+
+export const updateTheme = (userId, theme) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/users/user',
+    data: {
+      userId: userId,
+      key: 'preference.theme',
+      data: theme
+    }
+  })
+}
+
+export const updateDashboard = (userId, newDashboard) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/users/user',
+    data: {
+      userId: userId,
+      key: `dashboard.${newDashboard.key}`,
+      data: newDashboard.value
+    }
+  })
+}
+
+export const addPins = (userId, newPin) => {
+  return axios({
+    method: 'POST',
+    url: `/api/users/user/pins/`,
+    data: {
+      userId: userId,
+      data: newPin.value
+    }
+  })
+}
+
+export const deletePins = (userId, pin) => {
+  return axios({
+    method: 'DELETE',
+    url: `/api/users/user/pins/${pin.key}`,
+    data: {
+      userId: userId,
+      data: pin.value
+    }
+  })
+}

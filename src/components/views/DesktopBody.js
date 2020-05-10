@@ -1,10 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text*/
 import React, { useState } from 'react';
-import { Link, Switch } from 'react-router-dom';
-import Nav from '../shared/Nav'
-import PrivateRoute from '../../services/PrivateRoute'
-import Dashboard from '../features/Dashboard'
-  const DesktopBody = ({data}) => {
+import { Link, Switch, Route } from 'react-router-dom';
+import Nav from '../shared/Nav';
+import PrivateRoute from '../../services/PrivateRoute';
+import Dashboard from '../features/Dashboard';
+import NotFound from '../features/NotFound';
+  
+const DesktopBody = ({data}) => {
     
     const [feature, setFeature] = useState(
       {
@@ -49,8 +51,7 @@ import Dashboard from '../features/Dashboard'
       }
     }
 
-    //todo
-    debugger
+    // debugger
     return (
       <div className="app justify-content">
         <div className="side-nav">
@@ -60,16 +61,16 @@ import Dashboard from '../features/Dashboard'
           <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
         </div>
         <Switch>
-          <PrivateRoute path= "/user/dashboard" >
+          <PrivateRoute path="/user/dashboard" >
             <Dashboard />
           </PrivateRoute>
           <PrivateRoute path="/user/feature" >
             <Nav feature={feature}/>
           </PrivateRoute>
+          <Route >
+            <NotFound />
+          </Route>
         </Switch>
-        {/* {feature?
-          <Nav feature={feature}></Nav>:<Dashboard />
-        } */}
       </div>
     )
   }

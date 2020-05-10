@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form'
 import IndexContainer from '../HOC/IndexContainer'
 import { sameAs } from '../../helpers/validator'
-import useUserState from '../../helpers/customerHook';
+import { useUserState } from '../../helpers/customerHook';
 import { postUser } from '../../services/apiAction'
 
 const Register = (props) => { 
@@ -23,7 +23,7 @@ const Register = (props) => {
         if (user) {
           dispatch({
             isLoggedIn: true,
-            user: user
+            user: user.user
           })
           debugger
           history.push('/')

@@ -1,11 +1,12 @@
 import React, {useEffect, useCallback, useState} from 'react';
-import { Switch } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 // import {BrowserRouter as Router} from 'react-router-dom';
 // import Routes from '../../services/Routes'
 import Checklist from '../features/Checklist';
-import Editor from '../features/Editor'
-import Links from '../features/Links'
-import Album from '../features/Album'
+import Editor from '../features/Editor';
+import Links from '../features/Links';
+import Album from '../features/Album';
+import NotFound from '../features/NotFound';
 import PrivateRoute from '../../services/PrivateRoute'
 
 const Nav = ({feature}) => {
@@ -45,7 +46,7 @@ const Nav = ({feature}) => {
         </div>
         <div className="saved-elements-list">
           {content.contentArr && 
-            content.contentArr.map(element =>
+          content.contentArr.map(element =>
           <div key={element._id}>
               <p className="pointer" onClick={() => handleUpdateState(element._id, content.contentArr)} id={element._id}>{element.title}</p>
             <hr/>
@@ -56,7 +57,6 @@ const Nav = ({feature}) => {
           </div>
         </div>
       </div>
-      
       <Switch>
         <PrivateRoute path="/user/feature/notes" >
           <Editor content={content.currentContent} />
@@ -70,6 +70,9 @@ const Nav = ({feature}) => {
         <PrivateRoute path="/user/feature/gallery" >
           <Album content={content.currentContent} />
         </PrivateRoute>
+        <Route >
+          <NotFound />
+        </Route>
       </Switch>
     </div>
   )

@@ -1,8 +1,7 @@
 import React from 'react'
 import {useHistory, Link, Redirect} from 'react-router-dom'
-// import {Link } 
 import { useForm, ErrorMessage} from 'react-hook-form';
-import useUserState from '../../helpers/customerHook';
+import {useUserState} from '../../helpers/customerHook';
 import IndexContainer from '../HOC/IndexContainer';
 
 import { getUser} from '../../services/apiAction'
@@ -18,17 +17,14 @@ const Login = (props) => {
   const [userState, dispatch] = useUserState();
   
   const onSubmit = async (formData) => {
-    
     getUser(formData)
       .then(res => {
         const user = res.data
         if (user.auth) {
           dispatch({
             isLoggedIn:true,
-            user:user.user,
-            projectId: '5ea2098bce2a4e12abfcf052'
+            user:user.user
           })
-          debugger
           history.push('/user/dashboard')
         }
       })
@@ -51,11 +47,6 @@ const Login = (props) => {
       <img src="/assets/logo-text.png" className="logo-text mt-4 mb-2" alt="" />
       <button className='social-btn' onClick={onClickGoogle}><img className='icon-medium' src="/assets/search.svg" alt=""/>Signup with Google</button>
       <button className='social-btn' onClick={onClickFacebook}><img className='icon-medium' src="/assets/facebook.svg" alt=""/>Signup with Facebook</button>
-      {/* <Link to="/api/index/google" className='btn social-btn'><img className='icon-medium' src="/assets/search.svg" alt=""/>Signup with Google</Link>
-      <Link to="/api/index/facebook" className='btn social-btn'><img className='icon-medium' src="/assets/facebook.svg" alt=""/>Signup with Facebook</Link> */}
-      {/* <a href="http://localhost:3010/api/index/google" className='btn social-btn'><img className='icon-medium' src="/assets/search.svg" alt="" />Signup with Google</a>
-      <a href="http://localhost:3010/api/index/facebook" className='btn social-btn'><img className='icon-medium' src="/assets/facebook.svg" alt="" />Signup with Facebook</a> */}
-
       <div className="separator">Or</div>
       <form className="d-flex flex-column align-items-center justify-content- center w-100" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">

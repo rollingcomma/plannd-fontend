@@ -1,7 +1,6 @@
 import React from 'react';
 
 const IndexHeader = () => {
-debugger
   // render() {
   return (
     <div className="top-banner">
