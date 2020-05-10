@@ -1,13 +1,10 @@
-import React, {useEffect} from 'react';
-
+import React from 'react';
 import './index.scss';
 import Footer from './components/shared/Footer';
 import Routes from './services/Routes';
-import { UserStateProvider } from './components/HOC/Provider';
+import { UserStateProvider, ProjectsStateProvider } from './context/Provider';
 // import DesktopView from './components/views/DesktopView';
 import { BrowserRouter as Router } from 'react-router-dom';
-import useUserState from './helpers/customerHook';
-import { checkLoggedIn } from './services/apiAction';
 
 const App = () => {
   // const initialState = {
@@ -35,10 +32,12 @@ const App = () => {
 
   return (
     <UserStateProvider>
-      <Router>
-        <Routes />
-      </Router>
-      <Footer />
+      <ProjectsStateProvider>
+        <Router>
+          <Routes />
+        </Router>
+        <Footer />
+      </ProjectsStateProvider>  
     </UserStateProvider >
   )
   

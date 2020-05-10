@@ -1,28 +1,24 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { logout, getProjects, updateActiveProject } from '../../services/apiAction'
-import { useUserState } from '../../helpers/customerHook';
+import { useUserState, useProjectsState } from '../../context/customerHook';
 import $ from 'jquery'
 
 const Header = () =>{
   const history = useHistory();
-  const [userState, dispatch] = useUserState();
-  const [projectsState, setProjectsState] = useState(null);
+  const [userState, dispatchUser] = useUserState();
+  const [projectsState, dispatchProject] = useProjectsState();
   
   // const activeProject = projectsState.filter(project => (project._id == activeProjectState))
   debugger
   const [activeProjectState, setActiveProjectState] = useState(
-    userState? 
     {
       projectId: userState.user.preference.activeProject,
       projectTitle: ""
-    }
-    :
-    null
-  );
+    });
   
   const handleLogout = () => {
-    dispatch({
+    dispatchUser({
       isLoggedIn: false,
       user:null
     })
@@ -38,7 +34,7 @@ const Header = () =>{
     const projectId = $(e.target).attr('id')
     const projectTitle = $(e.target).text()
     
-    updateActiveProject(userState._id, projectId)
+    updateActiveProject(userState.user._id, projectId)
     .then(res => {
       setActiveProjectState({
         projectId: projectId,
@@ -46,7 +42,7 @@ const Header = () =>{
       })
       let user = userState.user
       user.preference.activeProject = projectId
-      dispatch({
+      dispatchUser({
         "user": user
       })
     })
@@ -55,16 +51,16 @@ const Header = () =>{
     })
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     debugger
-    if(userState.user)
+    if (!userState.projects) {
       getProjects(userState.user._id)
       .then(res => {
         const projects = res.data.projects
-        setProjectsState({
-          projects: projects
-        });
-        const activeProject = projects.filter(project => (project._id === activeProjectState.projectId))
+        dispatchUser({
+          "projects": projects
+        })
+        const activeProject = projects.filter(project => (project._id === userState.user.preference.activeProject))
         setActiveProjectState({
           projectId: activeProject[0]._id,
           projectTitle: activeProject[0].title
@@ -73,7 +69,15 @@ const Header = () =>{
       .catch(err => {
         console.log(err.message)
       })
-   },[])
+    } else {
+      const activeProject = userState.projects.filter(project => (project._id === userState.user.preference.activeProject))
+      setActiveProjectState({
+        projectId: activeProject[0]._id,
+        projectTitle: activeProject[0].title
+      })
+    }
+    
+  },[])
 
   return (
     <div className="top-banner">
@@ -96,7 +100,7 @@ const Header = () =>{
               <button className="btn btn-link text-dark account-name dropdown-toggle" id="projects-dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 Browse Projects</button>
               <div className="dropdown-menu" aria-labelledby="project-dropdwon-menu">
-                {projectsState && projectsState.projects.map(project => 
+                {userState.projects && userState.projects.map(project => 
                   <button key={project._id} id={project._id} className="btn btn-link text-dark dropdown-item" onClick={(e) => handleProjectChange(e)}>{project.title}</button>
                 )}
                 <div className="dropdown-divider"></div>

@@ -3,7 +3,7 @@ import { useHistory } from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form'
 import IndexContainer from '../HOC/IndexContainer'
 import { sameAs } from '../../helpers/validator'
-import { useUserState } from '../../helpers/customerHook';
+import { useUserState } from '../../context/customerHook';
 import { postUser } from '../../services/apiAction'
 
 const Register = (props) => { 
@@ -13,7 +13,7 @@ const Register = (props) => {
   }
   const { handleSubmit, register, errors, getValues } = useForm();
   
-  const [userState, dispatch] = useUserState();
+  const [userState, dispatchUser] = useUserState();
   
   const onSubmit = async (formData) => {
     debugger
@@ -21,7 +21,7 @@ const Register = (props) => {
       .then(res => {
         const user = res.data
         if (user) {
-          dispatch({
+          dispatchUser({
             isLoggedIn: true,
             user: user.user
           })

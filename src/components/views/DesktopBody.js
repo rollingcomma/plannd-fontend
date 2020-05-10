@@ -6,90 +6,117 @@ import PrivateRoute from '../../services/PrivateRoute';
 import Dashboard from '../features/Dashboard';
 import NotFound from '../features/NotFound';
 import {getGallery, getNotes, getTodos, getLinks} from '../../services/apiAction'
-import { useUserState } from '../../helpers/customerHook';
+import { useUserState } from '../../context/customerHook';
 
-const DesktopBody = ({data}) => {
+const DesktopBody = () => {
   
   const history = useHistory();
   const [userState, dispatch] = useUserState()
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject
   let location = useLocation()
+
+  //handle page reload
   useEffect(() => {
     debugger
-    const featureName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-    if(featureName == 'dashboard')
-      getNotes(activeProjectId)
-      .then(res => {
-        const notes = res.data.notes
-        if(notes)
-        setFeature({
-          name:"Notes",
-          _id:notes._id,
-          contentArr:notes.notebooks
-        })
-        // history.push('/user/feature/notes')
-      })
-      .catch(err =>{
-        console.log(err.message)
-      })
-    else
-      handleFeatureSwitch(featureName)
-      history.push(`/user/feature/${featureName}`)
-  }, [userState.user.preference.activeProject])
+    const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+    // if(featureName == 'feature') {
+    // getNotes(activeProjectId)
+    //   .then(res => {
+    //     const notes = res.data.notes
+    //     if (notes)
+    //       setFeature({
+    //         name: "Notes",
+    //         _id: notes._id,
+    //         contentArr: notes.notebooks
+    //       })
+    //     // history.push('/user/feature')
+    //   })
+    //   .catch(err => {
+    //     console.log(err.message)
+    //   })
+    // } else {
+      handleFeatureSwitch(pathname)
+    // }
+  }, [activeProjectId])
 
+  // useEffect(() => {
+  //   debugger
+  //   const featureName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+  //   // if(featureName == 'dashboard') {
+  //     getNotes(activeProjectId)
+  //     .then(res => {
+  //       const notes = res.data.notes
+  //       if (notes)
+  //         setFeature({
+  //           name: "Notes",
+  //           _id: notes._id,
+  //           contentArr: notes.notebooks
+  //         })
+  //       // history.push('/user/feature')
+  //     })
+  //     .catch(err => {
+  //       console.log(err.message)
+  //     })
+  // }, [userState.user.preference.activeProject])
+  
+  debugger
     const handleFeatureSwitch = (featureName) => {
       switch (featureName) {
-        case "notes":
+        case "notes": {
           getNotes(activeProjectId)
-          .then(res => {
-            const notes = res.data.notes;
-            if(notes)
-            setFeature({
-              name: "Notes",
-              _id: data.notes._id,
-              contentArr: data.notes.notebooks
-            });
-          })
-          .catch(err =>{
-            console.log(err.message)
-          })
+            .then(res => {
+              const notes = res.data.notes;
+              if (notes)
+                setFeature({
+                  name: "Notes",
+                  _id: notes._id,
+                  contentArr: notes.notebooks
+                });
+            })
+            .catch(err => {
+              console.log(err.message)
+            })
           return;
-        case "todos":
+        }
+        case "todos":{
           getTodos(activeProjectId)
             .then(res => {
               const todos = res.data.todos;
-              if(todos)
-              setFeature({
-                name: "To-dos",
-                _id: todos._id,
-                contentArr: todos.checklists
-              });
+              if (todos)
+                setFeature({
+                  name: "To-dos",
+                  _id: todos._id,
+                  contentArr: todos.checklists
+                });
             })
             .catch(err => {
               console.log(err.message)
             })
           return;
-        case "links":
+        }
+          
+        case "links": {
           getLinks(activeProjectId)
             .then(res => {
               const links = res.data.links;
-              if(links)
-              setFeature({
-                name: "Notes",
-                _id: links._id,
-                contentArr: links.categories
-              });
+              if (links)
+                setFeature({
+                  name: "Notes",
+                  _id: links._id,
+                  contentArr: links.categories
+                });
             })
             .catch(err => {
               console.log(err.message)
             })
           return;
-        case "gallery":
+        }
+        case "gallery": {
           getGallery(activeProjectId)
             .then(res => {
               const gallery = res.data.gallery;
-              if(gallery)
+              if (gallery)
                 setFeature({
                   name: "Image Gallery",
                   _id: gallery._id,
@@ -100,6 +127,7 @@ const DesktopBody = ({data}) => {
               console.log(err.message)
             })
           return;
+        }
         default:
           setFeature(null)
       }

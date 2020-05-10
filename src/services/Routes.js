@@ -6,7 +6,7 @@ import IndexHeader from '../components/shared/IndexHeader';
 import PrivateRoute from './PrivateRoute'
 import PrivateView from '../components/views/PrivateView';
 import NotFound from '../components/features/NotFound';
-import { useUserState } from '../helpers/customerHook';
+import { useUserState } from '../context/customerHook';
 import { checkLoggedIn } from '../services/apiAction';
 
 const Routes = () => {
