@@ -80,7 +80,7 @@ const Login = (props) => {
         <input type="submit" className="form-control my-3 btn btn-info" name="login" value="Sign In"/>
         </div>
       </form>
-      <div className="register-bar"><span className="mx-5">New Here?</span> 
+      <div className="register-bar div-shadow"><span className="mx-5">New Here?</span> 
       <button className='my-2 mr-1 btn btn-success' onClick={handleRedirectClick} >Join now</button></div>
       
 

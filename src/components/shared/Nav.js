@@ -11,17 +11,22 @@ import PrivateRoute from '../../services/PrivateRoute'
 
 const Nav = ({feature}) => {
   
+  
   const [content, setContent] = useState(
     { ...feature,
       currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
-  
+
+  const initialState = {}
+  if(content && content.contentArr.length > 0) content.contentArr.forEach(element => initialState[element.title] = true)
+  const [inputEditableState, setInputEditableState] = useState(initialState)
+
   useEffect (() => {
     setContent({
       ...feature,
       currentContent: feature.contentArr.length > 0 ? feature.contentArr[0] : null
     })
-  }, [feature])
+  }, [feature, feature.currentContent])
 
   const handleUpdateState = useCallback((id, contentArr) => {
     const arr = contentArr.filter(element => element._id === id)
@@ -35,14 +40,43 @@ const Nav = ({feature}) => {
     }
   }, [content.currentContent])
 
+  //onclick enable editing mode of input field
+  const handleOnDbClickInput = (evt) => {
+    const value = evt.target.value;
+    setInputEditableState({
+      ...inputEditableState,
+      [evt.target.name]: false
+    });
+  }
+
+  // const handleOnChange = (evt) => {
+  //   const value = evt.target.value;
+  //   setInputState({
+  //     ...inputState,
+  //     [evt.target.name]: value
+  //   });
+  // }
+
+  // const handleEscape = (evt) => {
+  //   if (evt.keyCode === 27) {
+  //     setState({ open: false });
+  //   }
+  // }
+
+  // const handleEnter = (evt) => {
+  //   if (evt.keyCode === 13) {
+  //     setState({ open: false });
+  //   }
+  // }
+
   debugger
   return (
     <div className="d-flex flex-row w-75">
       <div className="categories-nav">
         <div className="top-function-name">
-          <div className="rectangle"></div>
+          <div className={"rectangle-"+content.name}></div>
         <p id={content._id} className="function-name">{content.name}</p>
-          <div className="text-banner"></div>
+          <div className={"text-banner-"+content.name}></div>
         </div>
         <div className="saved-elements-list">
           {content.contentArr.length > 0 && 

@@ -85,7 +85,7 @@ const DesktopBody = () => {
               const todos = res.data.todos;
               if (todos)
                 setFeature({
-                  name: "To-dos",
+                  name: "To-Dos",
                   _id: todos._id,
                   contentArr: todos.checklists
                 });
@@ -102,7 +102,7 @@ const DesktopBody = () => {
               const links = res.data.links;
               if (links)
                 setFeature({
-                  name: "Notes",
+                  name: "Links",
                   _id: links._id,
                   contentArr: links.categories
                 });
@@ -118,7 +118,7 @@ const DesktopBody = () => {
               const gallery = res.data.gallery;
               if (gallery)
                 setFeature({
-                  name: "Image Gallery",
+                  name: "Gallery",
                   _id: gallery._id,
                   contentArr: gallery.albums
                 });

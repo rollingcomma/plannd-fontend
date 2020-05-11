@@ -4,7 +4,7 @@ const IndexContainer = (Component) =>  ({content}) => {
   
   return (
 
-    <div className='d-flex flex-row index-container'>
+    <div className='d-flex flex-row div-shadow index-container'>
       
       <div className='index-img'>
         <img src="/assets/travel.jpg" alt="" />

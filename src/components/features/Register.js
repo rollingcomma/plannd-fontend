@@ -98,7 +98,7 @@ const Register = (props) => {
         <input type="submit" className="form-control my-3 btn btn-info" name="Register" value="Register"/>
         </div>
       </form>
-      <div className="register-bar"><span className="mx-3">Already have an account?</span>
+      <div className="register-bar div-shadow"><span className="mx-3">Already have an account?</span>
         <button className='my-2 mr-1 btn btn-success' onClick={handleRedirectClick} >Sign In</button></div>
       </div>
   )

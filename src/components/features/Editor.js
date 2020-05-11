@@ -40,7 +40,10 @@ class Editor extends React.Component {
           theme: this.state.theme
         }
         :
-        this.state
+        {
+          editorHtml: '',
+          theme: 'snow'
+        }
       )
     }
   }

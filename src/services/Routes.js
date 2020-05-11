@@ -14,7 +14,8 @@ const Routes = () => {
   const history = useHistory()
   const [userState, dispatch] = useUserState();
   useEffect(() => {
-    if (!sessionStorage.getItem('isLoggedIn')) {
+    //verify user login by social media
+    if (!sessionStorage.getItem('isLoggedIn') && sessionStorage.getItem('isLoggedIn') !== null) {
       checkLoggedIn()
       .then(res => {
         const user = res.data
