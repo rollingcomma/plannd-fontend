@@ -87,7 +87,7 @@ const Dashboard = () => {
               case "notebook":
                 content.notebook.name="Notes"
                 return <div key={content._id} className="dashboard-feature-container">
-                  <div className="mx-2 mt-2 div-shadow">
+                  <div className="mx-2 mt-2">
                   <Editor content={content.notebook} />
                 </div>
                 </div>

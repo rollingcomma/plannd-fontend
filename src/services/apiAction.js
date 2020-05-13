@@ -88,7 +88,13 @@ export const addNotebook = (projectId, formData) => {
     url: '/api/users/notes/notebook',
     data: { 
       ...formData,
-      projectId: projectId }
+      projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -99,7 +105,13 @@ export const updateNotebook = (projectId, formData) => {
     data: {
       ...formData,
       projectId: projectId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -120,6 +132,11 @@ export const getLinks = (projectId) => {
     method: 'GET',
     url: '/api/users/links/',
     params: { projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }

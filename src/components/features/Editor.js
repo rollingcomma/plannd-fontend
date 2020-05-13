@@ -1,21 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
 import FeatureContainer from '../HOC/FeatureContainer';
-
+import { useUserState } from '../../context/customerHook'
+import { updateNotebook } from '../../services/apiAction'
 const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
 Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
 /*
  * Simple editor component that takes placeholder text as a prop
 */
-class Editor extends React.Component {
-  constructor(props) {
-    super(props)
-  
-    this.state = props.content? {
-      documentId: this.props.content._id,
-      editorHtml: this.props.content.note,
+// class Editor extends React.Component {
+//   constructor(props) {
+//     super(props)
+const Editor = ({content}) =>{
+
+    
+    const initialState = content? {
+      documentId: content._id,
+      editorHtml: content.note,
       theme: 'snow'
     }
     :
@@ -23,54 +26,88 @@ class Editor extends React.Component {
         editorHtml: '',
         theme: 'snow'
     }
+
+  const [contentState, setContentState] = useState(initialState)
+
+  const [UserState, dispatch] = useUserState()
+
     // this.textInput = React.createRef();
-    this.handleBlur = this.handleBlur.bind(this);
-    this.handleChange = this.handleChange.bind(this)
+  //   this.handleBlur = this.handleBlur.bind(this);
+  //   this.handleChange = this.handleChange.bind(this)
 
+  // }
+  
+  useEffect(() => {
+    setContentState(
+      {
+        ...contentState,
+        documentId: content._id,
+        editorHtml: content.note
+        
+      }
+    )
+  },[content, content._id])
+
+  // componentDidUpdate(prevProps) {
+  //   if (this.props.content !== prevProps.content) {
+  //     // debugger
+  //     this.setState(
+  //       this.props.content?
+  //       {
+  //         documentId: this.props.content._id,
+  //         editorHtml: this.props.content.note,
+  //         theme: this.state.theme
+  //       }
+  //       :
+  //       {
+  //         editorHtml: '',
+  //         theme: 'snow'
+  //       }
+  //     )
+  //   }
+  // }
+
+  const handleChange = (value) => {
+      setContentState({
+        ...contentState,
+        editorHtml: value
+      })
+    // this.setState({ editorHtml: value });
+    
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.content !== prevProps.content) {
-      // debugger
-      this.setState(
-        this.props.content?
-        {
-          documentId: this.props.content._id,
-          editorHtml: this.props.content.note,
-          theme: this.state.theme
-        }
-        :
-        {
-          editorHtml: '',
-          theme: 'snow'
-        }
-      )
-    }
-  }
-
-  handleChange = (value) => {
-    this.setState({ editorHtml: value });
-  }
-
-  handleThemeChange = (newTheme) => {
+  const handleThemeChange = (newTheme) => {
     if (newTheme === "core") newTheme = null;
-    this.setState({ theme: newTheme })
+    // this.setState({ theme: newTheme })
+    setContentState({
+      ...contentState,
+      theme:newTheme
+    })
   }
 
-  handleBlur = () => {
-    const val = this.state.editorHtml.replace(/"/g, '\\"')
-    console.log(val)
+  const handleBlur = () => {
+    debugger
+    const val = contentState.editorHtml.replace(/"/g, '\\"')
+    updateNotebook(UserState.user.preference.activeProject,
+      {
+        notebookId: contentState.documentId,
+        note: val
+      })
+      .then(result => {
+        console.log(result.data)
+        // console.log(val)
+      })
   }
 
-  render() {
+  // render() {
     debugger
     return (
       <div>
         <ReactQuill
-          theme={this.state.theme || 'snow'}
-          onChange={this.handleChange}
-          onBlur={this.handleBlur}
-          value={this.state.editorHtml ||''}
+          theme={contentState.theme || 'snow'}
+          onChange={handleChange}
+          onBlur={handleBlur}
+          value={contentState.editorHtml ||''}
           modules={Editor.modules}
           formats={Editor.formats}
           bounds={'.app'}
@@ -79,7 +116,7 @@ class Editor extends React.Component {
         <div className="themeSwitcher">
           <label>Theme </label>
           <select onChange={(e) =>
-            this.handleThemeChange(e.target.value)}>
+            handleThemeChange(e.target.value)}>
             <option value="snow">Snow</option>
             <option value="bubble">Bubble</option>
           </select>
@@ -87,7 +124,7 @@ class Editor extends React.Component {
       </div>
     )
   }
-}
+// }
 
 /* 
  * Quill modules to attach to editor
