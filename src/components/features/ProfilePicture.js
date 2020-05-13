@@ -1,10 +1,9 @@
 import React from 'react'
-import ProfileContainer from '../HOC/ProfileContainer'
 
 const ProfilePicture = () => {
 
   return (
-    <div className="d-flex flex-row w-50">
+    <div className="d-flex flex-row profile-container main-content-container">
       <div className="d-flex flex-column w-25">
         <div className="div-shadow profile-image-nav">
           <div className="top-function-name">
@@ -24,7 +23,7 @@ const ProfilePicture = () => {
         </div>
       </div>
       
-      <div className="div-shadow w-75">
+      <div className="div-shadow w-50 h-100">
         <div className="d-flex flex-row m-4">
           <div className="div-shadow m-2 profile-image-container">
             <img className="profile-image-container" src="https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?cs=srgb&dl=silhouette-photo-of-woman-holding-lights-3792581.jpg&fm=jpg"></img>

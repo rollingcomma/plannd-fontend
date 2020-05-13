@@ -1,10 +1,10 @@
 import React from 'react'
-import ProfileContainer from '../HOC/ProfileContainer'
+
 const ProfileTheme = () => {
 
   return (
-    <div className="d-flex flex-row w-50">
-      <div className="div-shadow profile-nav">
+    <div className="d-flex flex-row profile-container main-content-container">
+      <div className="div-shadow w-25 profile-nav">
         <div className="top-function-name">
           <div className="rectangle-To-Dos"></div>
           <p  className="function-name">Theme</p>
@@ -17,7 +17,7 @@ const ProfileTheme = () => {
           <p className ="mx-4">A variety of colour palettes are provided to match your destination</p>
         </div>
       </div>
-      <div className ="div-shadow w-50 h-height">
+      <div className ="div-shadow w-50 h-100">
         <div className="m-3 mt-5">
           <div id="Classic" className="div-shadow m-3 d-flex flex-row w-50">
             <div className="div-shadow classic-primary theme-colour"></div>

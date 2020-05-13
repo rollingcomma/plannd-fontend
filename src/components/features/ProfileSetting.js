@@ -1,8 +1,6 @@
 import React, { useState } from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form';
-import ProfileContainer from '../HOC/ProfileContainer'
 import { useUserState } from '../../context/customerHook'
-import { UserStateProvider } from '../../context/Provider'
 
 const ProfileTheme = () => {
   const { register, errors } = useForm();
@@ -42,8 +40,8 @@ const ProfileTheme = () => {
 
 
   return (
-    <div className="d-flex flex-row w-50">
-      <div className="div-shadow profile-nav">
+    <div className="d-flex flex-row profile-container main-content-container">
+      <div className="div-shadow w-25 profile-nav">
         <div className="top-function-name">
           <div className="rectangle-To-Dos"></div>
           <p className="function-name">User Information</p>
@@ -55,7 +53,7 @@ const ProfileTheme = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow w-50">
+      <div className="div-shadow w-50 h-100">
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">

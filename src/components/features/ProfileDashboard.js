@@ -1,8 +1,5 @@
 import React from 'react'
-import ProfileContainer from '../HOC/ProfileContainer'
 import {useUserState} from '../../context/customerHook'
-
-
 
 const ProfileDashboard = () => {
 
@@ -12,8 +9,8 @@ const ProfileDashboard = () => {
 
   }
   return (
-    <div className="d-flex flex-row w-50">
-      <div className="div-shadow profile-nav">
+    <div className="d-flex flex-row profile-container main-content-container">
+      <div className="div-shadow w-25 profile-nav">
         <div className="top-function-name">
           <div className="rectangle-Links"></div>
           <p className="function-name">Dashboard</p>
@@ -25,7 +22,7 @@ const ProfileDashboard = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow ml-2 w-50">
+      <div className="div-shadow ml-2 w-50 h-100">
         <div className="d-flex flex-column overflow-auto m-4">
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" name="checklistItem1" id="notes" value="option1" 

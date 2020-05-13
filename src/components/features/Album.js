@@ -1,12 +1,56 @@
-import React from 'react'
+import React, { useState, useCallback } from 'react'
 import FeatureContainer from '../HOC/FeatureContainer';
+import Gallery from 'react-photo-gallery';
+import SelectedImage from './SelectedImage';
 
-const Album = (props) => {
+const Album = ({content}) => {
   debugger
+  const [selectAll, setSelectAll] = useState(false)
+
+  const toggleSelectAll = () => {
+    setSelectAll(!selectAll);
+  }
+
+  if(content && content.images) {
+    content.images.map(image=>{
+      try{
+        image.width = parseInt(image.width)
+        image.height = parseInt(image.height)
+      } catch (err) {
+        console.log(err.message)
+      }
+      
+    })
+  }
+
+  const imageRenderer = useCallback(
+    ({ index, left, top, key, photo }) => (
+      <SelectedImage
+        selected={false}
+        key={key}
+        margin={"2px"}
+        index={index}
+        photo={photo}
+        left={left}
+        top={top}
+      />
+    ),
+    []
+  );
+
   return (
-    <div>
-      <h5> I'm a block of albums</h5>
-      <p>{JSON.stringify(props)}</p>
+    <div className="w-100">
+      { content && content.images && 
+      <Gallery photos={content.images} renderImage={imageRenderer}/>
+      }
+      <div className="mt-5 d-flex justify-content-center align-items-center">
+        <button className="btn btn-link text-dark"><img className="icon-small" src="/assets/garbage.png" alt="delete" />Trash</button>
+        <span>/</span>
+        <div className="create-icon">
+          <button className="btn btn-link text-dark"><img src="/assets/add-icon.svg" alt="add" />Create</button>
+        </div>
+      </div>
+     
     </div >
   )
 }

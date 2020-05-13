@@ -2,7 +2,6 @@ export const sessionStorageParser = (value) => {
   //if value is null, retrieving from sessionStorage
   //else store value to sessionStorage
   // if(value === 'user' || value ==='projects') {
-    debugger
     
     if(!value){
     //   return sessionStorage.getItem('projects')?{projects:JSON.parse(sessionStorage.getItem('projects'))}:null

@@ -7,10 +7,13 @@ import Editor from '../features/Editor';
 import Links from '../features/Links';
 import Album from '../features/Album';
 import NotFound from '../features/NotFound';
-import PrivateRoute from '../../services/PrivateRoute'
+import PrivateRoute from '../../services/PrivateRoute';
+import { useUserState } from '../../context/customerHook';
 
 const Nav = ({feature}) => {
-  
+  const [UserState, dispatch] = useUserState()
+
+  const pins = UserState.user.pins;
   
   const [content, setContent] = useState(
     { ...feature,
@@ -91,23 +94,26 @@ const Nav = ({feature}) => {
           </div>
         </div>
       </div>
-      <Switch>
-        <PrivateRoute path= "/user/feature/notes">
-          <Editor content={content.currentContent} />
-        </PrivateRoute>
-        <PrivateRoute path="/user/feature/todos" >
-          <Checklist content={content.currentContent} />
-        </PrivateRoute>
-        <PrivateRoute path="/user/feature/links" >
-          <Links content={content.currentContent} />
-        </PrivateRoute>
-        <PrivateRoute path="/user/feature/gallery" >
-          <Album content={content.currentContent} />
-        </PrivateRoute>
-        <Route >
-          <NotFound />
-        </Route>
-      </Switch>
+      <div className="feature-container">
+        <Switch>
+          <PrivateRoute path="/user/feature/notes">
+            <Editor content={content.currentContent} pins={pins} />
+          </PrivateRoute>
+          <PrivateRoute path="/user/feature/todos" >
+            <Checklist content={content.currentContent} pins={pins} />
+          </PrivateRoute>
+          <PrivateRoute path="/user/feature/links" >
+            <Links content={content.currentContent} pins={pins} />
+          </PrivateRoute>
+          <PrivateRoute path="/user/feature/gallery" >
+            <Album content={content.currentContent} pins={pins} />
+          </PrivateRoute>
+          <Route >
+            <NotFound />
+          </Route>
+        </Switch>
+      </div>
+      
     </div>
   )
   // }

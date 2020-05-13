@@ -18,7 +18,7 @@ const DesktopBody = () => {
 
   //handle page reload
   useEffect(() => {
-    debugger
+    // debugger
     const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
     // if(featureName == 'feature') {
     // getNotes(activeProjectId)
@@ -60,7 +60,7 @@ const DesktopBody = () => {
   //     })
   // }, [userState.user.preference.activeProject])
   
-  debugger
+  // debugger
     const handleFeatureSwitch = (featureName) => {
       switch (featureName) {
         case "notes": {
@@ -135,7 +135,7 @@ const DesktopBody = () => {
 
     // debugger
     return (
-      <div className="app justify-content">
+      <div className="app">
         <div className="side-nav">
           <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
           <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>

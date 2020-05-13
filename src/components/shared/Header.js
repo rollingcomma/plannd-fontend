@@ -7,10 +7,10 @@ import $ from 'jquery'
 const Header = () =>{
   const history = useHistory();
   const [userState, dispatchUser] = useUserState();
-  const [projectsState, dispatchProject] = useProjectsState();
+  // const [projectsState, dispatchProject] = useProjectsState();
   
   // const activeProject = projectsState.filter(project => (project._id == activeProjectState))
-  debugger
+ 
   const [activeProjectState, setActiveProjectState] = useState(
     {
       projectId: userState.user.preference.activeProject,
@@ -30,7 +30,7 @@ const Header = () =>{
   }
 
   const handleProjectChange = (e) => {
-    debugger
+    
     const projectId = $(e.target).attr('id')
     const projectTitle = $(e.target).text()
     
@@ -52,7 +52,7 @@ const Header = () =>{
   }
 
   useEffect(() => {
-    debugger
+    // debugger
     if (!userState.projects) {
       getProjects(userState.user._id)
       .then(res => {
@@ -81,17 +81,17 @@ const Header = () =>{
 
   return (
     <div className="top-banner">
-      <div className="d-flex w-75">
-        <div className="logo">
+      <div className="d-flex w-100">
+        <div className="d-flex align-items-center w-25 ">
           <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
         </div>
-        <div className="d-flex flex-row align-items-center pl-5 ml-5 w-75">
+        <div className="d-flex flex-row align-items-center w-75">
           <div className="current-trip">
             <p id="bali-text">{activeProjectState && activeProjectState.projectTitle}</p>
             <div className="vertical-line"></div>
           </div>
           <div className="dashboard-link">
-          <img alt="" src="/assets/dashboard-icon.svg" className="dashboard-icon" />
+            <img alt="" src="/assets/dashboard-icon.svg" className="dashboard-icon" />
             <Link to="/user/dashboard" className="text-dark">Dashboard</Link>
           </div>
           <div className="project-link">
@@ -109,8 +109,7 @@ const Header = () =>{
             </div>
           </div>
         </div>
-      </div>
-      <div className="login">
+        <div className="login">
         <img alt="" src="/assets/profile-photo.jpg" className="profile-photo" />
         <div className="nav-item dropdown">
           <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -120,6 +119,7 @@ const Header = () =>{
             <Link className="dropdown-item" to="/user/profile"><img alt="" src="/assets/gear.png" className="icon-small" />Profile Setting</Link>
           </div>
         </div>
+      </div>
       </div>
     </div>
   )

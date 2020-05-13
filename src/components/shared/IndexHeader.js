@@ -11,9 +11,9 @@ const IndexHeader = () => {
       </div>
       <div className="login">
         <img alt="" src="/assets/user.png" className="icon-small" />
-        <a href="/login" className="text-body mr-2">Sign In</a>
+        <a href="/login" className="text-body pr-2">Sign In</a>
         <span> or</span>
-        <a href="/register" className="text-body ml-2">Register</a>
+        <a href="/register" className="text-body pl-2">Register</a>
       </div>
     </div>
   )

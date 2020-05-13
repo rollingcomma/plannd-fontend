@@ -65,6 +65,23 @@ export const getNotes = (projectId) => {
   })
 }
 
+export const getNotebook = (projectId, notebookId) => {
+  return axios({
+    method: 'GET',
+    url: '/api/users/notes/notebook',
+    params: { 
+      projectId: projectId,
+      notebookId: notebookId
+     },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
+  })
+}
+
 export const addNotebook = (projectId, formData) => {
   return axios({
     method: 'POST',
@@ -103,6 +120,23 @@ export const getLinks = (projectId) => {
     method: 'GET',
     url: '/api/users/links/',
     params: { projectId: projectId },
+    withCredentials: true
+  })
+}
+
+export const getCategory = (projectId, categoryId) => {
+  return axios({
+    method: 'GET',
+    url: '/api/users/links/category',
+    params: {
+      projectId: projectId,
+      categoryId: categoryId
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -182,6 +216,18 @@ export const getTodos = (projectId) => {
   })
 }
 
+export const getChecklist = (projectId, checklistId) => {
+  return axios({
+    method: 'GET',
+    url: '/api/users/todos/checklist',
+    params: {
+      projectId: projectId,
+      checklistId: checklistId
+    },
+    withCredentials: true
+  })
+}
+
 export const addChecklist = (projectId, formData) => {
   return axios({
     method: 'POST',
@@ -253,6 +299,18 @@ export const getGallery = (projectId) => {
     method: 'GET',
     url: '/api/users/gallery/',
     params: { projectId: projectId },
+    withCredentials: true
+  })
+}
+
+export const getAlbum = (projectId, albumId) => {
+  return axios({
+    method: 'GET',
+    url: '/api/users/gallery/album',
+    params: {
+      projectId: projectId,
+      albumId: albumId
+    },
     withCredentials: true
   })
 }
