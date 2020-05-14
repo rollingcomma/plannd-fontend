@@ -1,7 +1,6 @@
 import React from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 import ProjectForm from '../shared/ProjectForm'
-import { updateActiveProject } from '../../services/apiAction'
 
 const Project = ({projects, activeProject, handleProjectChange}) => {
   debugger

@@ -24,7 +24,7 @@ const Dashboard = () => {
       const currentProject = UserState.projects.filter(project => project._id === UserState.user.preference.activeProject)
       const pins = currentProject[0].pins
       const requestArr = []
-    
+      
       for (const key of Object.keys(pins)) {
         switch (key) {
           case "notes":

@@ -1,6 +1,8 @@
-import React from 'react'
+import React, {useState} from 'react'
+import { useForm, ErrorMessage } from 'react-hook-form';
 import {useUserState} from '../../context/customerHook'
 import { addProject } from '../../services/apiAction'
+
 const ProjectForm = () => {
 
 const [UserState, dispatch] = useUserState()
@@ -8,19 +10,23 @@ const [UserState, dispatch] = useUserState()
 //   title:null,
 //   category:null
 // })
+const [categoryState, setCategoryState] = useState({
+  category:'Trip Planning'
+})
 
-const handleSubmit = (evt) => {
-  evt.preventDefault()
-  const formData = {
-    title:evt.target.title,
-    category:evt.target.category
-  } 
+const { handleSubmit, register, errors } = useForm();
+debugger
+
+const onSubmit = async (formData) => {
+  formData.category = categoryState.category
+  
   addProject(UserState.user._id, formData)
   .then(result => {
     if(result.data.success) {
       let projects = UserState.projects
       projects.push({
         _id: result.data.projectId,
+        category:categoryState.category,
         title:formData.title
       })
     }
@@ -28,30 +34,33 @@ const handleSubmit = (evt) => {
   .catch(err =>console.log(err.message))
 }
 
+const handleCategoryChoice = (evt) => {
+  const category = evt.target.getAttribute('id')
+  setCategoryState({
+    category:category
+  })
+}
   return(
-    <form onSubmit={handleSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div className="form-group">
         <label className="control-label" htmlFor="title">Project Name</label>
-        <input type="text" className="form-control" name="title" />
+        <input type="text" className="form-control" name="title"
+        ref={register({
+          required: "Title is required",
+          minLength: {
+            value: 6, message: "Minimum length of title is 6 characters!"
+          }
+        })} />
+        <ErrorMessage errors={errors} name="title">
+          {({ message }) => <p className="text-danger">{message}</p>}
+        </ErrorMessage>
       </div>
-      <div className="form-group">
-        <div className="form-check">
-          <input className="form-check-input" type="radio" name="category" id="projectRadios1" value="Trip Planning"/>
-            <label className="form-check-label" htmlFor="exampleRadios1">
-              Trip Planning
-          </label>
-        </div>
-        <div className="form-check">
-          <input className="form-check-input" type="radio" name="category" id="projectRadios2" value="Daily Usage"/>
-          <label className="form-check-label" htmlFor="exampleRadios2">
-              Daily Usage
-          </label>
-        </div>
+      <p>Category</p>
+      <div className='btn-group' role='group' aria-label="project-category">
+        <button type="button" id="Trip Planning" className="btn btn-light mr-3" onClick={(e) => handleCategoryChoice(e)}>Trip Planning</button>
+        <button type="button" id="Daily Usage" className="btn btn-light" onClick={(e) => handleCategoryChoice(e)}>Daily Usage</button>
       </div>
-
-      <button variant="primary" type="submit">
-        Create Project
-      </button>
+      <input className="btn create-project-btn mx-auto" name="newProject" type="submit" value="Create Project"/>
     </form>
   )
 }

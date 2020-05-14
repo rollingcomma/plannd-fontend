@@ -76,7 +76,7 @@ const Login = (props) => {
             {({ message }) => <p className="text-danger">{message}</p>}
           </ErrorMessage>
         </div>
-        <div className="form-group">    
+        <div className="form-group">
         <input type="submit" className="form-control my-3 btn btn-info" name="login" value="Sign In"/>
         </div>
       </form>
