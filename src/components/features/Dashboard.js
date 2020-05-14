@@ -14,47 +14,55 @@ const Dashboard = () => {
     contentList:null
   })
   
-  const [UserState, dispatch] = useUserState()
+  const [UserState] = useUserState()
   
   const [timeLeft, setTimeLeft] = useState(UserState?calculateTimeLeft(UserState.user.trip_plan.time):null)
   
   debugger
   useEffect(() => {
-    const pins = UserState.user.pins;
-    const requestArr = []
-    for(const key of Object.keys(pins)) {
-      switch(key) {
-        case "notes":
-          requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
-          break;
-        case "todos":
-          requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
-          break;
-        case "gallery":
-          requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
-          break;
-        case "links":
-          requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
-          break;
+    if (UserState.projects) {
+      const currentProject = UserState.projects.filter(project => project._id === UserState.user.preference.activeProject)
+      const pins = currentProject[0].pins
+      const requestArr = []
+    
+      for (const key of Object.keys(pins)) {
+        switch (key) {
+          case "notes":
+            requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
+            break;
+          case "todos":
+            requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
+            break;
+          case "gallery":
+            requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
+            break;
+          case "links":
+            requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
+            break;
+        }
       }
+      Promise.all(requestArr)
+        .then(responses => {
+          let content = responses.map(res => res.data)
+          setPinedContent({
+            contentList: content
+          })
+        })
+        .catch(err => {
+          console.log(err.message)
+        })
     }
-    Promise.all(requestArr)
-    .then(responses => {
-      let content = responses.map(res => res.data)
-      setPinedContent({
-        contentList: content
-      })
-    })
-    .catch(err => {
-      console.log(err.message)
-    })
-  }, [UserState.user.pins])
+    
+  }, [UserState.user.preference.activeProject])
 
-  useEffect(() => {
-    setTimeout(() => {
-      setTimeLeft(calculateTimeLeft(UserState.user.trip_plan.time));
-    }, 1000)
-  })
+  // useEffect(() => {
+  //   let timer = setTimeout(() => {
+  //     setTimeLeft(calculateTimeLeft(UserState.user.trip_plan.time));
+  //   }, 1000)
+  //   return () => {
+  //     clearTimeout(timer)
+  //   }
+  // })
 
   return (
     <div className="d-flex flex-column main-content-container dashboard-container">
@@ -82,7 +90,7 @@ const Dashboard = () => {
        {
           pinedContent.contentList && pinedContent.contentList.length >0 && pinedContent.contentList.map(content => {
             const key = Object.keys(content)
-            content[key].onDashboard = true;
+            content[key[0]].onDashboard = true;
             switch (key[0]) {
               case "notebook":
                 content.notebook.name="Notes"

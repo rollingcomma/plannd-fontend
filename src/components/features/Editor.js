@@ -86,7 +86,6 @@ const Editor = ({content}) =>{
   }
 
   const handleBlur = () => {
-    debugger
     const val = contentState.editorHtml.replace(/"/g, '\\"')
     updateNotebook(UserState.user.preference.activeProject,
       {
@@ -100,7 +99,7 @@ const Editor = ({content}) =>{
   }
 
   // render() {
-    debugger
+    // debugger
     return (
       <div>
         <ReactQuill

@@ -50,6 +50,20 @@ export const getProjects =(userId) => {
   })
 }
 
+export const addProject = (userId, formData) => {
+  return axios({
+    method: 'POST',
+    url: '/api/users/projects/',
+    params: { userId: userId },
+    data: {
+      ...formData,
+      'userId':userId
+    },
+    withCredentials: true
+  })
+}
+
+
 //notes related API actions
 export const getNotes = (projectId) => {
   return axios({

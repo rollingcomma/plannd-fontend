@@ -1,5 +1,5 @@
 import React from 'react'
-import {useHistory, Link, Redirect} from 'react-router-dom'
+import {useHistory} from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form';
 import {useUserState} from '../../context/customerHook';
 import IndexContainer from '../HOC/IndexContainer';
@@ -14,14 +14,14 @@ const Login = (props) => {
   }
 
   const { handleSubmit, register, errors} = useForm();
-  const [userState, dispatchUser] = useUserState();
+  const [userState, dispatch] = useUserState();
   
   const onSubmit = async (formData) => {
     getUser(formData)
       .then(res => {
         const user = res.data
         if (user.auth) {
-          dispatchUser({
+          dispatch({
             isLoggedIn:true,
             user:user.user
           })

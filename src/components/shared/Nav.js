@@ -11,7 +11,7 @@ import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState } from '../../context/customerHook';
 
 const Nav = ({feature}) => {
-  const [UserState, dispatch] = useUserState()
+  const [UserState] = useUserState()
 
   const pins = UserState.user.pins;
   
@@ -72,7 +72,7 @@ const Nav = ({feature}) => {
   //   }
   // }
 
-  debugger
+  // debugger
   return (
     <div className="d-flex flex-row w-75">
       <div className="categories-nav">

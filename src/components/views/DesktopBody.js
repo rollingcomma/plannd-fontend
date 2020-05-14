@@ -10,7 +10,7 @@ import { useUserState } from '../../context/customerHook';
 
 const DesktopBody = () => {
   
-  const history = useHistory();
+  // const history = useHistory();
   const [userState, dispatch] = useUserState()
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject

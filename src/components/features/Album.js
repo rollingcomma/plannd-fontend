@@ -4,12 +4,12 @@ import Gallery from 'react-photo-gallery';
 import SelectedImage from './SelectedImage';
 
 const Album = ({content}) => {
-  debugger
+  // debugger
   const [selectAll, setSelectAll] = useState(false)
 
-  const toggleSelectAll = () => {
-    setSelectAll(!selectAll);
-  }
+  // const toggleSelectAll = () => {
+  //   setSelectAll(!selectAll);
+  // }
 
   if(content && content.images) {
     content.images.map(image=>{

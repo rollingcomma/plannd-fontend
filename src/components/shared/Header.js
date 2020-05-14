@@ -1,13 +1,15 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { logout, getProjects, updateActiveProject } from '../../services/apiAction'
-import { useUserState, useProjectsState } from '../../context/customerHook';
+import { useUserState } from '../../context/customerHook';
+import Project from '../features/Project'
 import $ from 'jquery'
+import { Accordion, Card } from 'react-bootstrap'
 
 const Header = () =>{
   const history = useHistory();
   const [userState, dispatchUser] = useUserState();
-  // const [projectsState, dispatchProject] = useProjectsState();
+  const [projectPanelState, setProjectPanelState] = useState({open:false});
   
   // const activeProject = projectsState.filter(project => (project._id == activeProjectState))
  
@@ -79,48 +81,52 @@ const Header = () =>{
     
   },[])
 
+  const handleProjectPanel = () => {
+    setProjectPanelState ({open:!projectPanelState.open});
+  }
+
   return (
-    <div className="top-banner">
-      <div className="d-flex w-100">
-        <div className="d-flex align-items-center w-25 ">
-          <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
-        </div>
-        <div className="d-flex flex-row align-items-center w-75">
-          <div className="current-trip">
-            <p id="bali-text">{activeProjectState && activeProjectState.projectTitle}</p>
-            <div className="vertical-line"></div>
+    <div>
+      <div className="top-banner">
+        <div className="d-flex flex-row w-100">
+          <div className="d-flex align-items-center w-25 ">
+            <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
           </div>
-          <div className="dashboard-link">
-            <img alt="" src="/assets/dashboard-icon.svg" className="dashboard-icon" />
-            <Link to="/user/dashboard" className="text-dark">Dashboard</Link>
-          </div>
-          <div className="project-link">
-            <img alt="" src="/assets/project-icon.png" className="project-icon" />
-            <div className="nav-item dropdown">
-              <button className="btn btn-link text-dark account-name dropdown-toggle" id="projects-dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Browse Projects</button>
-              <div className="dropdown-menu" aria-labelledby="project-dropdwon-menu">
-                {userState.projects && userState.projects.map(project => 
-                  <button key={project._id} id={project._id} className="btn btn-link text-dark dropdown-item" onClick={(e) => handleProjectChange(e)}>{project.title}</button>
-                )}
-                <div className="dropdown-divider"></div>
-                <button className="btn btn-link text-dark dropdown-item" href="#">Create a new project</button>
+          <div className="d-flex justify-content-between w-75">
+            <div className="d-flex flex-row justify-content-start align-items-center w-75">
+              <div className="current-trip">
+                <span className="align-middle" id="bali-text">{activeProjectState && activeProjectState.projectTitle}</span>
+                <div className="vertical-line"></div>
+              </div>
+              <div className="dashboard-link">
+                <img alt="" src="/assets/dashboard-icon.svg" className="dashboard-icon" />
+                <Link to="/user/dashboard" className="text-dark">Dashboard</Link>
+              </div>
+              <div className="project-link">
+                <img alt="" src="/assets/project-icon.png" className="project-icon" />
+                <div className="dropdown">
+                  <button className="btn btn-link text-dark account-name" role="button" onClick={()=>handleProjectPanel()}>
+                    Browse Projects</button>
+                </div>
+              </div>
+            </div>
+            <div className="login">
+              <img alt="" src="/assets/profile-photo.jpg" className="profile-photo" />
+              <div className="nav-item dropdown">
+                <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  {userState.user.username}</button>
+                <div className="dropdown-menu" aria-labelledby="dropdwon-menu">
+                  <Link className="dropdown-item" to="/login" onClick={() => handleLogout()}><img alt="" src="/assets/signs.png" className="icon-small" />Log Out</Link>
+                  <Link className="dropdown-item" to="/user/profile"><img alt="" src="/assets/gear.png" className="icon-small" />Profile Setting</Link>
+                </div>
               </div>
             </div>
           </div>
         </div>
-        <div className="login">
-        <img alt="" src="/assets/profile-photo.jpg" className="profile-photo" />
-        <div className="nav-item dropdown">
-          <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            {userState.user.username}</button>
-          <div className="dropdown-menu" aria-labelledby="dropdwon-menu">
-            <Link className="dropdown-item" to="/login" onClick={() => handleLogout()}><img alt="" src="/assets/signs.png" className="icon-small" />Log Out</Link>
-            <Link className="dropdown-item" to="/user/profile"><img alt="" src="/assets/gear.png" className="icon-small" />Profile Setting</Link>
-          </div>
-        </div>
       </div>
-      </div>
+     {projectPanelState.open  && <div className="project-nav">
+        {userState.projects && <Project projects={userState.projects} activeProject={activeProjectState.projectId} handleProjectChange={handleProjectChange} />}
+      </div>}
     </div>
   )
 }
