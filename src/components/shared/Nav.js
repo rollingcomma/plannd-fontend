@@ -1,4 +1,4 @@
-import React, {useEffect, useCallback, useState} from 'react';
+import React, {useEffect, useCallback, useState, useRef} from 'react';
 import { Switch, Route } from 'react-router-dom';
 // import {BrowserRouter as Router} from 'react-router-dom';
 // import Routes from '../../services/Routes'
@@ -6,24 +6,35 @@ import Checklist from '../features/Checklist';
 import Editor from '../features/Editor';
 import Links from '../features/Links';
 import Album from '../features/Album';
+import Editable from '../shared/Editable';
 import NotFound from '../features/NotFound';
 import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState } from '../../context/customerHook';
 
 const Nav = ({feature}) => {
   const [UserState] = useUserState()
-
   const pins = UserState.user.pins;
+  const inputRef = useRef();
   
   const [content, setContent] = useState(
     { ...feature,
       currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
+  
+  const [contentArr, setContentArr] = useState({
+    contentArr: content.contentArr
+  });  
+  
+  const [addFormState, setAddFormState] = useState({open:false})
 
   const initialState = {}
   if(content && content.contentArr.length > 0) content.contentArr.forEach(element => initialState[element.title] = true)
-  const [inputEditableState, setInputEditableState] = useState(initialState)
+  
+  // const [inputEditableState, setInputEditableState] = useState(initialState)
 
+  const toggleAddFormHandler = () => {
+    setAddFormState({open:!addFormState.open})
+  }
   useEffect (() => {
     setContent({
       ...feature,
@@ -43,35 +54,6 @@ const Nav = ({feature}) => {
     }
   }, [content.currentContent])
 
-  //onclick enable editing mode of input field
-  const handleOnDbClickInput = (evt) => {
-    const value = evt.target.value;
-    setInputEditableState({
-      ...inputEditableState,
-      [evt.target.name]: false
-    });
-  }
-
-  // const handleOnChange = (evt) => {
-  //   const value = evt.target.value;
-  //   setInputState({
-  //     ...inputState,
-  //     [evt.target.name]: value
-  //   });
-  // }
-
-  // const handleEscape = (evt) => {
-  //   if (evt.keyCode === 27) {
-  //     setState({ open: false });
-  //   }
-  // }
-
-  // const handleEnter = (evt) => {
-  //   if (evt.keyCode === 13) {
-  //     setState({ open: false });
-  //   }
-  // }
-
   // debugger
   return (
     <div className="d-flex flex-row w-75">
@@ -82,15 +64,45 @@ const Nav = ({feature}) => {
           <div className={"text-banner-"+content.name}></div>
         </div>
         <div className="saved-elements-list">
+          
           {content.contentArr.length > 0 && 
           content.contentArr.map(element =>
-          <div key={element._id}>
-              <p className="pointer" onClick={() => handleUpdateState(element._id, content.contentArr)} id={element._id}>{element.title}</p>
+          <div key={element._id} className="my-2">
+              <Editable
+                text={element.title}
+                childRef={inputRef}
+                type="input"
+                className="pointer"
+                onClick={() => handleUpdateState(element._id, content.contentArr)}
+              >
+                <input
+                  id={element._id}
+                  ref={inputRef}
+                  type="text"
+                  name="contentArr"
+                  value={element.title}
+                  
+                  onChange={e => {
+                    element.title = e.target.value;
+                    setContentArr({ contentArr:content.contentArr })
+                  }}
+                />
+              </Editable>
+              {/* <p className="pointer" onClick={() => handleUpdateState(element._id, content.contentArr)} id={element._id}>{element.title}</p> */}
             <hr/>
           </div> 
           )}
+          <div>
+            {addFormState.open && 
+              <form>
+                <div className="form-group">
+                  <input type="text" name="title"/> 
+                </div>
+                <input type="submit" className="btn btn-info"/>
+              </form>}
+          </div>
           <div className="create-icon">
-            <button className="btn btn-link text-dark"><img src="/assets/add-icon.svg" alt="add" />Create</button>
+            <button className="btn btn-link text-dark" onClick={()=> toggleAddFormHandler()}><img src="/assets/add-icon.svg" alt="add" />Create</button>
           </div>
         </div>
       </div>

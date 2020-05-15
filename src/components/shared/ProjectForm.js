@@ -55,12 +55,18 @@ const handleCategoryChoice = (evt) => {
           {({ message }) => <p className="text-danger">{message}</p>}
         </ErrorMessage>
       </div>
-      <p>Category</p>
-      <div className='btn-group' role='group' aria-label="project-category">
-        <button type="button" id="Trip Planning" className="btn btn-light mr-3" onClick={(e) => handleCategoryChoice(e)}>Trip Planning</button>
-        <button type="button" id="Daily Usage" className="btn btn-light" onClick={(e) => handleCategoryChoice(e)}>Daily Usage</button>
+      <div>
+        <div>
+          <p>Category</p>
+          <div className='btn-group' role='group' aria-label="project-category">
+            <button type="button" id="Trip Planning" className="btn btn-light mr-3" onClick={(e) => handleCategoryChoice(e)}><img src="/assets/paper-plane.png" className="icon-small mx-1" alt="trip planning" />Trip Planning</button>
+            <button type="button" id="Daily Usage" className="btn btn-light" onClick={(e) => handleCategoryChoice(e)}><img src="/assets/notebook.png" className="icon-small mx-1" alt="trip planning" />Daily Usage</button>
+          </div>
+        </div>
+        <input className="btn create-project-btn mx-auto mt-4" name="newProject" type="submit" value="Create Project" />
       </div>
-      <input className="btn create-project-btn mx-auto" name="newProject" type="submit" value="Create Project"/>
+      
+     
     </form>
   )
 }

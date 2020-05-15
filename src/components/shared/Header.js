@@ -81,7 +81,7 @@ const Header = () =>{
     
   },[])
 
-  const handleProjectPanel = () => {
+  const toggleProjectPanel = () => {
     setProjectPanelState ({open:!projectPanelState.open});
   }
 
@@ -105,7 +105,7 @@ const Header = () =>{
               <div className="project-link">
                 <img alt="" src="/assets/project-icon.png" className="project-icon" />
                 <div className="dropdown">
-                  <button className="btn btn-link text-dark account-name" role="button" onClick={()=>handleProjectPanel()}>
+                  <button className="btn btn-link text-dark account-name" role="button" onClick={() => toggleProjectPanel()}>
                     Browse Projects</button>
                 </div>
               </div>
@@ -125,7 +125,7 @@ const Header = () =>{
         </div>
       </div>
      {projectPanelState.open  && <div className="project-nav">
-        {userState.projects && <Project projects={userState.projects} activeProject={activeProjectState.projectId} handleProjectChange={handleProjectChange} />}
+        {userState.projects && <Project projects={userState.projects} activeProject={activeProjectState.projectId} handleProjectChange={handleProjectChange} togglePanel={toggleProjectPanel}/>}
       </div>}
     </div>
   )

@@ -382,7 +382,7 @@ export const deleteAlbum = (projectId, albumId) => {
 export const addPicture = (projectId, albumId, formData) => {
   return axios({
     method: 'POST',
-    url: '/api/users/gallery/album/photo',
+    url: '/api/users/gallery/album/image',
     data: {
       ...formData,
       albumId: albumId,

@@ -2,7 +2,7 @@ import React from 'react'
 import { Accordion, Card, Button } from 'react-bootstrap'
 import ProjectForm from '../shared/ProjectForm'
 
-const Project = ({projects, activeProject, handleProjectChange}) => {
+const Project = ({projects, activeProject, handleProjectChange, togglePanel}) => {
   debugger
   return(
     <Accordion>
@@ -14,7 +14,7 @@ const Project = ({projects, activeProject, handleProjectChange}) => {
         </Card.Header>
         <Accordion.Collapse eventKey="0">
           <Card.Body>{projects && projects.map(project =>
-            <button key={project._id} id={project._id} className={activeProject == project._id ? "btn btn-link text-dark dropdown-item selected" :"btn btn-link text-dark dropdown-item"} onClick={(e) => handleProjectChange(e)}>{project.title}</button>
+            <button key={project._id} id={project._id} className={activeProject == project._id ? "btn btn-link text-dark dropdown-item selected" :"btn btn-link text-dark dropdown-item"} onClick={(e) => {handleProjectChange(e); togglePanel()}}>{project.title}</button>
           )}</Card.Body>
         </Accordion.Collapse>
       </Card>

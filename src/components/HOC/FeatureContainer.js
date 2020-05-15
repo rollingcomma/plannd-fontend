@@ -1,6 +1,6 @@
 import React from 'react';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
+// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+// import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 
 
 const FeatureContainer = (Component) => ( ({content, pins}) => {
@@ -28,7 +28,7 @@ const FeatureContainer = (Component) => ( ({content, pins}) => {
         :
         <div className="content-title d-flex justify-content-between">
           <p>{content && content.title}</p>
-            <button className="btn btn-link"><FontAwesomeIcon icon={faThumbtack} className={content.isPined? "pined":""}/></button>
+            <button className="btn btn-link"><img src={content.isPined ?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
         </div>
       }
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>
