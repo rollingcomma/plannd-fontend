@@ -16,7 +16,7 @@ const Dashboard = () => {
   
   const [UserState] = useUserState()
   
-  const [timeLeft, setTimeLeft] = useState(UserState?calculateTimeLeft(UserState.user.trip_plan.time):null)
+  const [timeLeft, setTimeLeft] = useState(UserState? calculateTimeLeft(UserState.user.trip_plan.time) : null)
   
   const loadPinedContent = () => {
     if (UserState.projects) {
@@ -55,7 +55,7 @@ const Dashboard = () => {
   debugger
   useEffect(() => {
     loadPinedContent()
-  }) 
+  },[]) 
   useEffect(() => {
     loadPinedContent()
     // if (UserState.projects) {
