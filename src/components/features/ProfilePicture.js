@@ -12,8 +12,8 @@ const ProfilePicture = () => {
             <div className="text-banner-Notes"></div>
           </div>
           <div className="">
-            <p className="m-4">Your profile picture will make it easy to see which account is currently logged in.</p>
-            <p className="mx-4">You can store multiple images to quickly change your profile picture whenever your please</p>
+            <p className="m-2 mt-5">Your profile picture will make it easy to see which account is currently logged in.</p>
+            <p className="mx-2">You can store multiple images to quickly change your profile picture whenever your please</p>
           </div>
         </div>
         <div className="profile-image-nav mt-3">

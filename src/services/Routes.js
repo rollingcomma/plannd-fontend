@@ -12,13 +12,13 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/register">
-        <div>
+        <div className="body-container">
         <IndexHeader />
         <Register/>
         </div>
       </Route>
       <Route exact path={["/", "/login"]}>
-        <div>
+        <div className="body-container">
           <IndexHeader />
           <Login />
         </div>

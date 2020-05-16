@@ -27,14 +27,15 @@ const Nav = ({feature}) => {
   
   const [addFormState, setAddFormState] = useState({open:false})
 
-  const initialState = {}
-  if(content && content.contentArr.length > 0) content.contentArr.forEach(element => initialState[element.title] = true)
+  // const initialState = {}
+  // if(content && content.contentArr.length > 0) content.contentArr.forEach(element => initialState[element.title] = true)
   
   // const [inputEditableState, setInputEditableState] = useState(initialState)
 
   const toggleAddFormHandler = () => {
     setAddFormState({open:!addFormState.open})
   }
+  
   useEffect (() => {
     setContent({
       ...feature,

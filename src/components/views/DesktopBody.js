@@ -20,25 +20,9 @@ const DesktopBody = () => {
   useEffect(() => {
     // debugger
     const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-    // if(featureName == 'feature') {
-    // getNotes(activeProjectId)
-    //   .then(res => {
-    //     const notes = res.data.notes
-    //     if (notes)
-    //       setFeature({
-    //         name: "Notes",
-    //         _id: notes._id,
-    //         contentArr: notes.notebooks
-    //       })
-    //     // history.push('/user/feature')
-    //   })
-    //   .catch(err => {
-    //     console.log(err.message)
-    //   })
-    // } else {
       handleFeatureSwitch(pathname)
-    // }
-  }, [activeProjectId])
+
+  }, [userState.user.preference.activeProject])
 
   // useEffect(() => {
   //   debugger

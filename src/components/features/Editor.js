@@ -38,6 +38,7 @@ const Editor = ({content}) =>{
   // }
   
   useEffect(() => {
+    if(content)
     setContentState(
       {
         ...contentState,
@@ -46,7 +47,7 @@ const Editor = ({content}) =>{
         
       }
     )
-  },[content, content._id])
+  },[content])
 
   // componentDidUpdate(prevProps) {
   //   if (this.props.content !== prevProps.content) {

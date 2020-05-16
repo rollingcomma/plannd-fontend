@@ -14,6 +14,7 @@
   width: 70%;
   margin-bottom: 0.2em;
 }
+
 .form-control {
   width: 100%;
 }
@@ -76,8 +77,9 @@ p {
     max-width: 900px;
     background-color: white;
 }
+
 .profile-container {
-  height: 50vh
+  min-height: 50vh
 }
 
 .index-img {
@@ -281,6 +283,10 @@ p {
 .project-nav {
   width: calc(50vw - 2.3rem);
   margin-left:calc(25vw + 4.3rem);
+}
+
+.body-container {
+  min-height:85vh;
 }
 
 .selected {

@@ -23,39 +23,41 @@ const Dashboard = () => {
       const currentProject = UserState.projects.filter(project => project._id === UserState.user.preference.activeProject)
       const pins = currentProject[0].pins
       const requestArr = []
-
-      for (const key of Object.keys(pins)) {
-        switch (key) {
-          case "notes":
-            requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
-            break;
-          case "todos":
-            requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
-            break;
-          case "gallery":
-            requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
-            break;
-          case "links":
-            requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
-            break;
+      if(pins) {
+        for (const key of Object.keys(pins)) {
+          switch (key) {
+            case "notes":
+              requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
+              break;
+            case "todos":
+              requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
+              break;
+            case "gallery":
+              requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
+              break;
+            case "links":
+              requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
+              break;
+          }
         }
-      }
-      Promise.all(requestArr)
-        .then(responses => {
-          let content = responses.map(res => res.data)
-          setPinedContent({
-            contentList: content
+        Promise.all(requestArr)
+          .then(responses => {
+            let content = responses.map(res => res.data)
+            setPinedContent({
+              contentList: content
+            })
           })
-        })
-        .catch(err => {
-          console.log(err.message)
-        })
+          .catch(err => {
+            console.log(err.message)
+          })
+      }
     }
   }
   debugger
   useEffect(() => {
     loadPinedContent()
   },[]) 
+
   useEffect(() => {
     loadPinedContent()
     // if (UserState.projects) {

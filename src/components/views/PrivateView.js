@@ -11,7 +11,7 @@ import Profile from '../features/Profile';
 const PrivateView = () => {
   
   return (
-    <div>
+    <div className="body-container">
       <Header />
       <Switch>
         <PrivateRoute path='/user/profile'>

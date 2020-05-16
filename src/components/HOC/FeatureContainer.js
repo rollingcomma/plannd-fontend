@@ -5,7 +5,7 @@ import React from 'react';
 
 const FeatureContainer = (Component) => ( ({content, pins}) => {
   
-  if(pins) {
+  if(pins && content) {
     for(const key of Object.keys(pins)) {
       if (content._id == pins[key])
         content.isPined = true
@@ -15,7 +15,7 @@ const FeatureContainer = (Component) => ( ({content, pins}) => {
   return (
     <div className="content">
       <div id="space-around-content" className="h-100"> 
-      { content.onDashboard?
+      { content && content.onDashboard?
           <div className="dashboard-feature-title-container">
             <div className={"rectangle-" + content.name}></div>
             <div className="content-title d-flex justify-content-between">
@@ -28,7 +28,7 @@ const FeatureContainer = (Component) => ( ({content, pins}) => {
         :
         <div className="content-title d-flex justify-content-between">
           <p>{content && content.title}</p>
-            <button className="btn btn-link"><img src={content.isPined ?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
+            <button className="btn btn-link"><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
         </div>
       }
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>
