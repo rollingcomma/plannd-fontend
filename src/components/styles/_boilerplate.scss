@@ -10,7 +10,8 @@ body, html {
 .app {
     display: flex;
     justify-content: center;
-    margin: 2.3rem;
+    padding: 2.3rem;
+    height:calc(85vh - 6rem);
     overflow-y:scroll;
 }
 
@@ -22,6 +23,8 @@ body, html {
     width: 100%;
     padding: 0 5%;
     background-color: white;
+    position: relative;
+    z-index: 1;
     margin:0;
     box-shadow: 0px 2px 0.3rem rgb(197, 197, 197);
 }
@@ -153,7 +156,7 @@ hr {
     height: 15vh;
     width: 100%;
     max-width: 100%;
-    background-color: rgb(62, 172, 230);
+    // background-color: rgb(62, 172, 230);
     bottom:0;
     // margin-top:7%;
     padding: 0 5%;

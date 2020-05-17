@@ -79,7 +79,8 @@ p {
 }
 
 .profile-container {
-  min-height: 50vh
+  min-height: 40vh;
+  height:fit-content;
 }
 
 .index-img {
@@ -227,26 +228,38 @@ p {
 }
 
 .classic-primary {
-  background-color:#000000 ;
+  background-color: white ;
 }
 
 .classic-secondary {
-  background-color:#3EACE6 ;
+  background-color: rgb(62, 172, 230) ;
 }
 
 .blossom-primary {
-  background-color:#00FFB1 ;
+  background-size: 100%;
+  // background: linear-gradient( rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3) ),url("/assets/blossom_background.jpg");
+  
+  background-image: url("/assets/blossom_background.jpg");
+  background-color: rgba(255,255,255,0.3);
+  background-blend-mode: lighten;
+  // z-index:-1;
+  // background-color:#FF009D ;
 }
 
+// .blossom-primary::after{
+//   opacity: 0.7;
+// }
+
 .blossom-secondary {
-  background-color:#FF009D ;
-}
-.retro-primary {
-  background-color:#FF0076 ;
+  background-color:white ;
 }
 
 .retro-secondary {
-  background-color:#00F5FF ;
+  background-color:#EF476F ;
+}
+
+.retro-primary {
+  background-color:#C6FDFF ;
 }
 
 .theme-colour {

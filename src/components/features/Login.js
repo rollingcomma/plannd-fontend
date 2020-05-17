@@ -14,14 +14,14 @@ const Login = (props) => {
   }
 
   const { handleSubmit, register, errors} = useForm();
-  const [userState, dispatch] = useUserState();
+  const [ , dispatchUser] = useUserState();
   
   const onSubmit = async (formData) => {
     getUser(formData)
       .then(res => {
         const user = res.data
         if (user.auth) {
-          dispatch({
+          dispatchUser({
             isLoggedIn:true,
             user:user.user
           })

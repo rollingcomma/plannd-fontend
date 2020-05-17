@@ -5,7 +5,7 @@ import { addProject } from '../../services/apiAction'
 
 const ProjectForm = () => {
 
-const [UserState, dispatch] = useUserState()
+const [UserState] = useUserState()
 // const [formState, setFormState] = useState({
 //   title:null,
 //   category:null

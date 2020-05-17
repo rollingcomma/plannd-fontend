@@ -1,4 +1,4 @@
-import React, {createContext, useReducer, useEffect} from 'react'
+import React, {createContext, useReducer} from 'react'
 import {sessionStorageParser} from '../helpers/parser'
 
 const defaultUserState = sessionStorageParser()
@@ -23,24 +23,27 @@ export const UserStateProvider =  ({children}) => {
   );
 }
 
-const defaultProjectState = sessionStorageParser()
-export const ProjectsContext = createContext(defaultProjectState)
-export const DispatchProjectsContext = createContext(undefined)
+// const defaultThemeState = {
+//   theme: "classic"
+// }
 
-export const ProjectsStateProvider = ({children}) => {
-  const [projectsState, dispatchProject] = useReducer(
-    (projectsState, newValue) => {
-      sessionStorageParser(newValue)
-      return {...projectsState, ...newValue}
-    },
-    defaultProjectState
-  );
-  return(
-    <ProjectsContext.Provider value={projectsState}>
-      <DispatchProjectsContext.Provider value={dispatchProject}>
-        {children}
-      </DispatchProjectsContext.Provider>
-    </ProjectsContext.Provider>
-  )
-}
+// export const ThemeContext = createContext(defaultThemeState)
+// export const DispatchThemeContext = createContext(undefined)
+
+// export const ThemeStateProvider = ({children}) => {
+//   const [themeState, dispatchTheme] = useReducer(
+//     (themeState, newTheme) => {
+//       sessionStorageParser(theme)
+//       return {...themeState, ...newValue}
+//     },
+//     defaultProjectState
+//   );
+//   return(
+//     <ProjectsContext.Provider value={projectsState}>
+//       <DispatchProjectsContext.Provider value={dispatchProject}>
+//         {children}
+//       </DispatchProjectsContext.Provider>
+//     </ProjectsContext.Provider>
+//   )
+// }
 // export default Provider

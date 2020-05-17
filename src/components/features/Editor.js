@@ -29,7 +29,7 @@ const Editor = ({content}) =>{
 
   const [contentState, setContentState] = useState(initialState)
 
-  const [UserState, dispatch] = useUserState()
+  const [UserState, dispatchUser] = useUserState()
 
     // this.textInput = React.createRef();
   //   this.handleBlur = this.handleBlur.bind(this);

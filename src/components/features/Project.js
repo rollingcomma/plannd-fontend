@@ -14,7 +14,9 @@ const Project = ({projects, activeProject, handleProjectChange, togglePanel}) =>
         </Card.Header>
         <Accordion.Collapse eventKey="0">
           <Card.Body>{projects && projects.map(project =>
-            <button key={project._id} id={project._id} className={activeProject == project._id ? "btn btn-link text-dark dropdown-item selected" :"btn btn-link text-dark dropdown-item"} onClick={(e) => {handleProjectChange(e); togglePanel()}}>{project.title}</button>
+            <button key={project._id} id={project._id} 
+              className={`btn btn-link text-dark dropdown-item ${activeProject === project._id ? "selected":""}`} 
+              onClick={(e) => {handleProjectChange(e); togglePanel()}}>{project.title}</button>
           )}</Card.Body>
         </Accordion.Collapse>
       </Card>

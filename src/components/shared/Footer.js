@@ -1,12 +1,13 @@
 import React from 'react';
-
+import useUserState from '../../context/customerHook'
 const Footer = () => {
   // constructor() {
   //   // debugger
   //   super();
   // }
+  const [userState] = useUserState()
   return (
-    <div className="bottom-banner">
+    <div className={`bottom-banner ${userState && userState.user ? userState.user.preference.theme + "-secondary": "classic-secondary"}`}>
       <div className="d-flex mx-4">
         <div className="footer-sitemap mx-5 ml-5">
           <p>Site Map</p>

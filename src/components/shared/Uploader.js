@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { useForm, ErrorMessage } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import AWS from 'aws-sdk'
 import { addPicture } from '../../services/apiAction'
 import { useUserState } from '../../context/customerHook'
@@ -8,9 +8,9 @@ const Uploader = ({albumId, handler}) => {
   const baseUrl = "http://craiglist2.s3-website.ca-central-1.amazonaws.com"
   
   const [message, setMessage] = useState("")
-  const { handleSubmit, register, errors } = useForm();
+  const { handleSubmit} = useForm();
   const [files, setFiles] = useState()
-  const [UserState, dispatch] = useUserState()
+  const [UserState] = useUserState()
   debugger
 
   const loadImageProcess = (src) => {
@@ -29,7 +29,6 @@ const Uploader = ({albumId, handler}) => {
 
   }
   const uploadHandle = async () => {
-    // e.preventDefault();
     // Initialize the Amazon Cognito credentials provider
     AWS.config.region = "ca-central-1";
     AWS.config.credentials = new AWS.CognitoIdentityCredentials({

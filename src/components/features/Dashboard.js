@@ -14,6 +14,7 @@ const Dashboard = () => {
     contentList:null
   })
   
+
   const [UserState] = useUserState()
   
   const [timeLeft, setTimeLeft] = useState(UserState? calculateTimeLeft(UserState.user.trip_plan.time) : null)
@@ -53,10 +54,10 @@ const Dashboard = () => {
       }
     }
   }
-  debugger
-  useEffect(() => {
-    loadPinedContent()
-  },[]) 
+  // debugger
+  // useEffect(() => {
+  //   loadPinedContent()
+  // }) 
 
   useEffect(() => {
     loadPinedContent()
@@ -93,7 +94,7 @@ const Dashboard = () => {
     //     })
     // }
     
-  }, [UserState.user.preference.activeProject])
+  }, [ UserState.user.preference.activeProject])
 
   useEffect(() => {
     let timer = setTimeout(() => {

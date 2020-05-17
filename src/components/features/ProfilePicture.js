@@ -23,7 +23,7 @@ const ProfilePicture = () => {
         </div>
       </div>
       
-      <div className="div-shadow w-50 h-100">
+      <div className="div-shadow w-50">
         <div className="d-flex flex-row m-4">
           <div className="div-shadow m-2 profile-image-container">
             <img className="profile-image-container" src="https://images.pexels.com/photos/3792581/pexels-photo-3792581.jpeg?cs=srgb&dl=silhouette-photo-of-woman-holding-lights-3792581.jpg&fm=jpg"></img>

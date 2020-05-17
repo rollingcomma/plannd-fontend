@@ -7,7 +7,7 @@ const FeatureContainer = (Component) => ( ({content, pins}) => {
   
   if(pins && content) {
     for(const key of Object.keys(pins)) {
-      if (content._id == pins[key])
+      if (content._id === pins[key])
         content.isPined = true
     }
   }

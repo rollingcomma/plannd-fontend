@@ -6,7 +6,7 @@ import { UserStateProvider } from '../../context/Provider'
 
 const ProfileTheme = () => {
   const { register, errors } = useForm();
-  const [UserState, dispatch] = useUserState()
+  const [UserState, dispatchUser] = useUserState()
   const [inputEditableState, setInputEditableState] = useState(
   
     UserState.user.provider ?

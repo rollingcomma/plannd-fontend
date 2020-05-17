@@ -4,7 +4,7 @@ import { useUserState } from '../../context/customerHook'
 
 const ProfileTheme = () => {
   const { register, errors } = useForm();
-  const [UserState, dispatch] = useUserState()
+  const [UserState, dispatchUser] = useUserState()
   const [inputEditableState, setInputEditableState] = useState(
   
     UserState.user.provider ?
@@ -53,7 +53,7 @@ const ProfileTheme = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow w-50 h-100">
+      <div className="div-shadow w-50">
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">

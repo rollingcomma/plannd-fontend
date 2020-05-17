@@ -19,9 +19,9 @@ const connect = (Component, selectState) => {
 
     render() {
       debugger
-      const { dispatch } = this.context
+      const { dispatchUser } = this.context
       const { slice } = this.state
-      return <Component {...slice} dispatch={dispatch}></Component>
+      return <Component {...slice} dispatchUser={dispatchUser}></Component>
     }
   }
 

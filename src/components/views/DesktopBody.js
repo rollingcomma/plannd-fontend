@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/alt-text*/
 import React, { useState, useEffect } from 'react';
-import { Link, Switch, Route, useHistory, useLocation } from 'react-router-dom';
+import { Link, Switch, Route, useLocation } from 'react-router-dom';
 import Nav from '../shared/Nav';
 import PrivateRoute from '../../services/PrivateRoute';
 import Dashboard from '../features/Dashboard';
@@ -11,7 +11,7 @@ import { useUserState } from '../../context/customerHook';
 const DesktopBody = () => {
   
   // const history = useHistory();
-  const [userState, dispatch] = useUserState()
+  const [userState] = useUserState()
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject
   let location = useLocation()
@@ -119,7 +119,7 @@ const DesktopBody = () => {
 
     // debugger
     return (
-      <div className="app">
+      <div className={"app " + userState.user.preference.theme + "-primary"}>
         <div className="side-nav">
           <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
           <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>

@@ -6,7 +6,7 @@ import {useUserState} from '../../context/customerHook'
 
 const ProfileDashboard = () => {
 
-  const [userState, dispatch] = useUserState();
+  const [userState, dispatchUser] = useUserState();
 
   const handleChangeChk = () => {
 

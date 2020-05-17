@@ -6,11 +6,13 @@ import ProfileTheme from './ProfileTheme';
 import ProfileSetting from './ProfileSetting';
 import PrivateRoute from '../../services/PrivateRoute'
 import NotFound from './NotFound'
+import useUserState from '../../context/customerHook'
 
 const Profile = () => {
+  const [userState] = useUserState()
   
   return (
-    <div className="app justify-content">
+    <div className={"app justify-content " + userState.user.preference.theme + "-primary"}>
       <div className="side-nav">
         <Link to="/user/profile/picture"><img alt="" className="icon-small note-icon" src="/assets/user-icon.svg" /></Link>
         <Link to="/user/profile/theme" ><img alt="" className="icon-theme todo-icon" src="/assets/ic_invert_colors.svg" /></Link>

@@ -3,7 +3,7 @@ import {useUserState} from '../../context/customerHook'
 
 const ProfileDashboard = () => {
 
-  const [userState, dispatch] = useUserState();
+  const [userState, dispatchUser] = useUserState();
 
   const handleChangeChk = () => {
 
@@ -22,7 +22,7 @@ const ProfileDashboard = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow ml-2 w-50 h-100">
+      <div className="div-shadow ml-2 w-50">
         <div className="d-flex flex-column overflow-auto m-4">
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" name="checklistItem1" id="notes" value="option1" 

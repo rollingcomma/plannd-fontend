@@ -6,14 +6,14 @@ import { sameAs } from '../../helpers/validator'
 import { useUserState } from '../../context/customerHook';
 import { postUser } from '../../services/apiAction'
 
-const Register = (props) => { 
+const Register = () => { 
   const history = useHistory()
   const handleRedirectClick = () => {
     history.push('/login')
   }
   const { handleSubmit, register, errors, getValues } = useForm();
   
-  const [userState, dispatchUser] = useUserState();
+  const [dispatchUser] = useUserState();
   
   const onSubmit = async (formData) => {
     debugger

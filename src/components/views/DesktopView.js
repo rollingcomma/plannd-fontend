@@ -13,7 +13,7 @@ import useUserState from '../../helpers/customerHook';
 
 
 const DesktopView = ({component}) => {
-  const [userState, dispatch] = useUserState();
+  const [userState, dispatchUser] = useUserState();
   debugger
   // const history = useHistory()
   // const header = userState.isLoggedIn ? Header : IndexHeader

@@ -4,7 +4,7 @@ import { logout, getProjects, updateActiveProject } from '../../services/apiActi
 import { useUserState } from '../../context/customerHook';
 import Project from '../features/Project'
 import $ from 'jquery'
-import { Accordion, Card } from 'react-bootstrap'
+// import { Accordion, Card } from 'react-bootstrap'
 
 const Header = () =>{
   const history = useHistory();

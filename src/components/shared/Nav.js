@@ -12,8 +12,8 @@ import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState } from '../../context/customerHook';
 
 const Nav = ({feature}) => {
-  const [UserState] = useUserState()
-  const pins = UserState.user.pins;
+  const [userState] = useUserState()
+  const pins = userState.user.pins;
   const inputRef = useRef();
   
   const [content, setContent] = useState(
@@ -21,9 +21,9 @@ const Nav = ({feature}) => {
       currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
   
-  const [contentArr, setContentArr] = useState({
-    contentArr: content.contentArr
-  });  
+  // const [contentArr, setContentArr] = useState({
+  //   contentArr: content.contentArr
+  // });  
   
   const [addFormState, setAddFormState] = useState({open:false})
 
@@ -85,7 +85,7 @@ const Nav = ({feature}) => {
                   
                   onChange={e => {
                     element.title = e.target.value;
-                    setContentArr({ contentArr:content.contentArr })
+                    setContent({ ...content, contentArr:content.contentArr })
                   }}
                 />
               </Editable>
