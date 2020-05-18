@@ -1,7 +1,6 @@
-import React, { useState, useRef } from 'react'
+import React, { useState } from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form';
 import { useUserState } from '../../context/customerHook';
-import Editable from '../shared/Editable'
 import { updateUser } from '../../services/apiAction';
 
 const ProfileSetting = () => {
@@ -23,8 +22,7 @@ const ProfileSetting = () => {
       password: true
     }
   )
-  // debugger
-  //onclick enable editing mode of input field
+  
   const handleOnClickInput = (e, key) =>{
     e.preventDefault();
     setInputDisableState({
