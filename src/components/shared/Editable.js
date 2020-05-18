@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 
-
 const Editable = ({
   childRef,
   text,
   type,
+  placeholder,
   id,
   className,
   children,
@@ -65,7 +65,7 @@ const Editable = ({
               </span>
               :
               <span id={id} onClick={props.onClick} className={className}>
-                {text || "Editable content"}
+                {text || placeholder || "Editable content"}
               </span>
             }
           </div>

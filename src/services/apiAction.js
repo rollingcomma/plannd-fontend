@@ -439,6 +439,19 @@ export const updateTheme = (userId, theme) => {
   })
 }
 
+export const updateProfilePicture = (userId, imageId) => {
+  return axios({
+    method: 'PUT',
+    url: '/api/users/user',
+    data: {
+      userId: userId,
+      key: 'profile_photo',
+      data: imageId
+    }
+  })
+}
+
+
 export const updateDashboard = (userId, newDashboard) => {
   return axios({
     method: 'PUT',
@@ -447,6 +460,29 @@ export const updateDashboard = (userId, newDashboard) => {
       userId: userId,
       key: `dashboard.${newDashboard.key}`,
       data: newDashboard.value
+    }
+  })
+}
+
+export const addProfilePictures = (userId, images) => {
+  debugger
+  return axios({
+    method: 'POST',
+    url: '/api/users/user/pictures',
+    data: {
+      userId: userId,
+      ...images
+    }
+  })
+}
+
+export const deleteProfilePictures = (userId, images) => {
+  return axios({
+    method: 'DELETE',
+    url: '/api/users/user/pictures',
+    data: {
+      userId: userId,
+      ...images
     }
   })
 }

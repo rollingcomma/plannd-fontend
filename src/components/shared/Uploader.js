@@ -1,18 +1,21 @@
 import React, { useState } from 'react'
 import { useForm } from 'react-hook-form';
 import AWS from 'aws-sdk'
-import { addPicture } from '../../services/apiAction'
+import { addPicture, addProfilePictures } from '../../services/apiAction'
 import { useUserState } from '../../context/customerHook'
 
-const Uploader = ({albumId, handler}) => {
+const Uploader = (
+  { toAlbum, 
+    albumId, 
+    handleFormState, 
+    handleUpdateState}) => {
   const baseUrl = "http://craiglist2.s3-website.ca-central-1.amazonaws.com"
   
   const [message, setMessage] = useState("")
   const { handleSubmit} = useForm();
   const [files, setFiles] = useState()
-  const [UserState] = useUserState()
-  debugger
-
+  const [ userState ] = useUserState()
+  
   const loadImageProcess = (src) => {
     return new Promise((resolve, reject) => {
       let img = new Image()
@@ -26,7 +29,6 @@ const Uploader = ({albumId, handler}) => {
     setFiles(
       evt.target.files
     )
-
   }
   const uploadHandle = async () => {
     // Initialize the Amazon Cognito credentials provider
@@ -53,7 +55,7 @@ const Uploader = ({albumId, handler}) => {
       if (files.length > 0) {
         const images = [];
         for (let i = 0; i < files.length; i++) {
-          const objKey = `${prefix}/${files[i].name}`;
+          const objKey = `plannd/${prefix}-${files[i].name}`;
           const params = {
             Key: objKey,
             ContentType: files[i].type,
@@ -67,12 +69,14 @@ const Uploader = ({albumId, handler}) => {
               // message = 'ERROR: ' + err;
             } else {
               // listObjs(bucket, prefix);
-              let width = 1;
-              let height = 1;
-
-              let imgObj = {}
+              const src = `${baseUrl}/${objKey}`
               // src = window.URL.createObjectURL(files[i])
-              loadImageProcess(window.URL.createObjectURL(files[i]))
+              if(toAlbum) {
+                let width = 1;
+                let height = 1;
+
+                let imgObj = {}
+                loadImageProcess(window.URL.createObjectURL(files[i]))
                 .then(img => {
                   if (img.width > img.height) {
                     width = 4;
@@ -81,34 +85,51 @@ const Uploader = ({albumId, handler}) => {
                     width = 3
                     height = 4
                   }
-                  const src = `${baseUrl}/${objKey}`
                   imgObj = {
                     src: src,
                     width: width,
                     height: height
                   }
                   images.push(imgObj);
+        
                   // console.log(imgObj)
                   setMessage('Success to upload ' + files[i].name)
 
-                  if (images.length == files.length) {
+                  if (images.length === files.length) {
                     addPicture(
-                      UserState.user.preference.activeProject,
+                      userState.user.preference.activeProject,
                       albumId,
-                      {images:JSON.stringify(images)}
+                      { images: JSON.stringify(images) }
                     ).then(result => {
                       // console.log(result.data)
                       setMessage('Images were uploaded successfully')
-                      setTimeout(handler(), 500)
+                      setTimeout(handleFormState(), 800)
+                      handleUpdateState(true, images)
                     })
                   }
                 })
                 .catch(err => {
                   console.log(err.message)
                 })
+              } else {
+                setMessage('Success to upload ' + files[i].name)
+                images.push(src)
+                if (images.length === files.length) {
+                  addProfilePictures(userState.user._id, {images: JSON.stringify(images) } )
+                  .then(res => {
+                    setMessage('Images were uploaded successfully')
+                    setTimeout(handleFormState(), 800)
+                    console.log(res.data)
+                    handleUpdateState(res.data.result)
+                  })
+                  .catch(err => {
+                    console.log(err.message)
+                  })
+                }
               }
-            })
-          }
+            }
+          })
+        }
       } else {
         setMessage('No file selected.');
       }
@@ -121,7 +142,7 @@ const Uploader = ({albumId, handler}) => {
       
       <form onSubmit={handleSubmit(uploadHandle)}>
         <div className="form-group">
-          <label for="images">Upload Image</label>
+          <label htmlFor="images">Upload Image</label>
           <input type="file" name="images" onChange={onChange} multiple />
         </div>
         {message && <p>{message}</p>}

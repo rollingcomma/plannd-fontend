@@ -268,15 +268,21 @@ p {
 }
 
 .profile-image-container {
-  width: 8rem;
-  height: 8rem;
+  width: 5rem;
+  height: 5rem;
+  border-radius: 3px;
   // background: lightgrey;
 }
 
 .profile-image-container-lg {
-  width: 12rem;
-  height: 12rem;
+  width: 8rem;
+  height: 8rem;
+  border-radius:5px;
   // background: lightgrey;
+}
+
+.active-profile-photo {
+  border: 2px solid #EF476F;
 }
 
 .profile-nav {

@@ -20,6 +20,8 @@ const Login = (props) => {
     getUser(formData)
       .then(res => {
         const user = res.data
+        const profile_photo = user.user.pictures.filter(picture => picture._id === user.user.profile_photo)
+        user.user.profile_photo = profile_photo[0]
         if (user.auth) {
           dispatchUser({
             isLoggedIn:true,

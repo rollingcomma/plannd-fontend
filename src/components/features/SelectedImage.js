@@ -28,10 +28,12 @@ const Checkmark = ({ selected }) => (
 const imgStyle = {
   transition: "transform .135s cubic-bezier(0.0,0.0,0.2,1),opacity linear .15s"
 };
+
 const selectedImgStyle = {
   transform: "translateZ(0px) scale3d(0.9, 0.9, 1)",
   transition: "transform .135s cubic-bezier(0.0,0.0,0.2,1),opacity linear .15s"
 };
+
 const cont = {
   backgroundColor: "#eee",
   cursor: "pointer",
@@ -40,13 +42,15 @@ const cont = {
 };
 
 const SelectedImage = ({
-  index,
+  className,
+  imgClassName,
   photo,
   margin,
   direction,
   top,
   left,
-  selected
+  selected,
+  handleSelected
 }) => {
   const [isSelected, setIsSelected] = useState(selected);
   //calculate x,y scale
@@ -60,22 +64,27 @@ const SelectedImage = ({
     cont.top = top;
   }
 
+  debugger
   const handleOnClick = e => {
     setIsSelected(!isSelected);
+    handleSelected(!isSelected, e.target.getAttribute('id'))
   };
 
   useEffect(() => {
     setIsSelected(selected);
   }, [selected]);
 
+  
   return (
     <div
       style={{ margin, height: photo.height, width: photo.width, ...cont }}
-      className={!isSelected ? "not-selected" : ""}
+      className={`${className} ${!isSelected ? "not-selected" : ""}`}
     >
       <Checkmark selected={isSelected ? true : false} />
       <img
-        alt={photo.title}
+        id={photo._id}
+        className={imgClassName || ""}
+        alt={photo.title || ""}
         style={
           isSelected ? { ...imgStyle, ...selectedImgStyle } : { ...imgStyle }
         }

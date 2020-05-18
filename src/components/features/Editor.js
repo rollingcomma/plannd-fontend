@@ -29,7 +29,7 @@ const Editor = ({content}) =>{
 
   const [contentState, setContentState] = useState(initialState)
 
-  const [UserState, dispatchUser] = useUserState()
+  const [UserState] = useUserState()
 
     // this.textInput = React.createRef();
   //   this.handleBlur = this.handleBlur.bind(this);
@@ -44,7 +44,6 @@ const Editor = ({content}) =>{
         ...contentState,
         documentId: content._id,
         editorHtml: content.note
-        
       }
     )
   },[content])

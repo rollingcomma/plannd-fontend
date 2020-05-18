@@ -6,7 +6,6 @@ import Checklist from './Checklist';
 import Editor from './Editor';
 import Links from './Links';
 import Album from './Album';
-// import DashboardContainer from '../HOC/DashboardContainer'
 
 const Dashboard = () => {
 
@@ -14,31 +13,34 @@ const Dashboard = () => {
     contentList:null
   })
   
-
-  const [UserState] = useUserState()
+  const [userState] = useUserState()
   
-  const [timeLeft, setTimeLeft] = useState(UserState? calculateTimeLeft(UserState.user.trip_plan.time) : null)
+  const [timeLeft, setTimeLeft] = useState(userState? calculateTimeLeft(userState.user.trip_plan.time) : null)
   
   const loadPinedContent = () => {
-    if (UserState.projects) {
-      const currentProject = UserState.projects.filter(project => project._id === UserState.user.preference.activeProject)
+    if (userState.projects) {
+      const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
       const pins = currentProject[0].pins
       const requestArr = []
+      
       if(pins) {
+        // const enalbedPins = pins.filter(pin => userState.user.dashboard({})
         for (const key of Object.keys(pins)) {
-          switch (key) {
-            case "notes":
-              requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
-              break;
-            case "todos":
-              requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
-              break;
-            case "gallery":
-              requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
-              break;
-            case "links":
-              requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
-              break;
+          if(userState.user.dashboard[key]) {
+            switch (key) {
+              case "notes":
+                requestArr.push(getNotebook(userState.user.preference.activeProject, pins[key]))
+                break;
+              case "todos":
+                requestArr.push(getChecklist(userState.user.preference.activeProject, pins[key]))
+                break;
+              case "gallery":
+                requestArr.push(getAlbum(userState.user.preference.activeProject, pins[key]))
+                break;
+              case "links":
+                requestArr.push(getCategory(userState.user.preference.activeProject, pins[key]))
+                break;
+            }
           }
         }
         Promise.all(requestArr)
@@ -61,24 +63,24 @@ const Dashboard = () => {
 
   useEffect(() => {
     loadPinedContent()
-    // if (UserState.projects) {
-    //   const currentProject = UserState.projects.filter(project => project._id === UserState.user.preference.activeProject)
+    // if (userState.projects) {
+    //   const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
     //   const pins = currentProject[0].pins
     //   const requestArr = []
       
     //   for (const key of Object.keys(pins)) {
     //     switch (key) {
     //       case "notes":
-    //         requestArr.push(getNotebook(UserState.user.preference.activeProject, pins[key]))
+    //         requestArr.push(getNotebook(userState.user.preference.activeProject, pins[key]))
     //         break;
     //       case "todos":
-    //         requestArr.push(getChecklist(UserState.user.preference.activeProject, pins[key]))
+    //         requestArr.push(getChecklist(userState.user.preference.activeProject, pins[key]))
     //         break;
     //       case "gallery":
-    //         requestArr.push(getAlbum(UserState.user.preference.activeProject, pins[key]))
+    //         requestArr.push(getAlbum(userState.user.preference.activeProject, pins[key]))
     //         break;
     //       case "links":
-    //         requestArr.push(getCategory(UserState.user.preference.activeProject, pins[key]))
+    //         requestArr.push(getCategory(userState.user.preference.activeProject, pins[key]))
     //         break;
     //     }
     //   }
@@ -94,11 +96,11 @@ const Dashboard = () => {
     //     })
     // }
     
-  }, [ UserState.user.preference.activeProject])
+  }, [ userState.user.preference.activeProject])
 
   useEffect(() => {
     let timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft(UserState.user.trip_plan.time));
+      setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
     }, 1000)
     return () => {
       clearTimeout(timer)
@@ -112,7 +114,7 @@ const Dashboard = () => {
           <div className="ml-4 my-4">
             <h5>Dashboard</h5>
             <p>Hi, Aneet!</p>
-            <p>You have an upcoming trip to {UserState.user.trip_plan.destination} in {timeLeft.days} days!</p>
+            <p>You have an upcoming trip to {userState.user.trip_plan.destination} in {timeLeft.days} days!</p>
           </div>
         </div>
         <div className="d-flex flex-column div-shadow countdown-container h-100">
@@ -137,28 +139,28 @@ const Dashboard = () => {
                 content.notebook.name="Notes"
                 return <div key={content._id} className="dashboard-feature-container">
                   <div className="mx-2 mt-2">
-                  <Editor content={content.notebook} />
-                </div>
+                    <Editor content={content.notebook} />
+                  </div>
                 </div>
               case "checklist":
                 content.checklist.name = "To-Dos"
                 return <div key={content._id} className="dashboard-feature-container">
                   <div className="mx-2 mt-2 div-shadow">
-                  <Checklist content={content.checklist} />
-                </div>
+                   <Checklist content={content.checklist} />
+                  </div>
                 </div>
               case "category": 
                 content.category.name = "Links"
                 return <div key={content._id} className="dashboard-feature-container">
                   <div className="mx-2 mr-2 div-shadow">
-                  <Links content={content.category} />
+                    <Links content={content.category} />
                   </div>
                 </div>
               case "album":
                 content.album.name= "Gallery"
                 return <div key={content._id} className="dashboard-feature-container">
                   <div className="mx-2 mr-2 div-shadow">
-                  <Album content={content.album} />
+                    <Album content={content.album} />
                   </div>
                 </div>
             }

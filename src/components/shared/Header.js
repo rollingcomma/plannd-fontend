@@ -105,15 +105,15 @@ const Header = () =>{
               <div className="project-link">
                 <img alt="" src="/assets/project-icon.png" className="project-icon" />
                 <div className="dropdown">
-                  <button className="btn btn-link text-dark account-name" role="button" onClick={() => toggleProjectPanel()}>
+                  <button className="btn btn-link text-dark account-name" onClick={() => toggleProjectPanel()}>
                     Browse Projects</button>
                 </div>
               </div>
             </div>
             <div className="login">
-              <img alt="" src="/assets/profile-photo.jpg" className="profile-photo" />
+              <img alt="" src={userState.user ? userState.user.profile_photo.src : ""} className="profile-photo" />
               <div className="nav-item dropdown">
-                <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {userState.user.username}</button>
                 <div className="dropdown-menu" aria-labelledby="dropdwon-menu">
                   <Link className="dropdown-item" to="/login" onClick={() => handleLogout()}><img alt="" src="/assets/signs.png" className="icon-small" />Log Out</Link>

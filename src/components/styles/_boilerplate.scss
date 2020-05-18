@@ -11,7 +11,7 @@ body, html {
     display: flex;
     justify-content: center;
     padding: 2.3rem;
-    height:calc(85vh - 6rem);
+    min-height:calc(85vh - 6rem);
     overflow-y:scroll;
 }
 

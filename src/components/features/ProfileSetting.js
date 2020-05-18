@@ -1,12 +1,13 @@
-import React, { useState } from 'react'
+import React, { useState, useRef } from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form';
-import { useUserState } from '../../context/customerHook'
+import { useUserState } from '../../context/customerHook';
+import Editable from '../shared/Editable'
 
 const ProfileTheme = () => {
   const { register, errors } = useForm();
-  const [UserState, dispatchUser] = useUserState()
-  const [inputEditableState, setInputEditableState] = useState(
-  
+  const [UserState, dispatchUser] = useUserState();
+  const inputRef = useRef();
+  const [inputDisableState, setInputDisableState] = useState(
     UserState.user.provider ?
     {
       username: true,
@@ -19,25 +20,23 @@ const ProfileTheme = () => {
       password: true
     }
   )
-  const [inputState, setInputState] = useState()
-
+  debugger
   //onclick enable editing mode of input field
   const handleOnClickInput = (evt) =>{
-    const value = evt.target.value;
-    setInputEditableState({
-      ...inputEditableState,
-      [evt.target.name]:false
+    const name = evt.target.name;
+    setInputDisableState({
+      ...inputDisableState,
+      [evt.target.name]: !inputDisableState[name]
     });
   }
 
   const handleOnChange = (evt) => {
-    const value = evt.target.value;
-    setInputState({
-      ...inputState,
-      [evt.target.name]: value
-    });
+    // const value = evt.target.value;
+    // setInputState({
+    //   ...inputState,
+    //   [evt.target.name]: evt.target.value
+    // });
   }
-
 
   return (
     <div className="d-flex flex-row profile-container main-content-container">
@@ -57,11 +56,17 @@ const ProfileTheme = () => {
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">
-              <label className="control-label" htmlFor="username"><b>Username</b></label>
+              <label className="control-label" htmlFor="username">Username</label>
+              {/* <Editable
+                text={UserState.user.username}
+                childRef={inputRef}
+                type="input"
+                className="pointer"
+              > */}
               <input type="text" className="form-control" name="username" 
                 value={UserState.user.username} 
-                disabled={inputEditableState.username} 
-                onClick={(evt)=>{handleOnClickInput(evt)}}
+                disabled={inputDisableState.username} 
+                onClick={handleOnClickInput}
                 onChange={(evt) => { handleOnChange(evt) }}
                 ref={register({
                   required: "Username is required",
@@ -70,14 +75,21 @@ const ProfileTheme = () => {
                   }
                 })} />
               <ErrorMessage errors={errors} name="username">
-                {({ message }) => <p className="text-danger">{message}</p>}
+                {({ message }) => <p className="text-danger my-1">{message}</p>}
               </ErrorMessage>
+              {/* </Editable> */}
             </div>
             <div className="form-group">
-              <label className="control-label" htmlFor="email"><b>Email</b></label>
+              <label className="control-label" htmlFor="email">Email</label>
+              {/* <Editable
+                text={UserState.user.username}
+                childRef={inputRef}
+                type="text"
+                className="pointer"
+              > */}
               <input type="email" className="form-control" name="email" 
                 value={UserState.user.email}
-                disabled={inputEditableState.email}
+                disabled={inputDisableState.email}
                 onClick={(evt) => { handleOnClickInput(evt) }}
                 onChange={(evt) => { handleOnChange(evt) }}
                 ref={register({
@@ -88,17 +100,26 @@ const ProfileTheme = () => {
                   }
                 })} />
               <ErrorMessage errors={errors} name="email">
-                {({ message }) => <p className="text-danger">{message}</p>}
+                {({ message }) => <p className="text-danger  my-1">{message}</p>}
               </ErrorMessage>
+              {/* </Editable> */}
             </div>
             {
               UserState && UserState.user.provider?
               <div> You are logged in with {UserState.user.provider}</div>
                 :
               <div className="form-group">
-                <label className="control-label" htmlFor="password"><b>Password</b></label>
+                <label className="control-label" htmlFor="password">Password</label>
+                  {/* <Editable
+                    text=""
+                    childRef={inputRef}
+                    type="password"
+                    className="pointer"
+                    placeholder="password"
+                  > */}
                 <input type="password" name="password" className="form-control"
-                  disabled={inputEditableState.password}
+                  disabled={inputDisableState.password}
+                  placeholder="password"
                   onClick={(evt) => { handleOnClickInput(evt) }}
                   onChange={(evt) => { handleOnChange(evt) }}
                   ref={register({
@@ -108,8 +129,9 @@ const ProfileTheme = () => {
                     }
                   })} />
                 <ErrorMessage errors={errors} name="password">
-                  {({ message }) => <p className="text-danger">{message}</p>}
+                    {({ message }) => <p className="text-danger my-1">{message}</p>}
                 </ErrorMessage>
+                {/* </Editable> */}
               </div>
             }
             </form>

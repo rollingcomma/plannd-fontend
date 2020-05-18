@@ -10,7 +10,6 @@ import { useUserState } from '../../context/customerHook';
 
 const DesktopBody = () => {
   
-  // const history = useHistory();
   const [userState] = useUserState()
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject
@@ -20,30 +19,10 @@ const DesktopBody = () => {
   useEffect(() => {
     // debugger
     const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-      handleFeatureSwitch(pathname)
+    handleFeatureSwitch(pathname)
 
   }, [userState.user.preference.activeProject])
 
-  // useEffect(() => {
-  //   debugger
-  //   const featureName = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
-  //   // if(featureName == 'dashboard') {
-  //     getNotes(activeProjectId)
-  //     .then(res => {
-  //       const notes = res.data.notes
-  //       if (notes)
-  //         setFeature({
-  //           name: "Notes",
-  //           _id: notes._id,
-  //           contentArr: notes.notebooks
-  //         })
-  //       // history.push('/user/feature')
-  //     })
-  //     .catch(err => {
-  //       console.log(err.message)
-  //     })
-  // }, [userState.user.preference.activeProject])
-  
   // debugger
     const handleFeatureSwitch = (featureName) => {
       switch (featureName) {
