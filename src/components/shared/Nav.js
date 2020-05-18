@@ -82,7 +82,6 @@ const Nav = ({feature}) => {
                   type="text"
                   name="contentArr"
                   value={element.title}
-                  
                   onChange={e => {
                     element.title = e.target.value;
                     setContent({ ...content, contentArr:content.contentArr })

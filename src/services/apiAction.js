@@ -415,41 +415,41 @@ export const deletePicture = (projectId, albumId, pictureIds) => {
   })
 }
 
-export const updateActiveProject = (userId, projectId) => {
+export const updateUser = (userId, key, value) => {
   return axios({
     method: 'PUT',
     url:'/api/users/user',
     data:{
-      userId:userId,
-      key:'preference.activeProject',
-      data:projectId
+      userId: userId,
+      key: key,
+      data: value
     }
   })
 }
 
-export const updateTheme = (userId, theme) => {
-  return axios({
-    method: 'PUT',
-    url: '/api/users/user',
-    data: {
-      userId: userId,
-      key: 'preference.theme',
-      data: theme
-    }
-  })
-}
+// export const updateTheme = (userId, theme) => {
+//   return axios({
+//     method: 'PUT',
+//     url: '/api/users/user',
+//     data: {
+//       userId: userId,
+//       key: 'preference.theme',
+//       data: theme
+//     }
+//   })
+// }
 
-export const updateProfilePicture = (userId, imageId) => {
-  return axios({
-    method: 'PUT',
-    url: '/api/users/user',
-    data: {
-      userId: userId,
-      key: 'profile_photo',
-      data: imageId
-    }
-  })
-}
+// export const updateProfilePicture = (userId, imageId) => {
+//   return axios({
+//     method: 'PUT',
+//     url: '/api/users/user',
+//     data: {
+//       userId: userId,
+//       key: 'profile_photo',
+//       data: imageId
+//     }
+//   })
+// }
 
 
 export const updateDashboard = (userId, newDashboard) => {

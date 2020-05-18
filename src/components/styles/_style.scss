@@ -39,6 +39,22 @@
   width: 65%;
 }
 
+.filter-notes {
+  filter: invert(35%) sepia(100%) saturate(1242%) hue-rotate(320deg) brightness(97%) contrast(94%);
+}
+
+.filter-todos {
+  filter: invert(69%) sepia(84%) saturate(2242%) hue-rotate(114deg) brightness(94%) contrast(95%);
+}
+
+.filter-links {
+  filter: invert(54%) sepia(97%) saturate(784%) hue-rotate(171deg) brightness(97%) contrast(85%);
+}
+
+.filter-gallery {
+  filter: invert(88%) sepia(58%) saturate(5620%) hue-rotate(311deg) brightness(107%) contrast(101%);
+}
+
 .icon-theme {
   width:2rem;
   height:2rem;

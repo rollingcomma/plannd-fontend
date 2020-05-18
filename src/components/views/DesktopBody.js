@@ -14,11 +14,11 @@ const DesktopBody = () => {
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject
   let location = useLocation()
-
+  const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
   //handle page reload
   useEffect(() => {
     // debugger
-    const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+    // const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
     handleFeatureSwitch(pathname)
 
   }, [userState.user.preference.activeProject])
@@ -100,10 +100,10 @@ const DesktopBody = () => {
     return (
       <div className={"app " + userState.user.preference.theme + "-primary"}>
         <div className="side-nav">
-          <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className="note-icon" src="/assets/note-icon.svg" /></Link>
-          <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className="todo-icon" src="/assets/checkbox-icon.svg" /></Link>
-          <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className="link-icon" src="/assets/link-icon.svg" /></Link>
-          <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className="image-icon" src="/assets/image-icon.svg" /></Link>
+          <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname==="feature" || pathname==="notes"? "filter-notes":""}`} src="/assets/note-icon.svg" /></Link>
+          <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>
+          <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /></Link>
+          <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon ${pathname === "gallery" ? "filter-gallery" : ""}`}  src="/assets/image-icon.svg" /></Link>
         </div>
         <Switch>
           <PrivateRoute path="/user/dashboard" >

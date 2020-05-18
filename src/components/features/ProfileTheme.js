@@ -1,6 +1,6 @@
 import React from 'react'
 import { useUserState } from '../../context/customerHook';
-import { updateTheme} from '../../services/apiAction'
+import { updateUser} from '../../services/apiAction'
 
 const ProfileTheme = () => {
 
@@ -10,12 +10,8 @@ const ProfileTheme = () => {
   const handleThemeChange = (evt) => {
     const theme = evt.target.getAttribute('id');
     
-    updateTheme(userState.user._id, theme)
+    updateUser(userState.user._id, 'preference.theme', theme)
       .then(res => {
-        // setActiveProjectState({
-        //   projectId: projectId,
-        //   projectTitle: projectTitle
-        // })
         let user = userState.user
         user.preference.theme = theme
         dispatchUser({

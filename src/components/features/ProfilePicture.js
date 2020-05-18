@@ -1,8 +1,8 @@
-import React, { useState } from 'react'
+import React, {useState} from 'react'
 import Uploader from '../shared/Uploader';
 import useUserState from '../../context/customerHook';
 import SelectedImage from './SelectedImage'
-import { deleteProfilePictures, updateProfilePicture } from '../../services/apiAction';
+import { deleteProfilePictures, updateUser } from '../../services/apiAction';
 
 const ProfilePicture = () => {
 
@@ -49,7 +49,7 @@ const ProfilePicture = () => {
 
   const handleEdit = () => {
     if(selected.images.length === 1) {
-      updateProfilePicture(userState.user._id, selected.images[0])
+      updateUser(userState.user._id, 'profile_photo', selected.images[0])
       .then(res => {
         let user = userState.user
         const profile_photo = user.pictures.filter(picture => picture._id === selected.images[0])
@@ -91,6 +91,7 @@ const ProfilePicture = () => {
         <div className="d-flex flex-row flex-wrap m-4">
           {userState.user && userState.user.pictures.map(picture => 
           <SelectedImage
+            key={picture._id}
             className={`div-shadow m-2 profile-image-container ${picture._id === userState.user.profile_photo._id ? "active-profile-photo" : ""}`}
             photo={picture}
             selected={false}

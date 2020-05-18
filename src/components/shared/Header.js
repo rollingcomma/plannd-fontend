@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { logout, getProjects, updateActiveProject } from '../../services/apiAction'
+import { logout, getProjects, updateUser } from '../../services/apiAction'
 import { useUserState } from '../../context/customerHook';
 import Project from '../features/Project'
 import $ from 'jquery'
@@ -36,7 +36,7 @@ const Header = () =>{
     const projectId = $(e.target).attr('id')
     const projectTitle = $(e.target).text()
     
-    updateActiveProject(userState.user._id, projectId)
+    updateUser(userState.user._id, 'preference.activeProject', projectId)
     .then(res => {
       setActiveProjectState({
         projectId: projectId,

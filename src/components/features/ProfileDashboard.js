@@ -1,13 +1,29 @@
-import React from 'react'
+import React, { useState } from 'react'
 import {useUserState} from '../../context/customerHook'
 
 const ProfileDashboard = () => {
-
+  
   const [userState] = useUserState();
-
-  const handleChangeChk = () => {
-
+  const [countdownFormState, setCountdownFormState] = useState({open:false})
+  
+  debugger
+  const handleChangeChk = (evt) => {
+    const name = evt.target.name;
+    const value = evt.target.checked;
+    if (name === "countdown" && (value || countdownFormState.open)) {
+      setCountdownFormState(
+        { open: !countdownFormState.open }
+      )
+    }
   }
+ 
+  const handleSubmit = () => {
+    
+    setCountdownFormState(
+      { open: !countdownFormState.open }
+    )
+  }
+
   return (
     <div className="d-flex flex-row profile-container main-content-container">
       <div className="div-shadow w-25 profile-nav">
@@ -26,64 +42,78 @@ const ProfileDashboard = () => {
         <div className="d-flex flex-column overflow-auto m-4 checklist-switch">
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem1" id="notes" value="option1" 
+              name="notes"
               defaultChecked={userState.user.dashboard.notes} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem1">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="notes">
               Notes
             </label>
           </div>
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem2" id="todos" value="option1"
+              name="todos"
               defaultChecked={userState.user.dashboard.todos} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem2">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="todos">
               To-Dos
             </label>
           </div>
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem3" id="links" value="option1"
+              name="links" 
               defaultChecked={userState.user.dashboard.links} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem2">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="links">
               Links
             </label>
           </div>
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem4" id="gallery" value="option1"
+              name="gallery"
               defaultChecked={userState.user.dashboard.gallery} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem2">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="gallery">
               Image Collection
             </label>
           </div>
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem5" id="countdown" value="option1"
+              name="countdown"
               defaultChecked={userState.user.dashboard.countdown} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem5">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="countdown">
               Active Countdown
             </label>
           </div>
+          {countdownFormState.open && 
+            <form className="ml-5 pl-3" onSubmit={() => handleSubmit()}>
+              <div className="form-group">
+                <p>Enter the date of your upcoming trip</p>
+                <input className="" type="date"
+                  name="trip_date" placeholder="2020-06-12" min={(new Date()).toLocaleDateString()} max="2022-01-01"/>
+              </div>
+              <div className="form-group">
+              <p>Enter your destination</p>
+                <input className="" type="text"
+                  name="trip_destination"  />
+              </div>
+              <input className="btn btn-inf" type="submit" />
+            </form>}
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem6" id="display_destination" value="option1"
+              name="destination" 
               defaultChecked={userState.user.dashboard.display_destination} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem6">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="destination">
               Image Collection
             </label>
           </div>
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 
-              name="checklistItem7" id="theme" value="option1"
+              name="theme" 
               defaultChecked={userState.user.dashboard.theme} 
-              onChange={() => { handleChangeChk() }} />
-            <label className="ml-2 form-check-label" htmlFor="checklistItem7">
+              onChange={(e) => { handleChangeChk(e) }} />
+            <label className="ml-2 form-check-label" htmlFor="theme">
               Disable Themes
             </label>
           </div>

@@ -2,13 +2,16 @@ import React, { useState, useRef } from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form';
 import { useUserState } from '../../context/customerHook';
 import Editable from '../shared/Editable'
+import { updateUser } from '../../services/apiAction';
 
-const ProfileTheme = () => {
+const ProfileSetting = () => {
   const { register, errors } = useForm();
-  const [UserState, dispatchUser] = useUserState();
-  const inputRef = useRef();
+  const [userState, dispatchUser] = useUserState();
+  const [state, setState] = useState(userState.user)
+  const [errorState, setErrorState] = useState(null);
+  
   const [inputDisableState, setInputDisableState] = useState(
-    UserState.user.provider ?
+    userState.user.provider ?
     {
       username: true,
       email: true
@@ -20,31 +23,43 @@ const ProfileTheme = () => {
       password: true
     }
   )
-  debugger
+  // debugger
   //onclick enable editing mode of input field
-  const handleOnClickInput = (evt) =>{
-    const name = evt.target.name;
+  const handleOnClickInput = (e, key) =>{
+    e.preventDefault();
     setInputDisableState({
       ...inputDisableState,
-      [evt.target.name]: !inputDisableState[name]
+      [key]: !inputDisableState[key]
     });
   }
 
-  const handleOnChange = (evt) => {
-    // const value = evt.target.value;
-    // setInputState({
-    //   ...inputState,
-    //   [evt.target.name]: evt.target.value
-    // });
+  const handleKeyDown = (evt) => {
+    const value = evt.target.value;
+    const key = evt.target.name;
+    if(evt.key === "Enter") 
+      updateUser(userState.user._id, key, value)
+      .then(res => {
+        if(res.data.error) 
+          setErrorState({ message: res.data.error})
+        else if(key !=='password') {
+          let user = userState.user
+          user[key] = value
+          dispatchUser(
+            {user:user}
+          )
+        }
+      })
+      .catch(err => console.log(err.message))
   }
 
+  debugger
   return (
     <div className="d-flex flex-row profile-container main-content-container">
       <div className="div-shadow w-25 profile-nav">
         <div className="top-function-name">
-          <div className="rectangle-To-Dos"></div>
+          <div className="rectangle-Gallery"></div>
           <p className="function-name">User Information</p>
-          <div className="text-banner-To-Dos"></div>
+          <div className="text-banner-Gallery"></div>
         </div>
         <div className="">
           <p className="m-4">
@@ -56,18 +71,17 @@ const ProfileTheme = () => {
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">
+              <div className="d-flex flex-row justify-content-between align-items-center">
               <label className="control-label" htmlFor="username">Username</label>
-              {/* <Editable
-                text={UserState.user.username}
-                childRef={inputRef}
-                type="input"
-                className="pointer"
-              > */}
-              <input type="text" className="form-control" name="username" 
-                value={UserState.user.username} 
+              <button className="btn btn-link" onClick={(e) => handleOnClickInput(e, "username")}><img src="/assets/pen.png" className="icon-small" alt="edit"/></button>
+              </div>
+               <input type="text" className="form-control" name="username" 
+                placeholder={state.username} 
                 disabled={inputDisableState.username} 
-                onClick={handleOnClickInput}
-                onChange={(evt) => { handleOnChange(evt) }}
+                onKeyDown={e => handleKeyDown(e)}
+                onChange={e => {
+                  setState({ ...state, username: e.target.value })
+                }}
                 ref={register({
                   required: "Username is required",
                   minLength: {
@@ -77,51 +91,48 @@ const ProfileTheme = () => {
               <ErrorMessage errors={errors} name="username">
                 {({ message }) => <p className="text-danger my-1">{message}</p>}
               </ErrorMessage>
-              {/* </Editable> */}
             </div>
+            
             <div className="form-group">
-              <label className="control-label" htmlFor="email">Email</label>
-              {/* <Editable
-                text={UserState.user.username}
-                childRef={inputRef}
-                type="text"
-                className="pointer"
-              > */}
+              <div className="d-flex flex-row justify-content-between align-items-center">
+                <label className="control-label" htmlFor="email">Email</label>
+                <button className="btn btn-link" onClick={(e) => handleOnClickInput(e, "email")}><img src="/assets/pen.png" className="icon-small" alt="edit" /></button>
+              </div>
               <input type="email" className="form-control" name="email" 
-                value={UserState.user.email}
+                value={state.email}
                 disabled={inputDisableState.email}
-                onClick={(evt) => { handleOnClickInput(evt) }}
-                onChange={(evt) => { handleOnChange(evt) }}
+                onKeyDown={e => handleKeyDown(e)}
+                onChange={e => {
+                  setState({...state, email:e.target.value})
+                }}
                 ref={register({
                   required: "Email is required",
                   pattern: {
                     value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i,
                     message: "Invalid email address"
                   }
-                })} />
+                })}/>
               <ErrorMessage errors={errors} name="email">
                 {({ message }) => <p className="text-danger  my-1">{message}</p>}
               </ErrorMessage>
-              {/* </Editable> */}
+              {errorState && <p className="text-danger  my-1">{errorState.message}</p>}
             </div>
             {
-              UserState && UserState.user.provider?
-              <div> You are logged in with {UserState.user.provider}</div>
+              userState && userState.user.provider?
+              <div> You are logged in with {userState.user.provider}</div>
                 :
               <div className="form-group">
-                <label className="control-label" htmlFor="password">Password</label>
-                  {/* <Editable
-                    text=""
-                    childRef={inputRef}
-                    type="password"
-                    className="pointer"
-                    placeholder="password"
-                  > */}
+                  <div className="d-flex flex-row justify-content-between align-items-center">
+                    <label className="control-label" htmlFor="password">Password</label>
+                    <button className="btn btn-link" onClick={(e) => handleOnClickInput(e, "password")}><img src="/assets/pen.png" className="icon-small" alt="edit" /></button>
+                  </div>
                 <input type="password" name="password" className="form-control"
                   disabled={inputDisableState.password}
-                  placeholder="password"
-                  onClick={(evt) => { handleOnClickInput(evt) }}
-                  onChange={(evt) => { handleOnChange(evt) }}
+                  placeholder="******" 
+                  onKeyDown={e => handleKeyDown(e)}
+                  onChange={e => {
+                    setState({ ...state, password: e.target.value })
+                  }}
                   ref={register({
                     required: "Password is required",
                     minLength: {
@@ -141,4 +152,4 @@ const ProfileTheme = () => {
   )
 }
 
-export default ProfileTheme
+export default ProfileSetting
