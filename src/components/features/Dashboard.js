@@ -55,10 +55,11 @@ const Dashboard = () => {
       }
     }
   }
-  // debugger
-  // useEffect(() => {
-  //   loadPinedContent()
-  // }) 
+
+  // Load pined content when first component mounted
+  useEffect(() => {
+    loadPinedContent()
+  }, []) 
 
   useEffect(() => {
     loadPinedContent()
@@ -98,7 +99,7 @@ const Dashboard = () => {
           </div>
         </div>
       )
-        :
+      :
       (
         <div className="d-flex w-100 mb-4 dashboard-banner">
           <div className="d-flex dashboard-banner div-shadow h-100 mr-3 w-100">

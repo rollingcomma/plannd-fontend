@@ -9,6 +9,7 @@ const ProfilePicture = () => {
   const [uploadState, setUploadState] = useState({ open: false })
   const [userState, dispatchUser] = useUserState()
   const [selected, setSelected] = useState({images:[]})
+  const [errorState, setErrorState] = useState(null)
   
   const handleUpdateState = (pictures) => {
     let user = userState.user
@@ -48,7 +49,7 @@ const ProfilePicture = () => {
   }
 
   const handleEdit = () => {
-    if(selected.images.length === 1) {
+    if(selected.images.length === 1) 
       updateUser(userState.user._id, 'profile_photo', selected.images[0])
       .then(res => {
         let user = userState.user
@@ -59,7 +60,8 @@ const ProfilePicture = () => {
         )
       })
       .catch(err => console.log(err.message))
-    }
+    else 
+     setErrorState({message:"Please choose only one photo"})
   }
   
   const toggleFormHandler = () => {
@@ -106,10 +108,11 @@ const ProfilePicture = () => {
         <div>
           {uploadState.open && <Uploader toAlbum={false} handleFormState={toggleFormHandler} handleUpdateState={handleUpdateState}/>}
         </div>
+        {errorState && <p className="text-danger">{errorState.message}</p>}
         <div className="mt-5 d-flex justify-content-center align-items-center">
           <button className="btn btn-link text-dark" onClick={() => handleDelete()}><img className="icon-small" src="/assets/garbage.png" alt="delete"/>Trash</button>
           <span>/</span>
-          <button className="btn btn-link text-dark" onClick={() => handleEdit()}><img className="icon-small" src="/assets/edit.png" alt="delete" />Edit</button>
+          <button className="btn btn-link text-dark" onClick={() => handleEdit()}><img className="icon-small" src="/assets/edit.png" alt="edit" />Pick</button>
         </div>
       </div>
       

@@ -22,9 +22,9 @@ const Editable = ({
     }
   }, [isEditing, childRef]);
 
-  // Event handler while pressing any key while editing
+  debugger
   const handleKeyDown = (event, type) => {
-    // Handle when key is pressed
+    
     const { key } = event;
     const keys = ["Escape", "Tab"];
     const enterKey = "Enter";
@@ -42,6 +42,7 @@ const Editable = ({
     }
   };
 
+
   /*
   - It will display a label is `isEditing` is false
   - It will display the children (input or textarea) if `isEditing` is true
@@ -54,8 +55,10 @@ const Editable = ({
         <div
           onBlur={() => setEditing(false)}
           onKeyDown={e => handleKeyDown(e, type)}
-        >
+          className="d-flex flex-row"
+        > 
           {children}
+          <button className="btn btn-link" title="Remove from list"><img src="/assets/delete.png" className="icon-xsmall" alt="delete" /></button>
         </div>
       ) : (
           <div onDoubleClick={() => setEditing(true)}>

@@ -7,15 +7,12 @@ import useUserState from '../../context/customerHook';
 import { deletePicture } from '../../services/apiAction';
 
 const Album = ({content}) => {
-  debugger
+  // debugger
   const [selected, setSelected] = useState([])
   const [images, setImages] = useState(content.images);
   const [uploadState, setUploadState] = useState({open: false})
   const [userState, dispatchUser] = useUserState()
-  // const toggleSelectAll = () => {
-  //   setSelectAll(!selectAll);
-  // }
-
+  
   if(content && content.images) {
     content.images.map(image=>{
       try{
