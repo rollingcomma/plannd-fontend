@@ -6,6 +6,8 @@ const Editable = ({
   type,
   placeholder,
   id,
+  index,
+  handleDelete,
   className,
   children,
   ...props
@@ -58,7 +60,7 @@ const Editable = ({
           className="d-flex flex-row"
         > 
           {children}
-          <button className="btn btn-link" title="Remove from list"><img src="/assets/delete.png" className="icon-xsmall" alt="delete" /></button>
+          <button className="btn btn-link" title="Remove from list" onClick={handleDelete}><img src="/assets/delete.png" className="icon-xsmall" alt="delete"/></button>
         </div>
       ) : (
           <div onDoubleClick={() => setEditing(true)}>

@@ -8,20 +8,6 @@ const DropdownMenu = (props) => {
     const [state, setState] = useState({open: props.open || false})
 
     
-  // componentDidMount() {
-  //   if (window === 'undefined') return;
-
-  //   document.addEventListener('click', this.handleClickOutside);
-  //   document.addEventListener('keydown', this.handleEscape);
-  // }
-
-  // componentWillUnmount() {
-  //   if (window === 'undefined') return;
-
-  //   document.removeEventListener('click', this.handleClickOutside);
-  //   document.removeEventListener('keydown', this.handleEscape);
-  // }
-
   const handleClickOutside = (event) => {
     if (!this.rootNode.contains(event.target)) {
       setState({ open: false });

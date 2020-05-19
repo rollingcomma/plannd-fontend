@@ -8,7 +8,9 @@ import Editable from '../shared/Editable';
 import NotFound from '../features/NotFound';
 import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState } from '../../context/customerHook';
-import { updateAlbum, updateCategory, updateChecklist, updateNotebook, deleteNotebook, deleteCategory, deleteChecklist, deleteAlbum } from '../../services/apiAction'
+import { updateAlbum, updateCategory, updateChecklist, updateNotebook, 
+        deleteNotebook, deleteCategory, deleteChecklist, deleteAlbum,
+        addNotebook, addCategory, addChecklist, addAlbum } from '../../services/apiAction'
 
 const Nav = ({feature}) => {
   const [userState] = useUserState()
@@ -21,7 +23,7 @@ const Nav = ({feature}) => {
     });
   
   const [inputState, setInputState] = useState({title:content.currentContent.title || ""})
-  
+  const [newListState, setNewListState] = useState({title:""})
   const [addFormState, setAddFormState] = useState({open:false})
 
   const toggleAddFormHandler = () => {
@@ -46,23 +48,27 @@ const Nav = ({feature}) => {
     }
   }, [content.currentContent])
 
-  const filterFeature = (id, formData) => {
+  const filterFeature = (id, formData, isDelete, isAdd) => {
     const projectId = userState.user.preference.activeProject
     switch (content.name) {
       case "Notes":
-        // if (!formData) return deleteNotebook(projectId, id)
+        if (isDelete) return deleteNotebook(projectId, id)
+        if (isAdd) return addNotebook(projectId, formData)
         formData.notebookId = id
         return updateNotebook(projectId, formData)
       case "Links":
-        // if (!formData) return deleteCategory(projectId, id)
+        if (isDelete) return deleteCategory(projectId, id)
+        if (isAdd) return addCategory(projectId, formData)
         formData.categoryId = id
         return updateCategory(projectId, formData) 
       case "To-Dos":
-        // if (!formData) return deleteChecklist(projectId, id)
+        if (isDelete) return deleteChecklist(projectId, id)
+        if (isAdd) return addChecklist(projectId, formData)
         formData.checklistId = id
         return updateChecklist(projectId, formData)
       case "Gallery":
-        // if (!formData) return deleteAlbum(projectId, id)
+        if (isDelete) return deleteAlbum(projectId, id)
+        if (isAdd) return addAlbum(projectId, formData)
         formData.albumId = id
         return updateAlbum(projectId, formData)
       default:
@@ -73,7 +79,7 @@ const Nav = ({feature}) => {
   debugger
   const handleOnKeyDown = (index) => {
     const formData = { title: inputState.title }
-    const apiCall = filterFeature(content.contentArr[index]._id, formData)
+    const apiCall = filterFeature(content.contentArr[index]._id, formData, false)
     if (apiCall) {
       apiCall
       .then(res => {
@@ -84,18 +90,32 @@ const Nav = ({feature}) => {
       })
       .catch(err => console.log(err.message))
     }
-    
   }
 
-  const handleDelete =(index) => {
+  const handleDelete = (index) => {
+    console.log('delete')
     debugger
-    const apiCall = filterFeature(content.contentArr[index]._id, null)
+    const apiCall = filterFeature(content.contentArr[index]._id, null, true)
     if(apiCall) {
       apiCall
       .then(res => {
         content.contentArr.splice(index, 1)
         setContent({ ...content, contentArr: content.contentArr })
       })
+    }
+  }
+
+  const handleCreateNewList = () => {
+    const formData = { title: newListState.title }
+    const apiCall = filterFeature(null, formData, false, true)
+    if (apiCall) {
+      apiCall
+      .then(res => {
+        content.contentArr = res.data.lists
+        setContent({ ...content, contentArr: content.contentArr })
+        setAddFormState({ open: !addFormState.open })
+      })
+      .catch(err => console.log(err.message))
     }
   }
   // debugger
@@ -108,46 +128,46 @@ const Nav = ({feature}) => {
           <div className={"text-banner-"+content.name}></div>
         </div>
         <div className="saved-elements-list pt-2">
-          
           {content.contentArr.length > 0 && 
           content.contentArr.map((element, index) => (
-            <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${element._id === content.currentContent._id ? "selected" : ""}`}>
-              <div className='my-3'>
-                <Editable
-                  text={element.title}
-                  childRef={inputRef}
+          <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${element._id === content.currentContent._id ? "selected" : ""}`}>
+            <div className='my-3'>
+              <Editable
+                text={element.title}
+                childRef={inputRef}
+                type="text"
+                index={index}
+                className="pointer"
+                handleDelete= {() => handleDelete(index)}
+                onClick={() => handleUpdateState(element._id, content.contentArr)}
+              >
+                <input
+                  id={element._id}
+                  ref={inputRef}
                   type="text"
-                  className="pointer"
-                  // handledelete={() => handleDelete(index)}
-                  onClick={() => handleUpdateState(element._id, content.contentArr)}
-                >
-                  <input
-                    id={element._id}
-                    ref={inputRef}
-                    type="text"
-                    name="title"
-                    value={inputState.title || element.title}
-                    onChange={e => {
-                      setInputState({title: e.target.value})
-                    }}
-                    onKeyDown={(evt)=> {if(evt.key==="Enter") handleOnKeyDown(index)}}
-                  />
-                </Editable>
-              </div>
+                  name="title"
+                  value={inputState.title || element.title}
+                  onChange={e => {
+                    setInputState({title: e.target.value})
+                  }}
+                  onKeyDown={(evt)=> {if(evt.key==="Enter") handleOnKeyDown(index)}}
+                />
+              </Editable>
+            </div>
             <hr/>
           </div> 
           ))}
-          <div>
+          <div className="mt-2">
             {addFormState.open && 
-              <form className="d-flex flex-row">
-                <div className="form-group">
-                  <input type="text" name="title"/> 
-                </div>
-                <input type="submit"/>
-              </form>}
-          </div>
-          <div className="create-icon">
-            <button className="btn btn-link text-dark" onClick={()=> toggleAddFormHandler()}><img src="/assets/add-icon.svg" alt="add" />Create</button>
+              <input type="text" name="title"
+                onChange={e => {
+                  setNewListState({ title: e.target.value })
+                }} 
+                onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }}/> }
+            <div className="create-icon">
+              <button className="btn btn-link text-dark" onClick={()=> toggleAddFormHandler()}>
+              <img src="/assets/add-icon.svg" alt="add" />Create</button>
+            </div>
           </div>
         </div>
       </div>

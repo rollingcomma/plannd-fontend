@@ -27,7 +27,13 @@ export const logout = () => {
   debugger
   return axios({
     url: '/api/users/logout',
-    method: 'GET'
+    method: 'GET',
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -36,7 +42,13 @@ export const postUser = (formData) => {
   return axios({
     method:'POST',
     url:'/api/index/register/',
-    data:formData
+    data:formData,
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -46,6 +58,11 @@ export const getProjects =(userId) => {
     method: 'GET',
     url: '/api/users/projects/',
     params:{userId: userId},
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -58,6 +75,11 @@ export const addProject = (userId, formData) => {
     data: {
       ...formData,
       'userId':userId
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
     },
     withCredentials: true
   })
@@ -136,7 +158,13 @@ export const deleteNotebook = (projectId, notebookId) => {
     data: {
       projectId: projectId,
       notebookId: notebookId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -178,7 +206,13 @@ export const addCategory = (projectId, formData) => {
     url: '/api/users/links/category',
     data: { 
       ...formData,
-      projectId: projectId }
+      projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -188,7 +222,13 @@ export const updateCategory = (projectId, formData) => {
     url: '/api/users/links/category',
     data: { 
       ...formData,
-      projectId: projectId }
+      projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -199,7 +239,13 @@ export const deleteCategory = (projectId, categoryId) => {
     data: { 
       projectId: projectId, 
       categoryId: categoryId 
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -210,7 +256,14 @@ export const addLink = (projectId, categoryId, formData) => {
     data: { 
       ...formData,
       categoryId: categoryId,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -221,7 +274,14 @@ export const updateLink = (projectId, categoryId, formData) => {
     data: { 
       ...formData,
       categoryId: categoryId,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -233,7 +293,13 @@ export const deleteLink = (projectId, categoryId, linkId) => {
       projectId: projectId, 
       categoryId: categoryId,
       linkId:linkId 
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -243,6 +309,11 @@ export const getTodos = (projectId) => {
     method: 'GET',
     url: '/api/users/todos/',
     params: { projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -255,6 +326,11 @@ export const getChecklist = (projectId, checklistId) => {
       projectId: projectId,
       checklistId: checklistId
     },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -265,7 +341,14 @@ export const addChecklist = (projectId, formData) => {
     url: '/api/users/todos/checklist',
     data: { 
       ...formData,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -275,7 +358,14 @@ export const updateChecklist = (projectId, formData) => {
     url: '/api/users/todos/checklist',
     data: { 
       ...formData,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -286,7 +376,13 @@ export const deleteChecklist = (projectId, checklistId) => {
     data: { 
       projectId: projectId, 
       checklistId: checklistId 
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -297,7 +393,14 @@ export const addItem = (projectId, checklistId, formData) => {
     data: { 
       ...formData,
       checklistId: checklistId,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -308,7 +411,14 @@ export const updateItem = (projectId, checklistId, formData) => {
     data: { 
       ...formData,
       checklistId: checklistId,
-      projectId: projectId }
+      projectId: projectId 
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -320,7 +430,13 @@ export const deleteItem = (projectId, checklistId, itemId) => {
       projectId: projectId, 
       checklistId: checklistId,
       itemId:itemId 
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -330,6 +446,11 @@ export const getGallery = (projectId) => {
     method: 'GET',
     url: '/api/users/gallery/',
     params: { projectId: projectId },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -342,6 +463,11 @@ export const getAlbum = (projectId, albumId) => {
       projectId: projectId,
       albumId: albumId
     },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
     withCredentials: true
   })
 }
@@ -353,7 +479,13 @@ export const addAlbum = (projectId, formData) => {
     data: {
       ...formData,
       projectId: projectId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -364,7 +496,13 @@ export const updateAlbum = (projectId, formData) => {
     data: {
       ...formData,
       projectId: projectId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -375,7 +513,13 @@ export const deleteAlbum = (projectId, albumId) => {
     data: {
       projectId: projectId,
       albumId: albumId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -387,31 +531,49 @@ export const addPicture = (projectId, albumId, formData) => {
       ...formData,
       albumId: albumId,
       projectId: projectId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
 export const updatePicture = (projectId, albumId, formData) => {
   return axios({
     method: 'PUT',
-    url: '/api/users/gallery/album/photo',
+    url: '/api/users/gallery/album/image',
     data: {
       ...formData,
       albumId: albumId,
       projectId: projectId
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
-export const deletePicture = (projectId, albumId, pictureIds) => {
+export const deletePicture = (projectId, albumId, images) => {
   return axios({
     method: 'DELETE',
-    url: '/api/users/gallery/album/photo',
+    url: '/api/users/gallery/album/image',
     data: {
       projectId: projectId,
       albumId: albumId,
-      pictureIds: pictureIds
-    }
+      imageIdArr: images
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -423,34 +585,15 @@ export const updateUser = (userId, key, value) => {
       userId: userId,
       key: key,
       data: value
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
-
-// export const updateTheme = (userId, theme) => {
-//   return axios({
-//     method: 'PUT',
-//     url: '/api/users/user',
-//     data: {
-//       userId: userId,
-//       key: 'preference.theme',
-//       data: theme
-//     }
-//   })
-// }
-
-// export const updateProfilePicture = (userId, imageId) => {
-//   return axios({
-//     method: 'PUT',
-//     url: '/api/users/user',
-//     data: {
-//       userId: userId,
-//       key: 'profile_photo',
-//       data: imageId
-//     }
-//   })
-// }
-
 
 export const updateDashboard = (userId, newDashboard) => {
   return axios({
@@ -460,7 +603,13 @@ export const updateDashboard = (userId, newDashboard) => {
       userId: userId,
       key: `dashboard.${newDashboard.key}`,
       data: newDashboard.value
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -472,7 +621,13 @@ export const addProfilePictures = (userId, images) => {
     data: {
       userId: userId,
       ...images
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -483,7 +638,13 @@ export const deleteProfilePictures = (userId, images) => {
     data: {
       userId: userId,
       ...images
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -494,7 +655,13 @@ export const addPins = (userId, newPin) => {
     data: {
       userId: userId,
       data: newPin.value
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }
 
@@ -505,6 +672,12 @@ export const deletePins = (userId, pin) => {
     data: {
       userId: userId,
       data: pin.value
-    }
+    },
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Credentials": true
+    },
+    withCredentials: true
   })
 }

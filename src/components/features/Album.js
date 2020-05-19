@@ -8,10 +8,10 @@ import { deletePicture } from '../../services/apiAction';
 
 const Album = ({content}) => {
   // debugger
-  const [selected, setSelected] = useState([])
+  const [selected, setSelected] = useState({images:[]})
   const [images, setImages] = useState(content.images);
   const [uploadState, setUploadState] = useState({open: false})
-  const [userState, dispatchUser] = useUserState()
+  const [userState] = useUserState()
   
   if(content && content.images) {
     content.images.map(image=>{
@@ -41,29 +41,29 @@ const Album = ({content}) => {
       setSelected({ images: selected.images })
     }
   }
-
-  const handleUpdateState =(isAdd, newChanges) => {
-    if(isAdd){
-      images.concat(newChanges)
-      setImages(images)
-    } else
-      setImages(images.filter(image => newChanges.includes(image._id)))
+  debugger
+  const handleUpdateState = (newChanges) => {
+    const newImages = images.concat(newChanges)
+    setImages(newImages)
+    // setUploadState({ open: !uploadState.open });
   }
 
   const handleDelete = () => {
-    deletePicture(userState.user.preference.activeProject, content._id, { images: selected.images })
-      .then(res => {
-        if (res.data.success) {
-          // let user = userState.user
-          // user.pictures = res.data.result
-          // dispatchUser(
-          //   { user: user }
-          // )
-        }
-      })
+    deletePicture(userState.user.preference.activeProject, content._id, selected.images)
+    .then(res => {
+      if(res.data.success) {
+        const newImages = images.filter(image => !selected.images.includes(image._id))
+        setImages(newImages)
+      }
+    })
+    .catch(err=> console.log(err.message))
   }
-  useEffect(() => {
-  },[uploadState.open])
+
+  // useEffect(() => {
+  // }, [images])
+
+  // useEffect(() => {
+  // },[uploadState.open])
 
   const toggleFormHandler = () => {
     setUploadState({open: !uploadState.open});

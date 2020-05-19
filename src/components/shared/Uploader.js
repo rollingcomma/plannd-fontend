@@ -104,7 +104,7 @@ const Uploader = (
                       // console.log(result.data)
                       setMessage('Images were uploaded successfully')
                       setTimeout(handleFormState(), 800)
-                      handleUpdateState(true, images)
+                      handleUpdateState(images)
                     })
                   }
                 })
@@ -118,7 +118,7 @@ const Uploader = (
                   addProfilePictures(userState.user._id, {images: JSON.stringify(images) } )
                   .then(res => {
                     setMessage('Images were uploaded successfully')
-                    setTimeout(handleFormState(), 800)
+                    setTimeout(handleFormState(), 1000)
                     console.log(res.data)
                     handleUpdateState(res.data.result)
                   })
