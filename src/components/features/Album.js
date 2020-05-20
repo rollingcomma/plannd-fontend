@@ -9,11 +9,11 @@ import { deletePicture } from '../../services/apiAction';
 const Album = ({content}) => {
   // debugger
   const [selected, setSelected] = useState({images:[]})
-  const [images, setImages] = useState(content.images);
+  const [images, setImages] = useState(content? content.images:[]);
   const [uploadState, setUploadState] = useState({open: false})
   const [userState] = useUserState()
   
-  useEffect(() => { setImages(content.images) }, [content])
+  useEffect(() => { setImages(content? content.images : []) }, [content])
 
   if(images) {
     images.map(image=>{

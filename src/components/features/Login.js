@@ -62,7 +62,7 @@ const Login = (props) => {
               }
             })} />
           <ErrorMessage errors={errors} name="email">
-            {({ message }) => <p className="text-danger">{message}</p>}
+            {({ message }) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
         <div className="form-group">
@@ -75,7 +75,7 @@ const Login = (props) => {
               }
             })} />
           <ErrorMessage errors={errors} name="password">
-            {({ message }) => <p className="text-danger">{message}</p>}
+            {({ message }) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
         <div className="form-group">

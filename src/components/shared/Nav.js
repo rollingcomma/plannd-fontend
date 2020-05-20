@@ -16,19 +16,18 @@ const Nav = ({feature}) => {
 
   const [userState, dispatchUser] = useUserState()
   const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
-  const pins = currentProject[0].pins;
+  const pins = currentProject.length > 0? currentProject[0].pins : null;
   const inputRef = useRef();
 
   const [content, setContent] = useState(
-    
     { ...feature,
       currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
   
-  const [inputState, setInputState] = useState({title:content.currentContent.title || ""})
+  const [inputState, setInputState] = useState({ title: content.currentContent? content.currentContent.title : ""})
   const [newListState, setNewListState] = useState({title:""})
   const [addFormState, setAddFormState] = useState({open:false})
-  const [pinState, setPinState] = useState(pins)
+  const [pinState, setPinState] = useState(pins || {})
 
   const toggleAddFormHandler = () => {
     setAddFormState({open:!addFormState.open})
@@ -214,16 +213,16 @@ const Nav = ({feature}) => {
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">
-            <Editor content={content.currentContent} featureName="notes" isPined={isPined("notes")} handlePinClick={ handlePinClick} />
+            <Editor content={content.currentContent} featureName="notes" isPined={content.currentContent && isPined("notes")} handlePinClick={ handlePinClick} />
           </PrivateRoute>
           <PrivateRoute path="/user/feature/todos" >
-            <Checklist content={content.currentContent} featureName="todos" isPined={isPined("todos")} handlePinClick={ handlePinClick}/>
+            <Checklist content={content.currentContent} featureName="todos" isPined={content.currentContent && isPined("todos")} handlePinClick={ handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/links" >
-            <Links content={content.currentContent} featureName="links" isPined={isPined("links")} handlePinClick={handlePinClick}/>
+            <Links content={content.currentContent} featureName="links" isPined={content.currentContent && isPined("links")} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/gallery" >
-            <Album content={content.currentContent} featureName="gallery" isPined={isPined("gallery")} handlePinClick={handlePinClick}/>
+            <Album content={content.currentContent} featureName="gallery" isPined={content.currentContent && isPined("gallery")} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <Route >
             <NotFound />

@@ -15,11 +15,12 @@ const Dashboard = () => {
   
   const [userState] = useUserState()
   
-  const [timeLeft, setTimeLeft] = useState(userState? calculateTimeLeft(userState.user.trip_plan.time) : null)
+  const [timeLeft, setTimeLeft] = useState(userState && userState.user.trip_plan? calculateTimeLeft(userState.user.trip_plan.time) : null)
   
   const loadPinedContent = () => {
     if (userState.projects) {
       const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
+      
       const pins = currentProject[0].pins
       const requestArr = []
       
@@ -66,7 +67,9 @@ const Dashboard = () => {
   }, [ userState.user.preference.activeProject])
 
   useEffect(() => {
-    let timer = setTimeout(() => {
+    let timer
+    if (userState.user.trip_plan && userState.user.trip_plan.time) 
+     timer = setTimeout(() => {
       setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
     }, 1000)
     return () => {

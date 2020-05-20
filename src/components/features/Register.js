@@ -17,6 +17,7 @@ const Register = () => {
   
   const onSubmit = async (formData) => {
     debugger
+
     postUser(formData)
       .then(res => {
         const user = res.data
@@ -26,7 +27,7 @@ const Register = () => {
             user: user.user
           })
           debugger
-          history.push('/')
+          history.push('/user/project')
         }
       })
       .catch(err => {
@@ -50,7 +51,7 @@ const Register = () => {
               }
             })} />
           <ErrorMessage errors={errors} name="email">
-            {({message}) => <p className="text-danger">{message}</p>}
+            {({message}) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
         <div className="form-group">
@@ -62,7 +63,7 @@ const Register = () => {
                 value: 3, message:"Minimum length of username is 3 characters!"}
             })} />
           <ErrorMessage errors={errors} name="username">
-            {({ message }) => <p className="text-danger">{message}</p>}
+            {({ message }) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
         <div className="form-group">
@@ -75,13 +76,13 @@ const Register = () => {
             }
           })} />
           <ErrorMessage errors={errors} name="password">
-            {({ message }) => <p className="text-danger">{message}</p>}
+            {({ message }) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
        
       <div className="form-group">
-        <label className="control-label" htmlFor="password-confirm"><b>Password Confirmation</b></label>
-          <input type="password" className="form-control"  name="password-confirm" 
+        <label className="control-label" htmlFor="password_confirm"><b>Password Confirmation</b></label>
+          <input type="password" className="form-control"  name="password_confirm" 
         ref={register({
           required: "Password is required",
           minLength: {
@@ -89,8 +90,8 @@ const Register = () => {
           },
           validate: sameAs('password', getValues)
         })} />
-          <ErrorMessage errors={errors} name="password-confirm">
-            {({ message }) => <p className="text-danger">{message}</p>}
+          <ErrorMessage errors={errors} name="password_confirm">
+            {({ message }) => <p className="text-danger my-0 py-0">{message}</p>}
           </ErrorMessage>
         </div>
         

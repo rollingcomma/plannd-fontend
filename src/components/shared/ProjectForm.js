@@ -19,15 +19,15 @@ const onSubmit = async (formData) => {
   
   addProject(UserState.user._id, formData)
   .then(result => {
-    if(result.data.success) {
+    // if(result.data.success) {
       let projects = UserState.projects
       projects.push({
         _id: result.data.projectId,
         category:categoryState.category,
         title:formData.title
       })
-      handleAfterSubmit();
-    }
+    handleAfterSubmit(result.data.projectId);
+    // }
   })
   .catch(err =>console.log(err.message))
 }

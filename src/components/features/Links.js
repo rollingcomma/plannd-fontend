@@ -7,7 +7,6 @@ import useUserState from '../../context/customerHook'
 const Links = ({content}) => {
   debugger
   //props.content.links.map
-  const [state, setState] = useState(content)
   const [categoryState, setCategoryState] = useState(content)
   const [newLinkState, setNewLinkState] = useState({ link: "" })
   const [addFormState, setAddFormState] = useState({ open: false })

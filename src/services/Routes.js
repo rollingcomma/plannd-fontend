@@ -15,19 +15,19 @@ const Routes = () => {
   return (
     <Switch>
       <Route path="/register">
-        <div className={`body-container ${userState && userState.user.preference.theme}-primary`}>
+        <div className="body-container">
         <IndexHeader />
         <Register/>
         </div>
       </Route>
       <Route exact path={["/", "/login"]}>
-        <div className={`body-container ${userState && userState.user.preference.theme}-primary`}>
+        <div className="body-container">
           <IndexHeader />
           <Login />
         </div>
       </Route>
       <PrivateRoute path="/user">
-        <PrivateView className={`body-container ${userState && userState.user.preference.theme}-primary`}/>
+        <PrivateView className={`body-container ${userState && userState.user && userState.user.preference.theme}-primary`}/>
       </PrivateRoute>
       <Route>
         <IndexHeader />

@@ -12,7 +12,7 @@ const Header = () =>{
   const [projectPanelState, setProjectPanelState] = useState({open:false});
   
   // const activeProject = projectsState.filter(project => (project._id == activeProjectState))
- 
+  
   const [activeProjectState, setActiveProjectState] = useState(
     {
       projectId: userState.user.preference.activeProject,
@@ -53,32 +53,41 @@ const Header = () =>{
     })
   }
 
+  const profile_photo = () =>{
+    const profile = userState.user.pictures.filter(picture => picture._id === userState.user.profile_photo)
+    return profile[0].src
+  }
+
   useEffect(() => {
     // debugger
     if (!userState.projects) {
       getProjects(userState.user._id)
       .then(res => {
-        const projects = res.data.projects
+        const projects = res.data.projects? res.data.projects:[]
         dispatchUser({
           "projects": projects
         })
-        const activeProject = projects.filter(project => (project._id === userState.user.preference.activeProject))
-        setActiveProjectState({
-          projectId: activeProject[0]._id,
-          projectTitle: activeProject[0].title
-        })
+        if(projects.length > 0) {
+          const activeProject = projects.filter(project => (project._id === userState.user.preference.activeProject))
+          setActiveProjectState({
+            projectId: activeProject[0]._id,
+            projectTitle: activeProject[0].title
+          })
+        }
       })
       .catch(err => {
         console.log(err.message)
       })
     } else {
-      const activeProject = userState.projects.filter(project => (project._id === userState.user.preference.activeProject))
-      setActiveProjectState({
-        projectId: activeProject[0]._id,
-        projectTitle: activeProject[0].title
-      })
+      // if(userState.user.preference.activeProject) {
+        const activeProject = userState.projects.filter(project => (project._id === userState.user.preference.activeProject))
+        if(activeProject.length > 0)
+          setActiveProjectState({
+            projectId: activeProject[0]._id,
+            projectTitle: activeProject[0].title
+          })
+      // } 
     }
-    
   },[])
 
   const toggleProjectPanel = () => {
@@ -115,7 +124,7 @@ const Header = () =>{
               </div>
             </div>
             <div className="login">
-              <img alt="" src={userState.user ? userState.user.profile_photo.src : ""} className="profile-photo" />
+              <img alt="" src={userState.user && userState.user.profile_photo ? profile_photo()  : "http://craiglist2.s3-website.ca-central-1.amazonaws.com/plannd/default-user-icon.jpg"} className="profile-photo" />
               <div className="nav-item dropdown">
                 <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {userState.user.username}</button>
