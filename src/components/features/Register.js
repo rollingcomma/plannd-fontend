@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import { useHistory } from 'react-router-dom'
 import { useForm, ErrorMessage} from 'react-hook-form'
 import IndexContainer from '../HOC/IndexContainer'
@@ -14,13 +14,17 @@ const Register = () => {
   const { handleSubmit, register, errors, getValues } = useForm();
   
   const [, dispatchUser] = useUserState();
+  const [messageState, setMessageState] = useState({message:""})
   
   const onSubmit = async (formData) => {
     debugger
 
     postUser(formData)
       .then(res => {
-        const user = res.data
+        if(res.data.error) {
+          setMessageState({message:res.data.error})
+        } else {
+        let user = res.data
         if (user) {
           dispatchUser({
             isLoggedIn: true,
@@ -28,7 +32,9 @@ const Register = () => {
           })
           debugger
           history.push('/user/project')
-        }
+        } 
+      }
+      
       })
       .catch(err => {
         console.log(err.message)
@@ -41,7 +47,8 @@ const Register = () => {
       <img src="/assets/logo-text.png" className="logo-text mt-4 mb-2" alt="" />
       <form className="d-flex flex-column align-items-center justify-content- center w-100" onSubmit={handleSubmit(onSubmit)}>
         <div className="form-group">
-          <label className="control-label" htmlFor="email"><b>Email</b></label>
+          <label className="control-label" htmlFor="email"><b>Email</b>
+          {messageState.message && <p className="text-danger my-0">{messageState.message}</p> }</label>
           <input type="email" name="email" className="form-control" placeholder="test@example.com"
             ref={register({
               required: "Email is required",

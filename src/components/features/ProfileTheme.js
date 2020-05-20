@@ -9,7 +9,6 @@ const ProfileTheme = () => {
 
   const handleThemeChange = (evt) => {
     const theme = evt.target.getAttribute('id');
-    
     updateUser(userState.user._id, 'preference.theme', theme)
       .then(res => {
         let user = userState.user
@@ -41,21 +40,21 @@ const ProfileTheme = () => {
       <div className ="div-shadow w-50">
         <div className="m-3 mt-5">
           <div id="classic" 
-            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference.theme === "classic"? "selected":""}`}
+            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference && userState.user.preference.theme === "classic"? "selected":""}`}
             onClick={(e) => handleThemeChange(e)}>
             <div className="div-shadow classic-primary theme-colour"></div>
             <div className="div-shadow ml-1 classic-secondary theme-colour"></div>
             <p className="mx-4">Classic</p>
           </div>
           <div id="blossom" 
-            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference.theme === "blossom" ? "selected" : ""}`}
+            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference && userState.user.preference.theme === "blossom" ? "selected" : ""}`}
             onClick={(e) => handleThemeChange(e)}>
             <div className="div-shadow blossom-primary theme-colour"></div>
             <div className="div-shadow ml-1 blossom-secondary theme-colour"></div>
             <p className="mx-4">Blossom</p>
           </div>
           <div id="retro" 
-            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference.theme === "retro" ? "selected" : ""}`}
+            className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference && userState.user.preference.theme === "retro" ? "selected" : ""}`}
             onClick={(e) => handleThemeChange(e)}>
             <div className="div-shadow retro-primary theme-colour"></div>
             <div className="div-shadow ml-1 retro-secondary theme-colour"></div>

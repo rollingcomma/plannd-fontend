@@ -84,14 +84,15 @@ const ProfilePicture = () => {
         </div>
         <div className="profile-image-nav mt-3">
           <div className="div-shadow d-flex justify-content-center align-items-center h-100">
-            <img className="profile-image-container-lg" alt="" src={userState.user? userState.user.profile_photo.src:""}></img>
+            <img className="profile-image-container-lg" alt="" 
+              src={userState.user && userState.user.profile_photo ? userState.user.profile_photo.src : "http://craiglist2.s3-website.ca-central-1.amazonaws.com/plannd/default-user-icon.jpg"}></img>
           </div>
         </div>
       </div>
       
       <div className="div-shadow w-50">
         <div className="d-flex flex-row flex-wrap m-4">
-          {userState.user && userState.user.pictures.map(picture => 
+          {userState.user && userState.user.pictures && userState.user.pictures.map(picture => 
           <SelectedImage
             key={picture._id}
             className={`div-shadow m-2 profile-image-container ${picture._id === userState.user.profile_photo._id ? "active-profile-photo" : ""}`}

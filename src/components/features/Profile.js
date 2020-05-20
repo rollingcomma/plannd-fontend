@@ -16,9 +16,9 @@ const Profile = () => {
     <div className={"app justify-content " + userState.user.preference.theme + "-primary"}>
       <div className="side-nav">
         <Link to="/user/profile/picture"><img alt="" className={`icon-small note-icon ${pathname === "profile"||pathname==="picture"?"filter-notes":""}`} src="/assets/user-icon.svg" /></Link>
-        <Link to="/user/profile/theme" ><img alt="" className={`icon-small note-icon ${pathname === "theme" ? "filter-todos" : ""}`} src="/assets/ic_invert_colors.svg" /></Link>
-        <Link to="/user/profile/dashboard" ><img alt="" className={`icon-small note-icon ${pathname === "dashboard" ? "filter-links" : ""}`} src="/assets/dashboard-icon.svg" /></Link>
-        <Link to="/user/profile/setting" ><img alt="" className={`icon-small note-icon ${pathname === "setting" ? "filter-gallery" : ""}`} src="/assets/gear-icon.svg" /></Link>
+        <Link to="/user/profile/theme" ><img alt="" className={`icon-medium todo-icon ${pathname === "theme" ? "filter-todos" : ""}`} src="/assets/ic_invert_colors.svg" /></Link>
+        <Link to="/user/profile/dashboard" ><img alt="" className={`icon-small link-icon ${pathname === "dashboard" ? "filter-links" : ""}`} src="/assets/dashboard-icon.svg" /></Link>
+        <Link to="/user/profile/setting" ><img alt="" className={`icon-small image-icon ${pathname === "setting" ? "filter-gallery" : ""}`} src="/assets/gear-icon.svg" /></Link>
       </div>
       <Switch>
         <PrivateRoute exact path={["/user/profile/picture", "/user/profile"]}>

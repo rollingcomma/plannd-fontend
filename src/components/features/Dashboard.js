@@ -21,7 +21,7 @@ const Dashboard = () => {
     if (userState.projects) {
       const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
       
-      const pins = currentProject[0].pins
+      const pins = currentProject.length>0? currentProject[0].pins:null
       const requestArr = []
       
       if(pins) {

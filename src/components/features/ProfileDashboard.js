@@ -129,7 +129,7 @@ const ProfileDashboard = () => {
               defaultChecked={userState.user.dashboard.display_destination} 
               onChange={(e) => { handleChangeChk(e) }} />
             <label className="ml-2 form-check-label" htmlFor="destination">
-              Image Collection
+              Display Destination
             </label>
           </div>
           <div className="form-check my-4">

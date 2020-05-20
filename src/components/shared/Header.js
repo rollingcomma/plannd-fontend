@@ -15,13 +15,14 @@ const Header = () =>{
   
   const [activeProjectState, setActiveProjectState] = useState(
     {
-      projectId: userState.user.preference.activeProject,
+      projectId: userState.user ? userState.user.preference.activeProject : null,
       projectTitle: ""
     });
   
   const handleLogout = () => {
     dispatchUser({
       isLoggedIn: false,
+      projects:null,
       user:null
     })
     window.sessionStorage.clear()
@@ -88,7 +89,7 @@ const Header = () =>{
           })
       // } 
     }
-  },[])
+  }, [userState.user && userState.user.preference.activeProject])
 
   const toggleProjectPanel = () => {
     setProjectPanelState ({open:!projectPanelState.open});

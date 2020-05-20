@@ -2,10 +2,11 @@ import React, {useState} from 'react'
 import { useForm, ErrorMessage } from 'react-hook-form';
 import {useUserState} from '../../context/customerHook'
 import { addProject } from '../../services/apiAction'
+import { DispatchUserContext } from '../../context/Provider';
 
 const ProjectForm = ({handleAfterSubmit}) => {
 
-const [UserState] = useUserState()
+const [UserState, DispatchUser] = useUserState()
 
 const [categoryState, setCategoryState] = useState({
   category:'Trip Planning'
@@ -20,13 +21,13 @@ const onSubmit = async (formData) => {
   addProject(UserState.user._id, formData)
   .then(result => {
     // if(result.data.success) {
-      let projects = UserState.projects
-      projects.push({
-        _id: result.data.projectId,
-        category:categoryState.category,
-        title:formData.title
-      })
-    handleAfterSubmit(result.data.projectId);
+    debugger
+    let projects = UserState.projects || []
+    projects.push(result.data.project)
+    DispatchUser(
+    {  projects: projects}
+    )
+    handleAfterSubmit();
     // }
   })
   .catch(err =>console.log(err.message))
