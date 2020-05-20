@@ -1,9 +1,6 @@
 import React from 'react';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import { faThumbtack } from '@fortawesome/free-solid-svg-icons'
 
-
-const FeatureContainer = (Component) => ( ({content, pins}) => {
+const FeatureContainer = (Component) => ( ({featureName, content, pins, handlePinClick}) => {
   
   if(pins && content) {
     for(const key of Object.keys(pins)) {
@@ -28,7 +25,7 @@ const FeatureContainer = (Component) => ( ({content, pins}) => {
         :
         <div className="content-title d-flex justify-content-between">
           <p>{content && content.title}</p>
-            <button className="btn btn-link"><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
+            <button className="btn btn-link pointer" onClick={() => { handlePinClick({ key: featureName, value: content._id }); content.isPined = !content.isPined}}><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
         </div>
       }
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>

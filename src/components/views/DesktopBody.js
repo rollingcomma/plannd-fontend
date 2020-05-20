@@ -15,10 +15,9 @@ const DesktopBody = () => {
   const activeProjectId = userState.user.preference.activeProject
   let location = useLocation()
   const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
+  
   //handle page reload
   useEffect(() => {
-    // debugger
-    // const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
     handleFeatureSwitch(pathname)
 
   }, [userState.user.preference.activeProject])

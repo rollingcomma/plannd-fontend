@@ -105,7 +105,7 @@ const ProfilePicture = () => {
             <button className="w-100 h-100 btn btn-link" onClick={() => toggleFormHandler()}><img src="/assets/add-icon.svg" alt="add" /></button>
           </div>
         </div>
-        <div>
+        <div className="m-2 w-50">
           {uploadState.open && <Uploader toAlbum={false} handleFormState={toggleFormHandler} handleUpdateState={handleUpdateState}/>}
         </div>
         {errorState && <p className="text-danger">{errorState.message}</p>}

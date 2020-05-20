@@ -138,15 +138,14 @@ const Uploader = (
   };
 
   return (
-    <div>
-      
-      <form onSubmit={handleSubmit(uploadHandle)}>
-        <div className="form-group">
-          <label htmlFor="images">Upload Image</label>
-          <input type="file" name="images" onChange={onChange} multiple />
+    <div className="mt-2 p-2">
+      <form className="d-flex flex-row" onSubmit={handleSubmit(uploadHandle)}>
+        <div className="custom-file">
+          <input type="file" className="custom-file-input" name="images" onChange={onChange} multiple /> 
+            <label className="custom-file-label" htmlFor="images">Choose file</label>
         </div>
         {message && <p>{message}</p>}
-        <input type='submit' className="btn btn-info" name="newImage" />
+        <input type='submit' className="btn btn-info ml-3" name="newImage" />
       </form>
     </div>
   )

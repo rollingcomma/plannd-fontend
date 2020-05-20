@@ -7,12 +7,7 @@ import { updateNotebook } from '../../services/apiAction'
 const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
 Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
 ReactQuill.Quill.register(Font, true);
-/*
- * Simple editor component that takes placeholder text as a prop
-*/
-// class Editor extends React.Component {
-//   constructor(props) {
-//     super(props)
+
 const Editor = ({content}) =>{
 
     
@@ -30,12 +25,6 @@ const Editor = ({content}) =>{
   const [contentState, setContentState] = useState(initialState)
 
   const [UserState] = useUserState()
-
-    // this.textInput = React.createRef();
-  //   this.handleBlur = this.handleBlur.bind(this);
-  //   this.handleChange = this.handleChange.bind(this)
-
-  // }
   
   useEffect(() => {
     if(content)
@@ -48,37 +37,15 @@ const Editor = ({content}) =>{
     )
   },[content])
 
-  // componentDidUpdate(prevProps) {
-  //   if (this.props.content !== prevProps.content) {
-  //     // debugger
-  //     this.setState(
-  //       this.props.content?
-  //       {
-  //         documentId: this.props.content._id,
-  //         editorHtml: this.props.content.note,
-  //         theme: this.state.theme
-  //       }
-  //       :
-  //       {
-  //         editorHtml: '',
-  //         theme: 'snow'
-  //       }
-  //     )
-  //   }
-  // }
-
   const handleChange = (value) => {
-      setContentState({
-        ...contentState,
-        editorHtml: value
-      })
-    // this.setState({ editorHtml: value });
-    
+    setContentState({
+      ...contentState,
+      editorHtml: value
+    })
   }
 
   const handleThemeChange = (newTheme) => {
     if (newTheme === "core") newTheme = null;
-    // this.setState({ theme: newTheme })
     setContentState({
       ...contentState,
       theme:newTheme
@@ -94,12 +61,10 @@ const Editor = ({content}) =>{
       })
       .then(result => {
         console.log(result.data)
-        // console.log(val)
       })
   }
 
-  // render() {
-    // debugger
+
     return (
       <div>
         <ReactQuill
@@ -123,12 +88,7 @@ const Editor = ({content}) =>{
       </div>
     )
   }
-// }
 
-/* 
- * Quill modules to attach to editor
- * See https://quilljs.com/docs/modules/ for complete options
- */
 Editor.modules = {
   toolbar: [
     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],

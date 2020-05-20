@@ -267,23 +267,23 @@ export const addLink = (projectId, categoryId, formData) => {
   })
 }
 
-export const updateLink = (projectId, categoryId, formData) => {
-  return axios({
-    method: 'PUT',
-    url: '/api/users/links/category/link',
-    data: { 
-      ...formData,
-      categoryId: categoryId,
-      projectId: projectId 
-    },
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json",
-      "Access-Control-Allow-Credentials": true
-    },
-    withCredentials: true
-  })
-}
+// export const updateLink = (projectId, categoryId, formData) => {
+//   return axios({
+//     method: 'PUT',
+//     url: '/api/users/links/category/link',
+//     data: { 
+//       ...formData,
+//       categoryId: categoryId,
+//       projectId: projectId 
+//     },
+//     headers: {
+//       Accept: "application/json",
+//       "Content-Type": "application/json",
+//       "Access-Control-Allow-Credentials": true
+//     },
+//     withCredentials: true
+//   })
+// }
 
 export const deleteLink = (projectId, categoryId, linkId) => {
   return axios({
@@ -391,9 +391,9 @@ export const addItem = (projectId, checklistId, formData) => {
     method: 'POST',
     url: '/api/users/todos/checklist/item',
     data: { 
-      ...formData,
       checklistId: checklistId,
-      projectId: projectId 
+      projectId: projectId,
+      ...formData
     },
     headers: {
       Accept: "application/json",
@@ -404,14 +404,15 @@ export const addItem = (projectId, checklistId, formData) => {
   })
 }
 
-export const updateItem = (projectId, checklistId, formData) => {
+export const updateItem = (projectId, checklistId, itemId, formData) => {
   return axios({
     method: 'PUT',
     url: '/api/users/todos/checklist/item',
     data: { 
-      ...formData,
       checklistId: checklistId,
-      projectId: projectId 
+      projectId: projectId,
+      itemId: itemId,
+      ...formData
     },
     headers: {
       Accept: "application/json",
@@ -648,13 +649,14 @@ export const deleteProfilePictures = (userId, images) => {
   })
 }
 
-export const addPins = (userId, newPin) => {
+export const addPin = (projectId, newPin) => {
   return axios({
     method: 'POST',
-    url: `/api/users/user/pins/`,
+    url: `/api/users/projects/pins/`,
     data: {
-      userId: userId,
-      data: newPin.value
+      projectId: projectId,
+      key: newPin.key,
+      value: newPin.value
     },
     headers: {
       Accept: "application/json",
@@ -665,13 +667,13 @@ export const addPins = (userId, newPin) => {
   })
 }
 
-export const deletePins = (userId, pin) => {
+export const deletePin = (projectId, pin) => {
   return axios({
     method: 'DELETE',
-    url: `/api/users/user/pins/${pin.key}`,
+    url: `/api/users/projects/pins/`,
     data: {
-      userId: userId,
-      data: pin.value
+      projectId: projectId,
+      key: pin.key
     },
     headers: {
       Accept: "application/json",

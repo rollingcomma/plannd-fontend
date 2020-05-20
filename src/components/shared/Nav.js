@@ -10,11 +10,13 @@ import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState } from '../../context/customerHook';
 import { updateAlbum, updateCategory, updateChecklist, updateNotebook, 
         deleteNotebook, deleteCategory, deleteChecklist, deleteAlbum,
-        addNotebook, addCategory, addChecklist, addAlbum } from '../../services/apiAction'
+        addNotebook, addCategory, addChecklist, addAlbum, addPin, deletePin } from '../../services/apiAction'
 
 const Nav = ({feature}) => {
+  
   const [userState] = useUserState()
-  const pins = userState.user.pins;
+  const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
+  const pins = currentProject[0].pins;
   const inputRef = useRef();
   
   const [content, setContent] = useState(
@@ -25,6 +27,7 @@ const Nav = ({feature}) => {
   const [inputState, setInputState] = useState({title:content.currentContent.title || ""})
   const [newListState, setNewListState] = useState({title:""})
   const [addFormState, setAddFormState] = useState({open:false})
+  const [pinState, setPinState] = useState(pins)
 
   const toggleAddFormHandler = () => {
     setAddFormState({open:!addFormState.open})
@@ -102,6 +105,7 @@ const Nav = ({feature}) => {
         content.contentArr.splice(index, 1)
         setContent({ ...content, contentArr: content.contentArr })
       })
+      .catch(err => console.log(err.message))
     }
   }
 
@@ -118,7 +122,30 @@ const Nav = ({feature}) => {
       .catch(err => console.log(err.message))
     }
   }
-  // debugger
+
+  const handlePinClick = (newPin) => {
+    const isPined = pinState[newPin.key] === newPin.value
+    if(!isPined)
+      addPin(userState.user.preference.activeProject, newPin)
+      .then(res => {
+        setPinState({
+          ...pinState,
+          [newPin.key]:newPin.value
+        })
+      })
+      .catch(err => console.log(err.message))
+    else
+      deletePin(userState.user.preference.activeProject, newPin)
+      .then(res => {
+        delete pinState[newPin.key]
+        setPinState({
+          ...pinState
+        })
+      })
+      .catch(err => console.log(err.message))
+  }
+
+  debugger
   return (
     <div className="d-flex flex-row w-75">
       <div className="categories-nav">
@@ -159,7 +186,7 @@ const Nav = ({feature}) => {
           ))}
           <div className="mt-2">
             {addFormState.open && 
-              <input type="text" name="title"
+              <input type="text" name="title" placeholder={`Enter a title`}
                 onChange={e => {
                   setNewListState({ title: e.target.value })
                 }} 
@@ -174,16 +201,16 @@ const Nav = ({feature}) => {
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">
-            <Editor content={content.currentContent} pins={pins} />
+            <Editor content={content.currentContent} featureName="notes" pins={pinState} handlePinClick={ handlePinClick} />
           </PrivateRoute>
           <PrivateRoute path="/user/feature/todos" >
-            <Checklist content={content.currentContent} pins={pins} />
+            <Checklist content={content.currentContent} featureName="todos" pins={pinState} handlePinClick={ handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/links" >
-            <Links content={content.currentContent} pins={pins} />
+            <Links content={content.currentContent} featureName="links" pins={pinState} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/gallery" >
-            <Album content={content.currentContent} pins={pins} />
+            <Album content={content.currentContent} featureName="gallery" pins={pinState} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <Route >
             <NotFound />

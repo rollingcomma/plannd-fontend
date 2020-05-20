@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
 import {useUserState} from '../../context/customerHook'
-import { useForm } from 'react-hook-form';
 import { updateUser } from '../../services/apiAction'
 
 const ProfileDashboard = () => {
-  const { handleSubmit } = useForm();
+  
   const [userState, dispatchUser] = useUserState();
   const [countdownFormState, setCountdownFormState] = useState({open:false})
   
