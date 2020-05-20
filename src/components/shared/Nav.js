@@ -193,7 +193,7 @@ const Nav = ({feature}) => {
                 />
               </Editable>
             </div>
-            <hr/>
+            {/* <hr/> */}
           </div> 
           ))}
           <div className="mt-2">

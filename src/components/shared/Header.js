@@ -124,7 +124,7 @@ const Header = () =>{
               </div>
             </div>
             <div className="login">
-              <img alt="" src={userState.user && userState.user.profile_photo ? profile_photo()  : "http://craiglist2.s3-website.ca-central-1.amazonaws.com/plannd/default-user-icon.jpg"} className="profile-photo" />
+              <img alt="" src={userState.user && userState.user.profile_photo ? userState.user.profile_photo.src  : "http://craiglist2.s3-website.ca-central-1.amazonaws.com/plannd/default-user-icon.jpg"} className="profile-photo" />
               <div className="nav-item dropdown">
                 <button className="btn btn-link text-dark account-name dropdown-toggle" id="dropdwon-menu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                   {userState.user.username}</button>

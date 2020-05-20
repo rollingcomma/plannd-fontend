@@ -53,29 +53,29 @@ const Dashboard = () => {
           .catch(err => {
             console.log(err.message)
           })
-      }
+        } else {
+          setPinedContent({
+            contentList:null
+          })
+        }
     }
   }
 
-  // Load pined content when first component mounted
   useEffect(() => {
     loadPinedContent()
-  }, []) 
-
-  useEffect(() => {
-    loadPinedContent()
-  }, [ userState.user.preference.activeProject])
+  }, [userState.user.preference.activeProject, userState.projects])
 
   useEffect(() => {
     let timer
-    if (userState.user.trip_plan && userState.user.trip_plan.time) 
-     timer = setTimeout(() => {
-      setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
-    }, 1000)
+    if (userState.user.trip_plan ) 
+      timer = setTimeout(() => {
+        setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
+      }, 1000)
     return () => {
       clearTimeout(timer)
     }
   })
+
 
   return (
     <div className="d-flex flex-column main-content-container dashboard-container">

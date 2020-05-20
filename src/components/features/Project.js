@@ -26,25 +26,6 @@ const Project = () => {
       projectTitle: userState.projects[0].title
     })
     history.push("/user/dashboard")
-    // getProjects(userState.user._id)
-    // .then(res => {
-    //   const projects = res.data.projects ? res.data.projects : []
-    //   dispatchUser({
-    //     "projects": projects
-    //   })
-    //   if (projects.length > 0 && userState.user.preference.activeProject) {
-    //     const activeProject = projects.filter(project => (project._id === userState.user.preference.activeProject))
-    //     if(activeProject.length > 0)
-    //       setActiveProjectState({
-    //         projectId: activeProject[0]._id,
-    //         projectTitle: activeProject[0].title
-    //       })
-        
-    //   }
-    // })
-    // .catch(err => {
-    //   console.log(err.message)
-    // })
   }
 
   return (
