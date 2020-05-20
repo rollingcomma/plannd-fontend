@@ -117,31 +117,32 @@ const Dashboard = () => {
        {
           pinedContent.contentList && pinedContent.contentList.length >0 && pinedContent.contentList.map(content => {
             const key = Object.keys(content)
-            content[key[0]].onDashboard = true;
-            switch (key[0]) {
-              case "notebook":
-                content.notebook.name="Notes"
-                return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
-                  <Editor content={content.notebook} />
-                </div>
-              case "checklist":
-                content.checklist.name = "To-Dos"
-                return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
-                  <Checklist content={content.checklist} />
-                </div>
-              case "category": 
-                content.category.name = "Links"
-                return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
-                  <Links content={content.category} />
-                </div>
-              case "album":
-                content.album.name= "Gallery"
-                return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
-                  <Album content={content.album} />
-                </div>
+            if(key.length > 0){
+              content[key[0]].onDashboard = true;
+              switch (key[0]) {
+                case "notebook":
+                  content.notebook.name = "Notes"
+                  return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
+                    <Editor content={content.notebook} onDashboard={true} />
+                  </div>
+                case "checklist":
+                  content.checklist.name = "To-Dos"
+                  return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
+                    <Checklist content={content.checklist} onDashboard={true} />
+                  </div>
+                case "category":
+                  content.category.name = "Links"
+                  return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
+                    <Links content={content.category} onDashboard={true} />
+                  </div>
+                case "album":
+                  content.album.name = "Gallery"
+                  return <div key={content._id} className="m-4 div-shadow dashboard-feature-container">
+                    <Album content={content.album} onDashboard={true} />
+                  </div>
               }
             }
-          )
+          })
         }  
       </div>
     </div>

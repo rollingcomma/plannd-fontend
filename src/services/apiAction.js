@@ -267,24 +267,6 @@ export const addLink = (projectId, categoryId, formData) => {
   })
 }
 
-// export const updateLink = (projectId, categoryId, formData) => {
-//   return axios({
-//     method: 'PUT',
-//     url: '/api/users/links/category/link',
-//     data: { 
-//       ...formData,
-//       categoryId: categoryId,
-//       projectId: projectId 
-//     },
-//     headers: {
-//       Accept: "application/json",
-//       "Content-Type": "application/json",
-//       "Access-Control-Allow-Credentials": true
-//     },
-//     withCredentials: true
-//   })
-// }
-
 export const deleteLink = (projectId, categoryId, linkId) => {
   return axios({
     method: 'DELETE',

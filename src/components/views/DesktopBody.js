@@ -97,7 +97,7 @@ const DesktopBody = () => {
 
     // debugger
     return (
-      <div className={"app " + userState.user.preference.theme + "-primary"}>
+      <div className="app">
         <div className="side-nav">
           <Link to="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname==="feature" || pathname==="notes"? "filter-notes":""}`} src="/assets/note-icon.svg" /></Link>
           <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>

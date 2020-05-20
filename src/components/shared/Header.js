@@ -128,7 +128,7 @@ const Header = () =>{
           </div>
         </div>
       </div>
-     {projectPanelState.open  && <div className="project-nav">
+     {projectPanelState.open  && <div className={`project-nav ${userState && userState.user.preference.theme}-primary`}>
         {userState.projects && 
           <ProjectDropdown 
             projects={userState.projects} 

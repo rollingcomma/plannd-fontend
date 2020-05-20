@@ -259,18 +259,11 @@ p {
 
 .blossom-primary {
   background-size: 100%;
-  // background: linear-gradient( rgba(255, 255, 255, 0.3), rgba(255, 255, 255, 0.3) ),url("/assets/blossom_background.jpg");
-  
   background-image: url("/assets/blossom_background.jpg");
   background-color: rgba(255,255,255,0.3);
   background-blend-mode: lighten;
-  // z-index:-1;
-  // background-color:#FF009D ;
+  
 }
-
-// .blossom-primary::after{
-//   opacity: 0.7;
-// }
 
 .blossom-secondary {
   background-color:white ;

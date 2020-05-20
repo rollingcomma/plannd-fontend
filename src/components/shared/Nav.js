@@ -19,13 +19,6 @@ const Nav = ({feature}) => {
   const pins = currentProject[0].pins;
   const inputRef = useRef();
 
-  
-  const initialState = () => {
-    
-  }
-
-  
-  
   const [content, setContent] = useState(
     
     { ...feature,
@@ -42,32 +35,11 @@ const Nav = ({feature}) => {
   }
   
   useEffect (() => {
-    // let currentContent = content.currentContent
-    // for(const key of Object.keys(pinState)) {
-    // if (currentContent._id === pinState[key])
-    //   currentContent.isPined = true
-    // }
     setContent({
       ...feature,
       currentContent: feature.contentArr.length > 0 ? feature.contentArr[0] : null
     })
   }, [feature, feature.contentArr, pinState])
-
-  // useEffect (() => {
-  //     for (const key of Object.keys(pinState)) {
-  //       if (content.currentContent._id === pinState[key])
-  //         content.currentContent.isPined = true
-  //     }
-  //   setContent({
-  //     ...content
-  //   })
-    
-  //     // let projects = userState.projects
-  //     // projects.map(project => project._id === userState.user.preference.activeProject ? project.pins = pinState : project)
-  //     // dispatchUser({
-  //     //   "projects": projects
-  //     // })
-  // }, [])
 
   const handleUpdateState = useCallback((id, contentArr) => {
     const arr = contentArr.filter(element => element._id === id)
@@ -180,7 +152,10 @@ const Nav = ({feature}) => {
         })
         .catch(err => console.log(err.message))
     }
-    
+  }
+
+  const isPined = (featureName) => {
+    return content.currentContent._id === pinState[`${featureName}`]
   }
 
   debugger
@@ -239,16 +214,16 @@ const Nav = ({feature}) => {
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">
-            <Editor content={content.currentContent} featureName="notes" pins={pinState} handlePinClick={ handlePinClick} />
+            <Editor content={content.currentContent} featureName="notes" isPined={isPined("notes")} handlePinClick={ handlePinClick} />
           </PrivateRoute>
           <PrivateRoute path="/user/feature/todos" >
-            <Checklist content={content.currentContent} featureName="todos" pins={pinState} handlePinClick={ handlePinClick}/>
+            <Checklist content={content.currentContent} featureName="todos" isPined={isPined("todos")} handlePinClick={ handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/links" >
-            <Links content={content.currentContent} featureName="links" pins={pinState} handlePinClick={handlePinClick}/>
+            <Links content={content.currentContent} featureName="links" isPined={isPined("links")} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <PrivateRoute path="/user/feature/gallery" >
-            <Album content={content.currentContent} featureName="gallery" pins={pinState} handlePinClick={handlePinClick}/>
+            <Album content={content.currentContent} featureName="gallery" isPined={isPined("gallery")} handlePinClick={handlePinClick}/>
           </PrivateRoute>
           <Route >
             <NotFound />

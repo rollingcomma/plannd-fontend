@@ -1,14 +1,7 @@
 import React from 'react';
 
-const FeatureContainer = (Component) => ( ({featureName, content, pins, handlePinClick}) => {
+const FeatureContainer = (Component) => ( ({featureName, content, isPined, handlePinClick}) => {
   
-  if(pins && content) {
-    for(const key of Object.keys(pins)) {
-      if (content._id === pins[key])
-        content.isPined = true
-    }
-  }
-
   return (
     <div className="content">
       <div id="space-around-content" className="h-100"> 
@@ -25,7 +18,10 @@ const FeatureContainer = (Component) => ( ({featureName, content, pins, handlePi
         :
         <div className="content-title d-flex justify-content-between">
           <p>{content && content.title}</p>
-            <button className="btn btn-link pointer" onClick={() => { handlePinClick({ key: featureName, value: content._id }); if(content && content.isPined) content.isPined = !content.isPined } }><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
+            {content && (!content.onDashboard) && 
+              <button className="btn btn-link pointer" 
+                onClick={() => handlePinClick({ key: featureName, value: content._id })}>
+                <img src={isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>}
         </div>
       }
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>

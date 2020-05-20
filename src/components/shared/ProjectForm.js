@@ -46,7 +46,7 @@ const handleCategoryChoice = (evt) => {
         ref={register({
           required: "Title is required",
           minLength: {
-            value: 6, message: "Minimum length of title is 6 characters!"
+            value: 4, message: "Minimum length of title is 4 characters!"
           }
         })} />
         <ErrorMessage errors={errors} name="title">

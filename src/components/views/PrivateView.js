@@ -9,10 +9,10 @@ import Profile from '../features/Profile';
 import Project from '../features/Project'
 // import { data } from '../../context/data'
 
-const PrivateView = () => {
+const PrivateView = ({className}) => {
   
   return (
-    <div className="body-container">
+    <div className={className}>
       <Header />
       <Switch>
         <PrivateRoute path='/user/profile'>
