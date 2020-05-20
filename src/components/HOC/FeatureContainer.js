@@ -25,7 +25,7 @@ const FeatureContainer = (Component) => ( ({featureName, content, pins, handlePi
         :
         <div className="content-title d-flex justify-content-between">
           <p>{content && content.title}</p>
-            <button className="btn btn-link pointer" onClick={() => { handlePinClick({ key: featureName, value: content._id }); content.isPined = !content.isPined}}><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
+            <button className="btn btn-link pointer" onClick={() => { handlePinClick({ key: featureName, value: content._id }); if(content && content.isPined) content.isPined = !content.isPined } }><img src={content && content.isPined?"/assets/pined.png" :"/assets/pin.png"} className="icon-small" alt="pin"/></button>
         </div>
       }
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>

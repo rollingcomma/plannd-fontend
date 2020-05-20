@@ -13,7 +13,7 @@ const Register = () => {
   }
   const { handleSubmit, register, errors, getValues } = useForm();
   
-  const [dispatchUser] = useUserState();
+  const [, dispatchUser] = useUserState();
   
   const onSubmit = async (formData) => {
     debugger

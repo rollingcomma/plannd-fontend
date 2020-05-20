@@ -117,6 +117,7 @@ const Checklist = ({content}) => {
                 id={item._id}
                 type="checkbox"
                 className="pointer"
+                handleDelete={() => handleDelete(index)}
                 style={checkboxStyle(item.is_checked)}
               >
                 <input

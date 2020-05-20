@@ -1,39 +1,19 @@
 import React from 'react'
-import { Accordion, Card, Button } from 'react-bootstrap'
+import { useHistory } from 'react-router-dom';
 import ProjectForm from '../shared/ProjectForm'
 
-const Project = ({projects, activeProject, handleProjectChange, togglePanel}) => {
-  debugger
-  return(
-    <Accordion>
-      <Card>
-        <Card.Header>
-          <Accordion.Toggle as={Button} variant="button" eventKey="0">
-           Open an existing project
-      </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey="0">
-          <Card.Body>{projects && projects.map(project =>
-            <button key={project._id} id={project._id} 
-              className={`btn btn-link text-dark dropdown-item ${activeProject === project._id ? "selected":""}`} 
-              onClick={(e) => {handleProjectChange(e); togglePanel()}}>{project.title}</button>
-          )}</Card.Body>
-        </Accordion.Collapse>
-      </Card>
-      <Card>
-        <Card.Header>
-          <Accordion.Toggle as={Button} variant="button" eventKey="1">
-            Create a new project
-      </Accordion.Toggle>
-        </Card.Header>
-        <Accordion.Collapse eventKey="1">
-          <Card.Body>
-            <ProjectForm />
-          </Card.Body>
-        </Accordion.Collapse>
-      </Card>
-    </Accordion>
+const Project = () => {
+  const history = useHistory();
+  const handleAfterSubmit = () => {
+    history.push("/")
+  }
+  return (
+    <div className="d-flex flex-column justify-content-center align-items-center side-container">
+      <img src="/assets/logo-text.png" className="logo-text mt-4 mb-2" alt="" />
+      <p>Welcome to the <b>plannd</b> app!</p>
+      <p>Before you discover all of the functionalities that ourapp has to offer, pick a name for your project and choose the category the best fits your needs!</p>
+      <ProjectForm handleAfterSubmit={handleAfterSubmit}/>
+    </div>
   )
 }
-
-export default Project;
+export default Project

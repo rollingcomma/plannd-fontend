@@ -13,13 +13,21 @@ import { updateAlbum, updateCategory, updateChecklist, updateNotebook,
         addNotebook, addCategory, addChecklist, addAlbum, addPin, deletePin } from '../../services/apiAction'
 
 const Nav = ({feature}) => {
-  
-  const [userState] = useUserState()
+
+  const [userState, dispatchUser] = useUserState()
   const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
   const pins = currentProject[0].pins;
   const inputRef = useRef();
+
+  
+  const initialState = () => {
+    
+  }
+
+  
   
   const [content, setContent] = useState(
+    
     { ...feature,
       currentContent: feature.contentArr.length > 0? feature.contentArr[0]:null
     });
@@ -34,11 +42,32 @@ const Nav = ({feature}) => {
   }
   
   useEffect (() => {
+    // let currentContent = content.currentContent
+    // for(const key of Object.keys(pinState)) {
+    // if (currentContent._id === pinState[key])
+    //   currentContent.isPined = true
+    // }
     setContent({
       ...feature,
       currentContent: feature.contentArr.length > 0 ? feature.contentArr[0] : null
     })
-  }, [feature, feature.currentContent])
+  }, [feature, feature.contentArr, pinState])
+
+  // useEffect (() => {
+  //     for (const key of Object.keys(pinState)) {
+  //       if (content.currentContent._id === pinState[key])
+  //         content.currentContent.isPined = true
+  //     }
+  //   setContent({
+  //     ...content
+  //   })
+    
+  //     // let projects = userState.projects
+  //     // projects.map(project => project._id === userState.user.preference.activeProject ? project.pins = pinState : project)
+  //     // dispatchUser({
+  //     //   "projects": projects
+  //     // })
+  // }, [])
 
   const handleUpdateState = useCallback((id, contentArr) => {
     const arr = contentArr.filter(element => element._id === id)
@@ -96,8 +125,7 @@ const Nav = ({feature}) => {
   }
 
   const handleDelete = (index) => {
-    console.log('delete')
-    debugger
+    // debugger
     const apiCall = filterFeature(content.contentArr[index]._id, null, true)
     if(apiCall) {
       apiCall
@@ -125,24 +153,34 @@ const Nav = ({feature}) => {
 
   const handlePinClick = (newPin) => {
     const isPined = pinState[newPin.key] === newPin.value
-    if(!isPined)
+    if(!isPined) {
       addPin(userState.user.preference.activeProject, newPin)
-      .then(res => {
-        setPinState({
-          ...pinState,
-          [newPin.key]:newPin.value
+        .then(res => {
+          pinState[`${newPin.key}`] = newPin.value
+          setPinState(
+            pinState
+          )
+          let projects = userState.projects
+          projects.map(project => project._id === userState.user.preference.activeProject ? project.pins = pinState : project)
+          dispatchUser({
+            "projects": projects
+          })
         })
-      })
-      .catch(err => console.log(err.message))
-    else
+        .catch(err => console.log(err.message))
+    } else {
       deletePin(userState.user.preference.activeProject, newPin)
-      .then(res => {
-        delete pinState[newPin.key]
-        setPinState({
-          ...pinState
+        .then(res => {
+          delete pinState[`${newPin.key}`]
+          setPinState(pinState)
+          let projects = userState.projects
+          projects.map(project => project._id === userState.user.preference.activeProject ? project.pins = pinState : project)
+          dispatchUser({
+            "projects": projects
+          })
         })
-      })
-      .catch(err => console.log(err.message))
+        .catch(err => console.log(err.message))
+    }
+    
   }
 
   debugger

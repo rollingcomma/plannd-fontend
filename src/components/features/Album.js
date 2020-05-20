@@ -13,8 +13,10 @@ const Album = ({content}) => {
   const [uploadState, setUploadState] = useState({open: false})
   const [userState] = useUserState()
   
-  if(content && content.images) {
-    content.images.map(image=>{
+  useEffect(() => { setImages(content.images) }, [content])
+
+  if(images) {
+    images.map(image=>{
       try{
         image.width = parseInt(image.width)
         image.height = parseInt(image.height)

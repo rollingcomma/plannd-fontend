@@ -54,14 +54,13 @@ const Editable = ({
   return (
     <section {...props}>
       {isEditing ? (
-        <div
-          onBlur={() => setEditing(false)}
-          onKeyDown={e => handleKeyDown(e, type)}
-          className="d-flex flex-row"
-        > 
-          {children}
-          <button className="btn btn-link" title="Remove from list" onClick={handleDelete}><img src="/assets/delete.png" className="icon-xsmall" alt="delete"/></button>
-        </div>
+          <div className="d-flex flex-row"
+            onKeyDown={evt => { if (evt.key === "Enter") setEditing(false)}}
+          > 
+            {children}
+            <button className="btn btn-link" title="Remove from list" onClick={handleDelete}><img src="/assets/delete.png" className="icon-xsmall" alt="delete" /></button>
+          </div>
+        
       ) : (
           <div onDoubleClick={() => setEditing(true)}>
             {type === "checkbox"?

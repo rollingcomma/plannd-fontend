@@ -3,13 +3,10 @@ import { useForm, ErrorMessage } from 'react-hook-form';
 import {useUserState} from '../../context/customerHook'
 import { addProject } from '../../services/apiAction'
 
-const ProjectForm = () => {
+const ProjectForm = ({handleAfterSubmit}) => {
 
 const [UserState] = useUserState()
-// const [formState, setFormState] = useState({
-//   title:null,
-//   category:null
-// })
+
 const [categoryState, setCategoryState] = useState({
   category:'Trip Planning'
 })
@@ -29,6 +26,7 @@ const onSubmit = async (formData) => {
         category:categoryState.category,
         title:formData.title
       })
+      handleAfterSubmit();
     }
   })
   .catch(err =>console.log(err.message))
@@ -65,8 +63,6 @@ const handleCategoryChoice = (evt) => {
         </div>
         <input className="btn create-project-btn mx-auto mt-4" name="newProject" type="submit" value="Create Project" />
       </div>
-      
-     
     </form>
   )
 }

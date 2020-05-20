@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
 import { logout, getProjects, updateUser } from '../../services/apiAction'
 import { useUserState } from '../../context/customerHook';
-import Project from '../features/Project'
+import ProjectDropdown from '../features/ProjectDropdown'
 import $ from 'jquery'
 // import { Accordion, Card } from 'react-bootstrap'
 
@@ -85,6 +85,10 @@ const Header = () =>{
     setProjectPanelState ({open:!projectPanelState.open});
   }
 
+  const handleAfterSubmit = () => {
+    setProjectPanelState({ open: !projectPanelState.open });
+  }
+
   return (
     <div>
       <div className="top-banner">
@@ -125,7 +129,13 @@ const Header = () =>{
         </div>
       </div>
      {projectPanelState.open  && <div className="project-nav">
-        {userState.projects && <Project projects={userState.projects} activeProject={activeProjectState.projectId} handleProjectChange={handleProjectChange} togglePanel={toggleProjectPanel}/>}
+        {userState.projects && 
+          <ProjectDropdown 
+            projects={userState.projects} 
+            activeProject={activeProjectState.projectId} 
+            handleProjectChange={handleProjectChange} 
+            togglePanel={toggleProjectPanel}
+            handleAfterSubmit={handleAfterSubmit}/>}
       </div>}
     </div>
   )

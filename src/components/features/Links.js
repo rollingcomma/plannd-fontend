@@ -13,7 +13,7 @@ const Links = ({content}) => {
   const [addFormState, setAddFormState] = useState({ open: false })
   const [userState] = useUserState()
 
-  useEffect(() => { setState({ ...content})},[content])
+  useEffect(() => { setCategoryState({ ...content})},[content])
   
   const toggleAddFormHandler = () => {
     setAddFormState({ open: !addFormState.open })
@@ -57,8 +57,8 @@ const Links = ({content}) => {
 
   return (
     <div className="d-flex flex-column overflow-auto ml-3">
-      {state && state.links &&
-        state.links.map(element => 
+      {categoryState && categoryState.links &&
+        categoryState.links.map(element => 
         <div key={element._id} className="m-1"> 
           <ReactTinyLink
             cardSize="small"

@@ -6,6 +6,7 @@ import DesktopBody from './DesktopBody';
 import { Switch } from 'react-router-dom';
 import PrivateRoute from '../../services/PrivateRoute'
 import Profile from '../features/Profile';
+import Project from '../features/Project'
 // import { data } from '../../context/data'
 
 const PrivateView = () => {
@@ -17,10 +18,13 @@ const PrivateView = () => {
         <PrivateRoute path='/user/profile'>
           < Profile />  
         </PrivateRoute>
+        <PrivateRoute path='/user/project'>
+          <Project />
+        </PrivateRoute>
         <PrivateRoute>
           <DesktopBody/>
         </PrivateRoute>
-      </Switch>    
+      </Switch>
     </div>
   )
 }
