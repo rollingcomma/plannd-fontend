@@ -1,4 +1,4 @@
-import React, {createContext, useReducer} from 'react'
+import React, {createContext, useState, useEffect, useReducer} from 'react'
 import {sessionStorageParser} from '../helpers/parser'
 
 const defaultUserState = sessionStorageParser()
@@ -22,6 +22,33 @@ export const UserStateProvider =  ({children}) => {
     </UserContext.Provider>
   );
 }
+
+
+export const WindowDimensionsCtx = createContext(null)
+
+const windowDims = () => ({
+  height: window.innerHeight,
+  width: window.innerWidth,
+})
+
+export const WindowDimensionsProvider = ({ children }) => {
+  const [dimensions, setDimensions] = useState(windowDims())
+  useEffect(() => {
+    const handleResize = () => {
+      setDimensions(windowDims())
+    }
+    window.addEventListener('resize', handleResize)
+    return () => { window.removeEventListener('resize', handleResize) }
+  }, [])
+  return (
+    <WindowDimensionsCtx.Provider value={dimensions}>
+      {children}
+    </WindowDimensionsCtx.Provider>
+  )
+}
+
+
+
 
 // const defaultThemeState = {
 //   theme: "classic"

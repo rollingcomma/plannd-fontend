@@ -1,21 +1,26 @@
 import React from 'react';
 import useUserState from '../../context/customerHook'
+import { Link } from 'react-router-dom';
 const Footer = () => {
   // constructor() {
   //   // debugger
   //   super();
   // }
+  const handleFeatureSwitch = () => {
+
+  }
+
   const [userState] = useUserState()
   return (
     <div className={`bottom-banner ${userState && userState.user ? userState.user.preference.theme + "-secondary": "classic-secondary"}`}>
-      <div className="d-flex mx-4">
-        <div className="footer-sitemap mx-5 ml-5">
+      <div className="d-flex">
+        <div className="footer-sitemap">
           <p>Site Map</p>
           <hr className="footer-sitemap-line"></hr>
-          <p className="footer-sitemap-content">Notes</p>
-          <p className="footer-sitemap-content">To-Dos</p>
-          <p className="footer-sitemap-content">Links</p>
-          <p className="footer-sitemap-content">Image Gallery</p>
+          <a href="/user/feature/notes" onClick={()=> handleFeatureSwitch("notes")} className="footer-sitemap-content text-dark">Notes</a>
+          <a href="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")} className="footer-sitemap-content text-dark">To-Dos</a>
+          <a href="/user/feature/links" onClick={() => handleFeatureSwitch("links")} className="footer-sitemap-content text-dark">Links</a>
+          <a href="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")} className="footer-sitemap-content text-dark">Image Gallery</a>
         </div>
         <div id="footer-learnmore">
           <p>Learn More</p>
@@ -28,7 +33,7 @@ const Footer = () => {
         <img alt=""  src="/assets/logo-horizontal-bw.png" id="footer-middle-logo"/>
         <p id="copyright-text">Copyright &copy; 2020 plannd. All rights reserved.</p>
       </div>
-      <div id="footer-social-media" className="mr-5 d-flex flex-column align-items-center">
+      <div id="footer-social-media" className="footer-media-container">
           <p id="footer-social-media-text">Follow us on all our social medias!</p>
           <div className="social-media-inner">
             <img alt=""  src="/assets/snapchat-icon.png" id="snapchat-icon"/>

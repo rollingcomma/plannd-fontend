@@ -1,5 +1,6 @@
 import React, {useEffect, useCallback, useState, useRef} from 'react';
 import { Switch, Route } from 'react-router-dom';
+import { Accordion, Card, Button, useAccordionToggle } from 'react-bootstrap'
 import Checklist from '../features/Checklist';
 import Editor from '../features/Editor';
 import Links from '../features/Links';
@@ -101,6 +102,8 @@ const Nav = ({feature}) => {
     if(apiCall) {
       apiCall
       .then(res => {
+        //if deleting content is the current content, set current content as null
+        if (content.currentContent && content.contentArr[index]._id === content.currentContent._id) content.currentContent = null
         content.contentArr.splice(index, 1)
         setContent({ ...content, contentArr: content.contentArr })
       })
@@ -157,59 +160,139 @@ const Nav = ({feature}) => {
     return content.currentContent._id === pinState[`${featureName}`]
   }
 
-  debugger
-  return (
-    <div className="d-flex flex-row w-75">
-      <div className="categories-nav">
-        <div className="top-function-name">
-          <div className={"rectangle-"+content.name}></div>
-          <p id={content._id} className="function-name">{content.name}</p>
-          <div className={"text-banner-"+content.name}></div>
-        </div>
-        <div className="saved-elements-list pt-2">
-          {content.contentArr.length > 0 && 
-          content.contentArr.map((element, index) => (
-          <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${element._id === content.currentContent._id ? "selected" : ""}`}>
-            <div className='my-3'>
-              <Editable
-                text={element.title}
-                childRef={inputRef}
-                type="text"
-                index={index}
-                className="pointer"
-                handleDelete= {() => handleDelete(index)}
-                onClick={() => handleUpdateState(element._id, content.contentArr)}
-              >
-                <input
-                  id={element._id}
-                  ref={inputRef}
-                  type="text"
-                  name="title"
-                  value={inputState.title || element.title}
+  const CustomToggle = ({content, children, eventKey}) => {
+    const decoratedOnClick = useAccordionToggle(eventKey, ()=>{})
+    return (
+      <button id={content._id} 
+        className={`w-100 h-auto mobile-nav-btn`}
+        onClick={decoratedOnClick}
+        >
+        {children}
+      </button>
+    )
+  }
+  const dropdown_nav = 
+
+    <div className="categories-nav mb-2">
+      <Accordion>
+        <Card>
+          <Card.Header className="top-function-name">
+            {/* <div className={"rectangle-" + content.name}></div> */}
+            <div className={"text-banner-" + content.name}></div>
+            <CustomToggle content={content} eventKey="0">{content.name}</CustomToggle>
+            {/* <div className="function-name" > */}
+            {/* <Accordion.Toggle as={Button} variant="button" eventKey="0">
+              {content.name}
+             </Accordion.Toggle> */}
+            {/* </div> */}
+            
+          </Card.Header>
+          <Accordion.Collapse eventKey="0">
+            <Card.Body> 
+              <div className="saved-elements-list pt-2">
+                {content.contentArr.length > 0 &&
+                content.contentArr.map((element, index) =>
+                  <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${content.currentContent && element._id === content.currentContent._id ? "selected" : ""}`}>
+                    <div className='my-3'>
+                      <Editable
+                        text={element.title}
+                        childRef={inputRef}
+                        type="text"
+                        index={index}
+                        className="pointer"
+                        handleDelete={() => handleDelete(index)}
+                        onClick={() => handleUpdateState(element._id, content.contentArr)}
+                      >
+                        <input
+                          id={element._id}
+                          ref={inputRef}
+                          type="text"
+                          name="title"
+                          value={inputState.title || element.title}
+                          onChange={e => {
+                            setInputState({ title: e.target.value })
+                          }}
+                          onKeyDown={(evt) => { if (evt.key === "Enter") handleOnKeyDown(index) }}
+                        />
+                      </Editable>
+                    </div>
+                  </div>
+                )}
+                <div >
+              {addFormState.open &&
+                <input type="text" name="title" placeholder={`Enter a title`}
                   onChange={e => {
-                    setInputState({title: e.target.value})
+                    setNewListState({ title: e.target.value })
                   }}
-                  onKeyDown={(evt)=> {if(evt.key==="Enter") handleOnKeyDown(index)}}
-                />
-              </Editable>
+                  onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }} />}
+              <div className="create-icon">
+                <button className="btn btn-link text-dark" onClick={() => toggleAddFormHandler()}>
+                  <img src="/assets/add-icon.svg" alt="add" />Create</button>
+              </div>
             </div>
-            {/* <hr/> */}
-          </div> 
-          ))}
-          <div className="mt-2">
-            {addFormState.open && 
-              <input type="text" name="title" placeholder={`Enter a title`}
-                onChange={e => {
-                  setNewListState({ title: e.target.value })
-                }} 
-                onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }}/> }
-            <div className="create-icon">
-              <button className="btn btn-link text-dark" onClick={()=> toggleAddFormHandler()}>
+              </div>
+            </Card.Body>
+          </Accordion.Collapse>
+        </Card>
+      </Accordion>
+     </div>
+    
+  const normal_nav = 
+    <div className="categories-nav">
+      <div className="top-function-name">
+        <div className={"rectangle-" + content.name}></div>
+        <p id={content._id} className="function-name">{content.name}</p>
+        <div className={"text-banner-" + content.name}></div>
+      </div>
+      <div className="saved-elements-list pt-2">
+        {content.contentArr.length > 0 &&
+          content.contentArr.map((element, index) =>
+            <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${content.currentContent && element._id === content.currentContent._id ? "selected" : ""}`}>
+              <div className='my-3'>
+                <Editable
+                  text={element.title}
+                  childRef={inputRef}
+                  type="text"
+                  index={index}
+                  className="pointer"
+                  handleDelete={() => handleDelete(index)}
+                  onClick={() => handleUpdateState(element._id, content.contentArr)}
+                >
+                  <input
+                    id={element._id}
+                    ref={inputRef}
+                    type="text"
+                    name="title"
+                    value={inputState.title || element.title}
+                    onChange={e => {
+                      setInputState({ title: e.target.value })
+                    }}
+                    onKeyDown={(evt) => { if (evt.key === "Enter") handleOnKeyDown(index) }}
+                  />
+                </Editable>
+              </div>
+              {/* <hr/> */}
+            </div>
+          )}
+        <div className="mt-2">
+          {addFormState.open &&
+            <input type="text" name="title" placeholder={`Enter a title`}
+              onChange={e => {
+                setNewListState({ title: e.target.value })
+              }}
+              onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }} />}
+          <div className="create-icon">
+            <button className="btn btn-link text-dark" onClick={() => toggleAddFormHandler()}>
               <img src="/assets/add-icon.svg" alt="add" />Create</button>
-            </div>
           </div>
         </div>
       </div>
+    </div>
+  
+  debugger
+  return (
+    <div className="nav-container">
+      {dropdown_nav}
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">

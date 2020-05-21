@@ -1,15 +1,16 @@
 import React from 'react'
 
-const IndexContainer = (Component) =>  ({content}) => {
-  
+const IndexContainer = (Component) =>  ({width}) => {
+  debugger
   return (
 
     <div className='d-flex flex-row div-shadow index-container'>
       
-      <div className='index-img'>
+      {width>800 &&<div className='index-img'>
         <img src="/assets/travel.jpg" alt="" />
-      </div>
-      <Component content={content}></Component>
+      </div>}
+      
+      <Component ></Component>
     </div>
   )
 }
