@@ -1,4 +1,4 @@
-v/* eslint-disable jsx-a11y/alt-text*/
+/* eslint-disable jsx-a11y/alt-text*/
 import React, { useState, useEffect } from 'react';
 import { Link, Switch, Route, useLocation } from 'react-router-dom';
 import Nav from '../shared/Nav';
@@ -22,7 +22,7 @@ const MobileView = () => {
 
   }, [userState.user.preference.activeProject])
 
-  // debugger
+  // //debugger
   const handleFeatureSwitch = (featureName) => {
     switch (featureName) {
       case "notes": {
@@ -95,7 +95,7 @@ const MobileView = () => {
     }
   }
 
-  // debugger
+  // //debugger
   return (
     <div className="app">
       <Switch>
@@ -109,11 +109,11 @@ const MobileView = () => {
           <NotFound />
         </Route>
       </Switch>
-      <div className="footer-nav">
-        <Link to="/user/feature/notes" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /></Link>
-        <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>
-        <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /></Link>
-        <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /></Link>
+      <div className={`mobile-footer-nav ${userState && userState.user ? userState.user.preference.theme + "-secondary" : "classic-secondary"}`}>
+        <Link to="/user/feature/notes" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon icon-medium ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /></Link>
+        <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon icon-medium ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>
+        <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon icon-medium ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /></Link>
+        <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon icon-medium ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /></Link>
       </div>
     </div>
   )

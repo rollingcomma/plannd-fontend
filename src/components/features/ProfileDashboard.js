@@ -1,13 +1,13 @@
 import React, { useState } from 'react'
-import {useUserState} from '../../context/customerHook'
+import {useUserState, useWindowDimensions} from '../../context/customerHook'
 import { updateUser } from '../../services/apiAction'
 
 const ProfileDashboard = () => {
   
   const [userState, dispatchUser] = useUserState();
   const [countdownFormState, setCountdownFormState] = useState({open:false})
-  
-  debugger
+  const { width } = useWindowDimensions();
+  // //debugger
   const handleChangeChk = (evt) => {
     const name = evt.target.name;
     const value = evt.target.checked;
@@ -49,8 +49,8 @@ const ProfileDashboard = () => {
   }
 
   return (
-    <div className="d-flex flex-row profile-container main-content-container">
-      <div className="div-shadow w-25 profile-nav">
+    <div className="profile-container">
+      <div className="div-shadow profile-nav">
         <div className="top-function-name">
           <div className="rectangle-Links"></div>
           <p className="function-name">Dashboard</p>
@@ -62,7 +62,7 @@ const ProfileDashboard = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow ml-2 w-50">
+      <div className="div-shadow profile-content">
         <div className="d-flex flex-column overflow-auto m-4 checklist-switch">
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 

@@ -64,7 +64,7 @@ const SelectedImage = ({
     cont.top = top;
   }
 
-  debugger
+  //debugger
   const handleOnClick = e => {
     setIsSelected(!isSelected);
     handleSelected(!isSelected, e.target.getAttribute('id'))

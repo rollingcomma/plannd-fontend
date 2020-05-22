@@ -1,11 +1,8 @@
 import React from 'react';
-import useUserState from '../../context/customerHook'
-import { Link } from 'react-router-dom';
+import { useUserState, useWindowDimensions }from '../../context/customerHook'
+
 const Footer = () => {
-  // constructor() {
-  //   // debugger
-  //   super();
-  // }
+  const { width } = useWindowDimensions();
   const handleFeatureSwitch = () => {
 
   }
@@ -25,14 +22,19 @@ const Footer = () => {
         <div id="footer-learnmore">
           <p>Learn More</p>
           <hr className="footer-learnmore-line"></hr>
-          <p className="footer-learnmore-content">About Us</p>
-          <p className="footer-learnmore-content">Q&A</p>
+          <div className="d-flex flex-column">
+            <a href="/about" className="text-dark footer-learnmore-content">About Us</a>
+            <a href="/qanda" className="text-dark footer-learnmore-content">Q&A</a>
+          </div>
         </div>
       </div>
-      <div id="footer-middle">
-        <img alt=""  src="/assets/logo-horizontal-bw.png" id="footer-middle-logo"/>
-        <p id="copyright-text">Copyright &copy; 2020 plannd. All rights reserved.</p>
-      </div>
+      { width > 600 &&
+        <div id="footer-middle">
+          <img alt="" src="/assets/logo-horizontal-bw.png" id="footer-middle-logo" />
+          <p id="copyright-text">Copyright &copy; 2020 plannd. All rights reserved.</p>
+        </div>
+      }
+      
       <div id="footer-social-media" className="footer-media-container">
           <p id="footer-social-media-text">Follow us on all our social medias!</p>
           <div className="social-media-inner">

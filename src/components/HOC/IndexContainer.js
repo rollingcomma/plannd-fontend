@@ -1,10 +1,10 @@
 import React from 'react'
 
 const IndexContainer = (Component) =>  ({width}) => {
-  debugger
+  //debugger
   return (
 
-    <div className='d-flex flex-row div-shadow index-container'>
+    <div className={`d-flex flex-row index-container ${width>600?"div-shadow":""}`}>
       
       {width>800 &&<div className='index-img'>
         <img src="/assets/travel.jpg" alt="" />

@@ -5,7 +5,7 @@ import {addLink, deleteLink} from '../../services/apiAction'
 import useUserState from '../../context/customerHook'
 
 const Links = ({content}) => {
-  debugger
+  // //debugger
   //props.content.links.map
   const [categoryState, setCategoryState] = useState(content)
   const [newLinkState, setNewLinkState] = useState({ link: "" })
@@ -24,7 +24,7 @@ const Links = ({content}) => {
   }
 
   const handleDelete = (index) => {
-    debugger
+    //debugger
     deleteLink(
       userState.user.preference.activeProject,
       categoryState._id,

@@ -8,7 +8,7 @@ import Album from '../features/Album';
 import Editable from '../shared/Editable';
 import NotFound from '../features/NotFound';
 import PrivateRoute from '../../services/PrivateRoute';
-import { useUserState } from '../../context/customerHook';
+import { useUserState, useWindowDimensions } from '../../context/customerHook';
 import { updateAlbum, updateCategory, updateChecklist, updateNotebook, 
         deleteNotebook, deleteCategory, deleteChecklist, deleteAlbum,
         addNotebook, addCategory, addChecklist, addAlbum, addPin, deletePin } from '../../services/apiAction'
@@ -19,6 +19,7 @@ const Nav = ({feature}) => {
   const currentProject = userState.projects.filter(project => project._id === userState.user.preference.activeProject)
   const pins = currentProject.length > 0? currentProject[0].pins : null;
   const inputRef = useRef();
+  const { width } = useWindowDimensions()
 
   const [content, setContent] = useState(
     { ...feature,
@@ -97,7 +98,7 @@ const Nav = ({feature}) => {
   }
 
   const handleDelete = (index) => {
-    // debugger
+    // //debugger
     const apiCall = filterFeature(content.contentArr[index]._id, null, true)
     if(apiCall) {
       apiCall
@@ -172,20 +173,12 @@ const Nav = ({feature}) => {
     )
   }
   const dropdown_nav = 
-
     <div className="categories-nav mb-2">
       <Accordion>
         <Card>
           <Card.Header className="top-function-name">
-            {/* <div className={"rectangle-" + content.name}></div> */}
             <div className={"text-banner-" + content.name}></div>
             <CustomToggle content={content} eventKey="0">{content.name}</CustomToggle>
-            {/* <div className="function-name" > */}
-            {/* <Accordion.Toggle as={Button} variant="button" eventKey="0">
-              {content.name}
-             </Accordion.Toggle> */}
-            {/* </div> */}
-            
           </Card.Header>
           <Accordion.Collapse eventKey="0">
             <Card.Body> 
@@ -289,10 +282,10 @@ const Nav = ({feature}) => {
       </div>
     </div>
   
-  debugger
+  //debugger
   return (
     <div className="nav-container">
-      {dropdown_nav}
+      {width > 800? normal_nav:dropdown_nav}
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">

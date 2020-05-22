@@ -1,17 +1,17 @@
 import React, {useEffect, useState} from 'react';
 import { useHistory, Link } from 'react-router-dom';
-import { logout, getProjects, updateUser } from '../../services/apiAction'
-import { useUserState } from '../../context/customerHook';
-import ProjectDropdown from '../features/ProjectDropdown'
-import $ from 'jquery'
+import { logout, getProjects, updateUser } from '../../services/apiAction';
+import { useUserState, useWindowDimensions } from '../../context/customerHook';
+import ProjectDropdown from '../features/ProjectDropdown';
+import $ from 'jquery';
+import Menu from '../mobiles/Menu';
 // import { Accordion, Card } from 'react-bootstrap'
 
 const Header = () =>{
   const history = useHistory();
   const [userState, dispatchUser] = useUserState();
   const [projectPanelState, setProjectPanelState] = useState({open:false});
-  
-  // const activeProject = projectsState.filter(project => (project._id == activeProjectState))
+  const { width } = useWindowDimensions();
   
   const [activeProjectState, setActiveProjectState] = useState(
     {
@@ -60,7 +60,7 @@ const Header = () =>{
   }
 
   useEffect(() => {
-    // debugger
+    // //debugger
     if (!userState.projects) {
       getProjects(userState.user._id)
       .then(res => {
@@ -99,6 +99,8 @@ const Header = () =>{
     setProjectPanelState({ open: !projectPanelState.open });
   }
 
+  
+
   return (
     <div>
       <div className="top-banner">
@@ -106,7 +108,7 @@ const Header = () =>{
           <div className="d-flex align-items-center w-25 ">
             <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
           </div>
-          <div className="d-flex justify-content-between w-75">
+          {width > 600 ?<div className="d-flex justify-content-between w-75">
             <div className="d-flex flex-row justify-content-start align-items-center w-75">
               <div className="current-trip">
                 <span className="align-middle" id="bali-text">{activeProjectState && activeProjectState.projectTitle}</span>
@@ -136,6 +138,8 @@ const Header = () =>{
               </div>
             </div>
           </div>
+          :
+          <Menu handleLogout={handleLogout} toggleProjectPanel={toggleProjectPanel}/>}
         </div>
       </div>
      {projectPanelState.open  && <div className={`project-nav ${userState && userState.user.preference.theme}-primary`}>

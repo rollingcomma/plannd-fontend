@@ -13,7 +13,7 @@ const Profile = () => {
   let location = useLocation()
   const pathname = location.pathname.substring(location.pathname.lastIndexOf('/') + 1)
   return (
-    <div className={"app justify-content " + userState.user.preference.theme + "-primary"}>
+    <div className="app">
       <div className="side-nav">
         <Link to="/user/profile/picture"><img alt="" className={`icon-small note-icon ${pathname === "profile"||pathname==="picture"?"filter-notes":""}`} src="/assets/user-icon.svg" /></Link>
         <Link to="/user/profile/theme" ><img alt="" className={`icon-medium todo-icon ${pathname === "theme" ? "filter-todos" : ""}`} src="/assets/ic_invert_colors.svg" /></Link>

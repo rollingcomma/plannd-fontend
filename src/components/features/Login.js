@@ -43,7 +43,7 @@ const Login = (props) => {
     window.location = ("/api/index/google");
   }
 
-  // debugger
+  // //debugger
   return (
     <div className="d-flex flex-column justify-content-center align-items-center side-container">
       <img src="/assets/logo-text.png" className="logo-text mt-4 mb-2" alt="" />

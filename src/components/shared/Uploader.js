@@ -41,7 +41,7 @@ const Uploader = (
       if (err) alert(err);
       console.log(AWS.config.credentials);
     });
-    debugger
+    //debugger
     const bucketName = 'craiglist2'; // Enter your bucket name
     const bucket = new AWS.S3({
       params: {

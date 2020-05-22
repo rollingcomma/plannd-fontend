@@ -41,9 +41,6 @@
     margin: 2.3rem 0;
 }
 
-.main-content-container {
-  width: 65%;
-}
 
 .filter-notes {
   filter: invert(35%) sepia(100%) saturate(1242%) hue-rotate(320deg) brightness(97%) contrast(94%);
@@ -101,10 +98,16 @@ p {
 }
 
 .profile-container {
+  display:flex;
+  flex-direction: row;
   min-height: 40vh;
   height:fit-content;
 }
 
+.top-banner-logo {
+  display:flex;
+  width:75%;
+}
 .index-img {
   height: 65vh;
   width: 35%;
@@ -228,7 +231,20 @@ p {
 }
 
 .dashboard-banner{
-  width: 65%;
+  width: 100%;
+  height:11rem;
+ }
+
+ span {
+   font-size:0.8rem;
+ }
+ .dashboard-banner-text{
+   width:65%;
+   height: 100%;
+   display: flex;
+   flex-direction: column;
+   padding:1rem;
+   margin-right:1rem;
  }
 
 .pined{
@@ -245,22 +261,30 @@ p {
 }
 
 .dashboard-container {
- 
-}
-
-.dashboard-banner {
-  height:13rem
+  display:flex;
+  flex-direction: column ;
+  width: 65%;
 }
 
 .countdown-container {
   width:35%;
 }
+.countdown-content {
+  margin:0.9rem;
+  margin-bottom: 0.3rem;
+}
 
 .dashboard-features-container {
+  width:100%;
+  display:flex;
+  flex-wrap: wrap;
+  justify-content: center;
   height:fit-content;
+  margin:1rem auto;
 }
 
 .dashboard-feature-container {
+  margin:1rem;
   width: 45%;
   height:auto;
   max-height:25rem;
@@ -326,11 +350,16 @@ p {
 
 .profile-nav {
   position: relative;
+  display:flex;
+  flex-direction: column;
   height: auto;
-  width: 17%;
+  width: 25%;
   margin: 0 0.6rem 0 0.6rem;
 }
-
+.profile-content {
+  width: 50%;
+  margin-left:1rem;
+}
 .profile-image-nav {
   position: relative;
   height: 25vh;
@@ -516,16 +545,6 @@ p {
     }
   }
 
-  #clockdiv{
-	font-family: sans-serif;
-	color: #fff;
-	display: inline-block;
-	font-weight: 100;
-	text-align: center;
-  font-size: 1.2rem;
-  font-weight: bold;
-}
-
 .feature-container{
   width:50vw;
   background-color: white;
@@ -533,14 +552,25 @@ p {
   border-radius: 0.3rem;
 }
 
-#clockdiv > div{
+  #clockdiv {
+	font-family: sans-serif;
+	color: #fff;
+	display: inline-block;
+	font-weight: 100;
+	text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top:0.5rem;
+}
+
+#clockdiv > div {
 	padding: 0.3rem;
 	border-radius: 3px;
   background: #06D6a0;
 	display: inline-block;
 }
 
-#clockdiv div > span{
+#clockdiv div > span {
 	padding: 0.6rem;
 	border-radius: 3px;
   background: rgb(3, 138, 102);
@@ -550,5 +580,8 @@ p {
 .smalltext{
 	padding-top: 5px;
   font-size: 1rem;
+}
+
+.burger-btn {
   
 }

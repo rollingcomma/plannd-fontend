@@ -17,7 +17,7 @@ const Register = () => {
   const [messageState, setMessageState] = useState({message:""})
   
   const onSubmit = async (formData) => {
-    debugger
+    //debugger
 
     postUser(formData)
       .then(res => {
@@ -30,7 +30,7 @@ const Register = () => {
             isLoggedIn: true,
             user: user.user
           })
-          debugger
+          //debugger
           history.push('/user/project')
         } 
       }
@@ -40,7 +40,7 @@ const Register = () => {
         console.log(err.message)
       })
   }
-  debugger
+  //debugger
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center side-container">

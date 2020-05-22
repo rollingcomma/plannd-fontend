@@ -24,7 +24,7 @@ const Editable = ({
     }
   }, [isEditing, childRef]);
 
-  debugger
+  // //debugger
   const handleKeyDown = (event, type) => {
     
     const { key } = event;

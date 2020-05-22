@@ -50,10 +50,10 @@ const ProfileSetting = () => {
       .catch(err => console.log(err.message))
   }
 
-  debugger
+  //debugger
   return (
-    <div className="d-flex flex-row profile-container main-content-container">
-      <div className="div-shadow w-25 profile-nav">
+    <div className="profile-container">
+      <div className="div-shadow profile-nav">
         <div className="top-function-name">
           <div className="rectangle-Gallery"></div>
           <p className="function-name">User Information</p>
@@ -65,7 +65,7 @@ const ProfileSetting = () => {
           </p>
         </div>
       </div>
-      <div className="div-shadow w-50">
+      <div className="div-shadow profile-content">
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">

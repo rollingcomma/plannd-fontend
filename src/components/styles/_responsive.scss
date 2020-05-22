@@ -6,10 +6,28 @@ body{
   font-size: .7rem;
 }
 
-.footer-nav{
-  width: 100vw;
-  height: 5rem;
-  margin: 0 0;
+.mobile-footer-nav{
+  position: absolute;
+  height: 4rem;
+  right:0;
+  left:0;
+  padding:0.5rem;
+  max-width: 100%;
+  bottom:0;
+  display: flex;
+  justify-content: space-between; 
+}
+
+@media (max-width:1500px) {
+  .dashboard-container {
+    width: 75%;
+  }
+}
+
+@media (max-width:1350px) {
+  .dashboard-container {
+    width: 85%;
+  }
 }
 
 @media (max-width: 1200px) {
@@ -31,15 +49,29 @@ body{
     padding: 0 2%;
   }
   .index-container {
-    width:70vw;
+    width:75vw;
+  }
+  .dashboard-container {
+    width: 100%;
+  }
+  .dashboard-banner-text {
+    width:55%;
+  }
+  .countdown-container {
+    width: 45%;
+  }
+  .profile-nav {
+    width: 35%;
+  }
+  .profile-content {
+    width: 55%;
   }
 }
 
-@media (max-width: 1000px) {
+@media (max-width: 1024px) {
   body { font-size: 12px; }
   .app {
     width:95%;
-    margin: auto auto;
   }
   .current-trip {
     margin-left:0;
@@ -47,13 +79,58 @@ body{
   .index-container {
     width:85vw;
   }
+  .top-banner-logo {
+    width:70%;
+  }
+  .dashboard-container {
+    width:85vw;
+  }
+  .dashboard-banner-text{
+    width:50%;
+  }
+  .dashboard-feature-container {
+    width: 44%;
+  }
+  .countdown-container {
+    width:50%;
+  }
+  .profile-container {
+    width: 90%;
+  }
+  .profile-nav {
+    width: 35%;
+  }
+  .profile-content {
+    width: 65%;
+  }
+  #clockdiv {
+   font-size: 1.1rem;
+  }
+
+  #clockdiv > div {
+    padding: 0.2rem;
+    border-radius: 2px;
+  }
+
+  #clockdiv div > span {
+    padding: 0.5rem;
+    border-radius: 2px;
+  }
+  .small-text {
+    font-size: 1.1rem;
+  }
+  .countdown-content {
+    margin:0.8rem;
+  }
+  .dashboard-banner {
+    height:11rem;
+  }
 }
 
 @media (max-width: 800px) {
   body { font-size: 10px; }
   .app {
     width:100%;
-    margin: auto auto;
   }
   .social-media-inner {
     flex-wrap:wrap;
@@ -63,6 +140,10 @@ body{
     margin-top: 0.5%; 
     margin-right:2rem;
     margin-left:2rem;
+  }
+  .top-banner-logo {
+    margin-left:2rem;
+    width:60%;
   }
   .vertical-line{
     margin-left:1rem;
@@ -93,14 +174,186 @@ body{
   .side-container {
     width: 100%;
   }
-}
-
-@media (max-width: 600px) {
+  .dashboard-feature-container {
+    width: 100%;
+  }
+  .profile-container {
+    width: 95%;
+  }
+  .dashboard-container {
+    width:90vw;
+  }
+  #clockdiv {
+   font-size: 1rem;
+  }
+  #clockdiv div > span {
+    padding: 0.4rem;
+  }
+  .smalltext {
+    font-size: 0.9rem;
+  }
+  .countdown-content {
+    margin:0.7rem;
+  }
+  .dashboard-banner {
+    height:10rem;
+  }
+  .project-nav {
+    width:80vw;
+    margin:0 auto;
+    background-color:transparent;
+  }
+  
   
 }
 
-/* Type will scale with document */
-h1 {
+@media (max-width: 600px) {
+  .index-container {
+    width:100vw;
+    margin:0 0;
+  }
+  .body-container {
+    min-height:100vh;
+  }
+  .app {
+    position: relative;
+    min-height: calc(100vh - 4rem);
+    width: 100vw;
+    margin:0 0;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 1rem;
+  }
+  .top-banner-logo {
+    width:60%;
+  }
+  .side-container {
+    background-color: transparent;
+  }
+  .profile-container {
+    width: 100%;
+    flex-direction: column;
+  }
+  .profile-nav {
+    width: 100%;
+    margin: 0;
+    margin-bottom: 1rem;
+    height:fit-content;
+  }
+  .profile-content {
+    width: 100%;
+    margin: 0;
+    margin-bottom:3rem;
+  }
+  
+  .function-name{
+    font-size: 1.1rem;
+  }
+  .dashboard-container {
+    width:100vw;
+    margin-bottom:3rem;
+  }
+  .dashboard-feature-title {
+    font-size: 0.9rem;
+  }
+  #space-around-content {
+    margin:1.2rem 0.5rem;
+  }
+  #clockdiv {
+   font-size: 0.8rem;
+  }
+  #clockdiv div > span {
+    padding: 0.3rem;
+  }
+  .smalltext {
+    font-size: 0.8rem;
+  }
+  .dashboard-banner {
+    height:fit-content;
+    flex-direction: column;
+  }
+  .dashboard-banner-text {
+    width: 90vw;
+    margin:1rem auto;
+  }
+  .countdown-container {
+    width: 90vw;
+    margin:0 auto;
+  }
+  .project-nav {
+    width:90vw;
+    margin: 0 auto;
+  }
+  .nav-container {
+    width:100%;
+  }
+  .feature-container {
+    width: 100%;
+  }
+  .categories-nav {
+    width: 100%;
+  }
+  .social-media-inner {
+    flex-wrap:nowrap;
+    margin-right:1.5rem;
+    width:70%;
+  }
+  #snapchat-icon {
+    height: 1.5rem;
+    margin: 0.4rem;
+  }
+
+  #instagram-icon {
+      height: 1.5rem;
+      margin: 0.2rem;
+  }
+
+  #twitter-icon {
+      height: 2rem;
+      margin: 0.2rem;
+  }
+
+  #facebook-icon {
+      height: 1.4rem;
+      margin: 0.2rem;
+  }
+}
+
+@media (max-width: 400px) {
+  .app{
+    padding:1rem;
+  }
+  .index-container {
+    height:80vw;
+  }
+  .top-banner-logo {
+    width:60%;
+    margin:auto auto;
+  }
+  .side-container {
+
+  }
+  .top-banner-logo {
+    width:60%;
+  }
+  .function-name{
+    font-size: 1rem;
+  }
+  .dashboard-container {
+    width:100vw;
+  }
+  .dashboard-feature-title {
+    font-size: 0.8rem;
+  }
+  #space-around-content {
+    margin:1.2rem 0.5rem;
+  }
+  .small-text {
+    font-size: 0.7rem;
+  }
+}
+h1
+{
   font-size: 3rem;
 }
 h2 {

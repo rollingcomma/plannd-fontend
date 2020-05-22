@@ -7,7 +7,7 @@ import useUserState from '../../context/customerHook';
 import { deletePicture } from '../../services/apiAction';
 
 const Album = ({content}) => {
-  // debugger
+  // //debugger
   const [selected, setSelected] = useState({images:[]})
   const [images, setImages] = useState(content? content.images:[]);
   const [uploadState, setUploadState] = useState({open: false})
@@ -43,7 +43,7 @@ const Album = ({content}) => {
       setSelected({ images: selected.images })
     }
   }
-  debugger
+  // //debugger
   const handleUpdateState = (newChanges) => {
     const newImages = images.concat(newChanges)
     setImages(newImages)
