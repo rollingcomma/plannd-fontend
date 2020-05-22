@@ -65,16 +65,16 @@ const Dashboard = () => {
     loadPinedContent()
   }, [userState.user.preference.activeProject, userState.projects])
 
-  // useEffect(() => {
-  //   let timer
-  //   if (userState.user.trip_plan ) 
-  //     timer = setTimeout(() => {
-  //       setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
-  //     }, 1000)
-  //   return () => {
-  //     clearTimeout(timer)
-  //   }
-  // })
+  useEffect(() => {
+    let timer
+    if (userState.user.trip_plan ) 
+      timer = setTimeout(() => {
+        setTimeLeft(calculateTimeLeft(userState.user.trip_plan.time));
+      }, 1000)
+    return () => {
+      clearTimeout(timer)
+    }
+  })
 
   return (
     <div className="dashboard-container">
