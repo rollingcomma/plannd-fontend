@@ -128,7 +128,7 @@ body{
 }
 
 @media (max-width: 800px) {
-  body { font-size: 10px; }
+  
   .app {
     width:100%;
   }
@@ -208,6 +208,7 @@ body{
 }
 
 @media (max-width: 600px) {
+  body { font-size: 14px; }
   .index-container {
     width:100vw;
     margin:0 0;

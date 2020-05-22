@@ -104,11 +104,12 @@ const Header = () =>{
   return (
     <div>
       <div className="top-banner">
+        {width > 600 ?
         <div className="d-flex flex-row w-100">
           <div className="d-flex align-items-center w-25 ">
             <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
           </div>
-          {width > 600 ?<div className="d-flex justify-content-between w-75">
+          <div className="d-flex justify-content-between w-75">
             <div className="d-flex flex-row justify-content-start align-items-center w-75">
               <div className="current-trip">
                 <span className="align-middle" id="bali-text">{activeProjectState && activeProjectState.projectTitle}</span>
@@ -138,10 +139,15 @@ const Header = () =>{
               </div>
             </div>
           </div>
+          </div>
           :
-          <Menu handleLogout={handleLogout} toggleProjectPanel={toggleProjectPanel}/>}
+          <div className="d-flex flex-row justify-content-between w-100">
+            <Menu handleLogout={handleLogout} toggleProjectPanel={toggleProjectPanel}/>
+            <div className="d-flex align-items-center w-25 mr-5">
+              <img alt="" src="/assets/logo-horizontal.png" className="header_logo" />
+            </div>
+          </div>}
         </div>
-      </div>
      {projectPanelState.open  && <div className={`project-nav ${userState && userState.user.preference.theme}-primary`}>
         {userState.projects && 
           <ProjectDropdown 
