@@ -8,7 +8,6 @@ import PrivateRoute from '../../services/PrivateRoute'
 import NotFound from '../features/NotFound'
 
 const ProfileContainer = () => {
-  // //debugger
   return (
     <div className="app justify-content">
       <div className="side-nav">

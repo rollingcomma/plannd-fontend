@@ -5,7 +5,6 @@ import { useUserState, useWindowDimensions } from '../../context/customerHook';
 import ProjectDropdown from '../features/ProjectDropdown';
 import $ from 'jquery';
 import Menu from '../mobiles/Menu';
-// import { Accordion, Card } from 'react-bootstrap'
 
 const Header = () =>{
   const history = useHistory();
@@ -60,7 +59,7 @@ const Header = () =>{
   }
 
   useEffect(() => {
-    // //debugger
+    
     if (!userState.projects) {
       getProjects(userState.user._id)
       .then(res => {

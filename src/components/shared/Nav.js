@@ -1,6 +1,6 @@
 import React, {useEffect, useCallback, useState, useRef} from 'react';
 import { Switch, Route } from 'react-router-dom';
-import { Accordion, Card, Button, useAccordionToggle } from 'react-bootstrap'
+import { Accordion, Card, useAccordionToggle } from 'react-bootstrap'
 import Checklist from '../features/Checklist';
 import Editor from '../features/Editor';
 import Links from '../features/Links';
@@ -81,7 +81,6 @@ const Nav = ({feature}) => {
     }
   }
 
-  debugger
   const handleOnKeyDown = (index) => {
     const formData = { title: inputState.title }
     const apiCall = filterFeature(content.contentArr[index]._id, formData, false)
@@ -98,7 +97,7 @@ const Nav = ({feature}) => {
   }
 
   const handleDelete = (index) => {
-    // //debugger
+    
     const apiCall = filterFeature(content.contentArr[index]._id, null, true)
     if(apiCall) {
       apiCall
@@ -282,7 +281,7 @@ const Nav = ({feature}) => {
       </div>
     </div>
   
-  //debugger
+  
   return (
     <div className="nav-container">
       {width > 800? normal_nav:dropdown_nav}

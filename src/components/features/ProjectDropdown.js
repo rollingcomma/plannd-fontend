@@ -3,7 +3,7 @@ import { Accordion, Card, Button } from 'react-bootstrap'
 import ProjectForm from '../shared/ProjectForm'
 
 const ProjectDropdown = ({ projects, activeProject, handleProjectChange, togglePanel, handleAfterSubmit}) => {
-  //debugger
+  
   return(
     <Accordion>
       <Card>

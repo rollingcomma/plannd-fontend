@@ -22,7 +22,7 @@ const DesktopView = () => {
 
   }, [userState.user.preference.activeProject])
 
-  // //debugger
+  
   const handleFeatureSwitch = (featureName) => {
     switch (featureName) {
       case "notes": {
@@ -95,7 +95,7 @@ const DesktopView = () => {
     }
   }
 
-  // //debugger
+  
   return (
     <div className="app">
       <div className="side-nav">

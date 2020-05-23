@@ -42,7 +42,7 @@ const Checklist = ({content}) => {
 
   const handleDelete = (index) => {
     console.log('delete')
-    // //debugger
+    
     deleteItem(
       userState.user.preference.activeProject,
       checklistState._id,

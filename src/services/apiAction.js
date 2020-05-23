@@ -2,7 +2,7 @@ import axios from 'axios'
 
 //user related API actions
 export const getUser = (formData) => {
-  // //debugger
+  
   return axios({
     method:'POST',
     url: '/api/index/login/',
@@ -10,7 +10,7 @@ export const getUser = (formData) => {
   })}
   
 export const checkLoggedIn = () => {
-  //debugger
+  
   return axios({
     url: '/api/users/login/success/',
     method: 'GET',
@@ -24,7 +24,7 @@ export const checkLoggedIn = () => {
 }
 
 export const logout = () => {
-  //debugger
+  
   return axios({
     url: '/api/users/logout',
     method: 'GET',
@@ -38,7 +38,7 @@ export const logout = () => {
 }
 
 export const postUser = (formData) => {
-  //debugger
+  
   return axios({
     method:'POST',
     url:'/api/index/register/',
@@ -597,7 +597,7 @@ export const updateDashboard = (userId, newDashboard) => {
 }
 
 export const addProfilePictures = (userId, images) => {
-  //debugger
+  
   return axios({
     method: 'POST',
     url: '/api/users/user/pictures',

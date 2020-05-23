@@ -41,7 +41,7 @@ const Uploader = (
       if (err) alert(err);
       console.log(AWS.config.credentials);
     });
-    //debugger
+    
     const bucketName = 'craiglist2'; // Enter your bucket name
     const bucket = new AWS.S3({
       params: {
@@ -141,7 +141,7 @@ const Uploader = (
     <div className="mt-2 p-2">
       <form className="d-flex flex-row" onSubmit={handleSubmit(uploadHandle)}>
         <div className="custom-file">
-          <input type="file" className="custom-file-input" name="images" onChange={onChange} multiple /> 
+          <input type="file" className="custom-file-input" name="images" onChange={onChange} multiple accept="image/png, image/jpeg, image/jpg"/> 
             <label className="custom-file-label" htmlFor="images">Choose file</label>
         </div>
         {message && <p>{message}</p>}

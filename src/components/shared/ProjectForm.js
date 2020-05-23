@@ -13,7 +13,7 @@ const [categoryState, setCategoryState] = useState({
 })
 
 const { handleSubmit, register, errors } = useForm();
-//debugger
+
 
 const onSubmit = async (formData) => {
   formData.category = categoryState.category
@@ -21,7 +21,7 @@ const onSubmit = async (formData) => {
   addProject(UserState.user._id, formData)
   .then(result => {
     // if(result.data.success) {
-    //debugger
+    
     let projects = UserState.projects || []
     projects.push(result.data.project)
     DispatchUser(

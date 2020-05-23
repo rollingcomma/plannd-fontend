@@ -16,7 +16,7 @@ import { useUserState, useWindowDimensions } from '../context/customerHook';
 const Routes = () => {
   const {width} = useWindowDimensions()
   const [userState] = useUserState();
-  // //debugger
+  
   return (
     <Switch>
       <Route path="/register">

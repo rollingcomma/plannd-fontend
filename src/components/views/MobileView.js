@@ -22,7 +22,7 @@ const MobileView = () => {
 
   }, [userState.user.preference.activeProject])
 
-  // //debugger
+  
   const handleFeatureSwitch = (featureName) => {
     switch (featureName) {
       case "notes": {
@@ -95,7 +95,7 @@ const MobileView = () => {
     }
   }
 
-  // //debugger
+  
   return (
     <div className="app">
       <Switch>

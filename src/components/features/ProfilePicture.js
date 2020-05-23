@@ -33,7 +33,7 @@ const ProfilePicture = () => {
     }
   }
 
-  //debugger
+  
   const handleDelete = () => {
     deleteProfilePictures(userState.user._id, {images:selected.images})
     .then(res => {

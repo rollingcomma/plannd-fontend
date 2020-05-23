@@ -50,7 +50,7 @@ const ProfileSetting = () => {
       .catch(err => console.log(err.message))
   }
 
-  //debugger
+  
   return (
     <div className="profile-container">
       <div className="div-shadow profile-nav">

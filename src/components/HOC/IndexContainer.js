@@ -1,7 +1,7 @@
 import React from 'react'
 
 const IndexContainer = (Component) =>  ({width}) => {
-  //debugger
+  
   return (
 
     <div className={`d-flex flex-row index-container ${width>600?"div-shadow":""}`}>
