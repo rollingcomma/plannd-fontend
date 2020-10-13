@@ -24,19 +24,18 @@ const Links = ({content}) => {
   }
 
   const handleDelete = (index) => {
-    
     deleteLink(
       userState.user.preference.activeProject,
       categoryState._id,
       categoryState.links[index]._id
     )
-      .then(res => {
-        if (res.data.success) {
-          categoryState.links.splice(index, 1)
-          setCategoryState({ ...categoryState })
-        }
-      })
-      .catch(err => console.log(err.message))
+    .then(res => {
+      if (res.data.success) {
+        categoryState.links.splice(index, 1)
+        setCategoryState({ ...categoryState })
+      }
+    })
+    .catch(err => console.log(err.message))
   }
 
   const handleCreateNewLink = () => {

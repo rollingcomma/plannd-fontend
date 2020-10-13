@@ -1,77 +1,67 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import ReactQuill from 'react-quill';
 import PropTypes from 'prop-types';
 import FeatureContainer from '../HOC/FeatureContainer';
 import { useUserState } from '../../context/customerHook'
 import { updateNotebook } from '../../services/apiAction'
-const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
-Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
-ReactQuill.Quill.register(Font, true);
 
 const Editor = ({content}) =>{
+  // const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
+  // Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
+  // ReactQuill.Quill.register(Font, true);
+  const editRef = useRef();
+  const initialState = 
+  {
+    content,
+    theme: 'snow'
+  }
 
-    
-    const initialState = content? {
-      documentId: content._id,
-      editorHtml: content.note,
-      theme: 'snow'
-    }
-    :
-    {
-        editorHtml: '',
-        theme: 'snow'
-    }
-
-  const [contentState, setContentState] = useState(initialState)
-
-  const [UserState] = useUserState()
-  
+  const [notebookState, setNotebookState] = useState(content)
+  // const [noteState, setNoteState] = useState({note:notebookState.note})
+  const [themeState, setThemeState] = useState({theme:"snow"})
+  const [userState] = useUserState()
   useEffect(() => {
     if(content)
-    setContentState(
-      {
-        ...contentState,
-        documentId: content._id,
-        editorHtml: content.note
-      }
+    setNotebookState(
+      {...content}
     )
-  },[content])
+  },[content, notebookState._id])
 
-  const handleChange = (value) => {
-    setContentState({
-      ...contentState,
-      editorHtml: value
+  const handleChange = (content, delta, source, editor) => {
+    setNotebookState({
+       ...notebookState,
+       note: editor.getHTML()
     })
   }
 
   const handleThemeChange = (newTheme) => {
-    if (newTheme === "core") newTheme = null;
-    setContentState({
-      ...contentState,
-      theme:newTheme
-    })
+    setThemeState({theme: newTheme})
   }
 
   const handleBlur = () => {
-    const val = contentState.editorHtml.replace(/"/g, '\\"')
-    updateNotebook(UserState.user.preference.activeProject,
+    const val = notebookState.note.replace(/"/g, '\\"')
+    updateNotebook(
+      userState.user.preference.activeProject,
       {
-        notebookId: contentState.documentId,
+        notebookId: notebookState._id,
         note: val
       })
       .then(result => {
         console.log(result.data)
+        content.note = val;
+       })
+      .catch(err=>{
+        console.log(err.message)
       })
   }
-
 
     return (
       <div>
         <ReactQuill
-          theme={contentState.theme || 'snow'}
+          theme={themeState.theme || 'snow'}
           onChange={handleChange}
           onBlur={handleBlur}
-          value={contentState.editorHtml ||''}
+          value={notebookState.note ||''}
           modules={Editor.modules}
           formats={Editor.formats}
           bounds={'.app'}

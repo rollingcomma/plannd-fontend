@@ -11,6 +11,7 @@ import { useUserState } from '../../context/customerHook';
 const DesktopView = () => {
 
   const [userState] = useUserState()
+  const [hoverState, setHoverState] = useState(false);
   const [feature, setFeature] = useState(null)
   const activeProjectId = userState.user.preference.activeProject
   let location = useLocation()
@@ -94,15 +95,27 @@ const DesktopView = () => {
         setFeature(null)
     }
   }
+  
+  const normalMenu =
+    <div className="side-nav">
+      <Link to="/user/feature/notes" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /></Link>
+      <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>
+      <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /></Link>
+      <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /></Link>
+    </div>
 
+  const hoverMenu =
+    <div className="side-nav-hover">
+      <Link to="/user/feature/notes" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /> Notes </Link>
+      <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /> Todos </Link>
+      <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /> Links </Link>
+      <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /> Gallery</Link>
+    </div>
   
   return (
     <div className="app">
-      <div className="side-nav">
-        <Link to="/user/feature/notes" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /></Link>
-        <Link to="/user/feature/todos" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /></Link>
-        <Link to="/user/feature/links" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /></Link>
-        <Link to="/user/feature/gallery" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /></Link>
+      <div onMouseEnter={() => setHoverState(true)} onMouseLeave={() => setHoverState(false)}>
+        {hoverState ? hoverMenu : normalMenu}
       </div>
       <Switch>
         <PrivateRoute path="/user/dashboard" >

@@ -42,7 +42,7 @@ const Nav = ({feature}) => {
     })
   }, [feature, feature.contentArr, pinState])
 
-  const handleUpdateState = useCallback((id, contentArr) => {
+  const handleClickSideNavList = useCallback((id, contentArr) => {
     const arr = contentArr.filter(element => element._id === id)
     if (arr.length === 1) {
       setContent({
@@ -171,6 +171,7 @@ const Nav = ({feature}) => {
       </button>
     )
   }
+  
   const dropdown_nav = 
     <div className="categories-nav mb-2">
       <Accordion>
@@ -193,7 +194,7 @@ const Nav = ({feature}) => {
                         index={index}
                         className="pointer"
                         handleDelete={() => handleDelete(index)}
-                        onClick={() => handleUpdateState(element._id, content.contentArr)}
+                        onClick={() => handleClickSideNavList(element._id, content.contentArr)}
                       >
                         <input
                           id={element._id}
@@ -248,7 +249,7 @@ const Nav = ({feature}) => {
                   index={index}
                   className="pointer"
                   handleDelete={() => handleDelete(index)}
-                  onClick={() => handleUpdateState(element._id, content.contentArr)}
+                  onClick={() => handleClickSideNavList(element._id, content.contentArr)}
                 >
                   <input
                     id={element._id}

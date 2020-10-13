@@ -113,31 +113,32 @@ const Dashboard = () => {
       )  
         }
       
-      <div className={`pins dashboard-features-container ${width > 600 ? "div-shadow":""}`}>
+      {/* <div className={`pins dashboard-features-container ${width > 600 ? "div-shadow":""}`}> */}
+      <div className="pins dashboard-features-container">
        {
           pinedContent.contentList && pinedContent.contentList.length >0 && pinedContent.contentList.map(content => {
             const key = Object.keys(content)
             if(key.length > 0){
               content[key[0]].onDashboard = true;
               switch (key[0]) {
-                case "notebook":
-                  content.notebook.name = "Notes"
-                  return <div key={content._id} className="div-shadow dashboard-feature-container">
-                    <Editor content={content.notebook} onDashboard={true} />
-                  </div>
                 case "checklist":
                   content.checklist.name = "To-Dos"
-                  return <div key={content._id} className="div-shadow dashboard-feature-container">
+                  return <div key={content._id} className=" dashboard-feature-container">
                     <Checklist content={content.checklist} onDashboard={true} />
+                  </div>
+                case "notebook":
+                  content.notebook.name = "Notes"
+                  return <div key={content._id} className=" dashboard-feature-container">
+                    <Editor content={content.notebook} onDashboard={true} />
                   </div>
                 case "category":
                   content.category.name = "Links"
-                  return <div key={content._id} className="div-shadow dashboard-feature-container">
+                  return <div key={content._id} className=" dashboard-feature-container">
                     <Links content={content.category} onDashboard={true} />
                   </div>
                 case "album":
                   content.album.name = "Gallery"
-                  return <div key={content._id} className="div-shadow dashboard-feature-container">
+                  return <div key={content._id} className=" dashboard-feature-container">
                     <Album content={content.album} onDashboard={true} />
                   </div>
               }

@@ -286,10 +286,10 @@ p {
 
 .dashboard-feature-container {
   margin:1rem;
-  width: 45%;
-  height:auto;
+  width: 100%;
+  //height:auto;
   max-height:25rem;
-  overflow: hidden;
+  overflow: scroll;
 }
 
 .nav-container {
@@ -339,8 +339,8 @@ p {
 }
 
 .profile-image-container-lg {
-  width: 8rem;
-  height: 8rem;
+  width: 12rem;
+  height: 12rem;
   border-radius:5px;
   // background: lightgrey;
 }
@@ -549,8 +549,8 @@ p {
 .feature-container{
   width:50vw;
   background-color: white;
-  box-shadow: 0px 0px 0.6rem rgb(197, 197, 197);
-  border-radius: 0.3rem;
+  // box-shadow: 0px 0px 0.6rem rgb(197, 197, 197);
+  // border-radius: 0.3rem;
 }
 
   #clockdiv {

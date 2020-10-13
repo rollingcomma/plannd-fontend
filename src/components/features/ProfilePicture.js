@@ -1,6 +1,6 @@
 import React, {useState} from 'react'
 import Uploader from '../shared/Uploader';
-import { useUserState, useWindowDimensions} from '../../context/customerHook';
+import { useUserState, } from '../../context/customerHook';
 import SelectedImage from './SelectedImage'
 import { deleteProfilePictures, updateUser } from '../../services/apiAction';
 
@@ -10,7 +10,7 @@ const ProfilePicture = () => {
   const [userState, dispatchUser] = useUserState()
   const [selected, setSelected] = useState({images:[]})
   const [errorState, setErrorState] = useState(null)
-  const { width } = useWindowDimensions();
+  
   const handleUpdateState = (pictures) => {
     let user = userState.user
       user.pictures = pictures
@@ -70,28 +70,6 @@ const ProfilePicture = () => {
 
   return (
     <div className="profile-container">
-      <div className="profile-nav">
-        <div className={`div-shadow ${width > 600? "profile-image-nav":""}`}>
-          <div className="top-function-name">
-            <div className="rectangle-Notes"></div>
-            <p className="function-name">Profile Picture</p>
-            <div className="text-banner-Notes"></div>
-          </div>
-          <div className="">
-            <p className="m-2 mt-2">Your profile picture will make it easy to see which account is currently logged in.</p>
-            <p className="mx-2">You can store multiple images to quickly change your profile picture whenever your please</p>
-          </div>
-        </div>
-        { width >600 &&
-          <div className="profile-image-nav mt-3">
-            <div className="div-shadow d-flex justify-content-center align-items-center h-100">
-              <img className="profile-image-container-lg" alt=""
-                src={userState.user && userState.user.profile_photo ? userState.user.profile_photo.src : "http://craiglist2.s3-website.ca-central-1.amazonaws.com/plannd/default-user-icon.jpg"}></img>
-            </div>
-          </div>
-        }
-      </div>
-      
       <div className="div-shadow profile-content">
         <div className="d-flex flex-row flex-wrap m-4">
           {userState.user && userState.user.pictures && userState.user.pictures.map(picture => 

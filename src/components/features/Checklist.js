@@ -143,8 +143,8 @@ const Checklist = ({content}) => {
             onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }} />}
       </div>
       <div className="mt-5 d-flex justify-content-center align-items-center">
-        <button className="btn btn-link text-dark"><img className="icon-small" src="/assets/garbage.png" alt="delete" />Trash</button>
-        <span>/</span>
+        {/* <button className="btn btn-link text-dark"><img className="icon-small" src="/assets/garbage.png" alt="delete" />Trash</button>
+        <span>/</span> */}
         <div className="create-icon">
           <button className="btn btn-link text-dark" onClick={() => toggleAddFormHandler()}><img src="/assets/add-icon.svg" alt="add" />Create</button>
         </div>
