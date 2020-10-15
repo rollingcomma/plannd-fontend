@@ -102,13 +102,19 @@ p {
   flex-direction: row;
   min-height: 40vh;
   height:fit-content;
-  width: 55%;
+  width: 40%;
+  height:65vh;
+}
+
+.profile-banner {
+  position: relative;
 }
 
 .top-banner-logo {
   display:flex;
   width:75%;
 }
+
 .index-img {
   height: 65vh;
   width: 35%;
@@ -339,8 +345,10 @@ p {
 }
 
 .profile-image-container-lg {
-  width: 12rem;
-  height: 12rem;
+  max-width: 15rem;
+  max-height: 15rem;
+  width:auto;
+  height:auto;
   border-radius:5px;
   // background: lightgrey;
 }
@@ -353,12 +361,13 @@ p {
   position: relative;
   display:flex;
   flex-direction: column;
-  height: auto;
-  width: 25%;
+  height: 65vh;
+  width: 20%;
   margin: 0 0.6rem 0 0.6rem;
 }
+
 .profile-content {
-  width: 50%;
+  width: 100%;
   margin-left:1rem;
 }
 .profile-image-nav {

@@ -24,20 +24,15 @@ const ProfileTheme = () => {
 
   return (
     <div className="profile-container">
-      <div className="div-shadow profile-nav">
-        <div className="top-function-name">
-          <div className="rectangle-To-Dos"></div>
-          <p  className="function-name">Theme</p>
-          <div className="text-banner-To-Dos"></div>
-        </div>
-        <div className="">
-          <p className="m-4">
-            This widget allows you to choose a different theme for your plannd dashboard.
-          </p>
-          <p className ="mx-4">A variety of colour palettes are provided to match your destination</p>
-        </div>
-      </div>
       <div className ="div-shadow profile-content">
+        <div className="profile-banner">
+          <div className="top-function-name">
+            <div className="rectangle-To-Dos"></div>
+            <p className="function-name">Theme</p>
+            <div className="text-banner-To-Dos"></div>
+          </div>
+
+        </div>
         <div className="m-3 mt-5">
           <div id="classic" 
             className={`div-shadow p-3 m-3 d-flex flex-row w-75 pointer ${userState && userState.user.preference && userState.user.preference.theme === "classic"? "selected":""}`}

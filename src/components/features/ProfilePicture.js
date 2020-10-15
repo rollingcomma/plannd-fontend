@@ -71,6 +71,15 @@ const ProfilePicture = () => {
   return (
     <div className="profile-container">
       <div className="div-shadow profile-content">
+        <div className="profile-banner">
+          <div className="top-function-name">
+            <div className="rectangle-Gallery"></div>
+            <p className="function-name">Profile Pictures</p>
+            <div className="text-banner-Notes"></div>
+          </div>
+        </div>
+        
+      
         <div className="d-flex flex-row flex-wrap m-4">
           {userState.user && userState.user.pictures && userState.user.pictures.map(picture => 
           <SelectedImage

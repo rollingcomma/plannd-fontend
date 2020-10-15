@@ -50,19 +50,14 @@ const ProfileDashboard = () => {
 
   return (
     <div className="profile-container">
-      <div className="div-shadow profile-nav">
-        <div className="top-function-name">
-          <div className="rectangle-Links"></div>
-          <p className="function-name">Dashboard</p>
-          <div className="text-banner-Links"></div>
-        </div>
-        <div className="">
-          <p className="m-4">
-            Change the widgets on your dashboard here!
-          </p>
-        </div>
-      </div>
       <div className="div-shadow profile-content">
+        <div className="profile-banner">
+          <div className="top-function-name">
+            <div className="rectangle-Links"></div>
+            <p className="function-name">Dashboard</p>
+            <div className="text-banner-Links"></div>
+          </div>
+        </div>
         <div className="d-flex flex-column overflow-auto m-4 checklist-switch">
           <div className="form-check my-4">
             <input className=" form-check-input switch" type="checkbox" 

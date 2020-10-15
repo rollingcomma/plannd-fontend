@@ -53,19 +53,14 @@ const ProfileSetting = () => {
   
   return (
     <div className="profile-container">
-      <div className="div-shadow profile-nav">
-        <div className="top-function-name">
-          <div className="rectangle-Gallery"></div>
-          <p className="function-name">User Information</p>
-          <div className="text-banner-Gallery"></div>
-        </div>
-        <div className="">
-          <p className="m-4">
-            Customize your user info here!
-          </p>
-        </div>
-      </div>
       <div className="div-shadow profile-content">
+        <div className="profile-banner">
+          <div className="top-function-name">
+            <div className="rectangle-Gallery"></div>
+            <p className="function-name">User Information</p>
+            <div className="text-banner-Gallery"></div>
+          </div>
+        </div>
         <div className="m-4 mb-5">
           <form className="d-flex flex-column align-items-center justify-content- center w-100">
             <div className="form-group">
