@@ -15,7 +15,7 @@ const Editor = ({ content, toolbarTheme}) =>{
   //   content,
   //   theme: 'bubble'
   // }
-
+  debugger
   const [notebookState, setNotebookState] = useState(content)
   // const [noteState, setNoteState] = useState({note:notebookState.note})
   const [themeState, setThemeState] = useState({ theme: toolbarTheme || "bubble"})

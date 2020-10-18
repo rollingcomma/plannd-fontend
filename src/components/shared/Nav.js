@@ -304,6 +304,7 @@ const Nav = ({feature}) => {
       :
         dropdown_nav}
       <div className="feature-container">
+        {content.currentContent &&
         <Switch>
           <PrivateRoute path="/user/feature/notes">
             <Editor content={content.currentContent} featureName="notes" isPined={content.currentContent && isPined("notes")} handlePinClick={ handlePinClick} />
@@ -320,7 +321,7 @@ const Nav = ({feature}) => {
           <Route >
             <NotFound />
           </Route>
-        </Switch>
+        </Switch>}
       </div>
       
     </div>

@@ -664,4 +664,5 @@ export const deletePin = (projectId, pin) => {
     },
     withCredentials: true
   })
+
 }

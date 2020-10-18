@@ -142,10 +142,12 @@ const Uploader = (
       <form className="d-flex flex-row" onSubmit={handleSubmit(uploadHandle)}>
         <div className="custom-file">
           <input type="file" className="custom-file-input" name="images" onChange={onChange} multiple accept="image/png, image/jpeg, image/jpg"/> 
-            <label className="custom-file-label" htmlFor="images">Choose file</label>
+            <label className="custom-file-label" htmlFor="images">{files? files[0].name:"Choose file"}</label>
         </div>
         {message && <p>{message}</p>}
+        
         <input type='submit' className="btn btn-info ml-3" name="newImage" />
+        <button type='button' className="btn btn-info ml-3" name="cancel" onClick={handleFormState}>Cancel</button>
       </form>
     </div>
   )
