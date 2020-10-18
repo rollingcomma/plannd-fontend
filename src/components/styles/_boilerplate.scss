@@ -35,32 +35,24 @@ body, html {
     justify-content: flex-start; 
     padding-top: 1.5rem;
     row-gap: 1.5rem;
-    align-items: center;
+    padding-left: 0.6rem;
+    align-items: flex-start;
     width: 3rem;
     height:100%;
     background-color: white;
     border-right: 1px solid rgb(197, 197, 197);
     border-radius: 0.1rem;
-    margin: 0 2.3rem 0 0;
+    transition:width 0.5s ease-out 0.3s;
 }
 
-.side-nav-hover {
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start; 
-    padding-top: 1.5rem;
-    row-gap: 1.5rem;
-    padding-left: 0.5rem;
-    align-items: flex-start;
-    width: 6rem;
-    height:100%;
-    background-color: white;
-    border-right: 1px solid rgb(197, 197, 197);
-    border-radius: 0.1rem;
-    margin: 0 2.3rem 0 0;
+.side-nav:hover {
+    width: 10rem;
+    transition:width 0.5s ease-out 0.3s;
+    overflow: hidden;
+
 }
 
-.side-nav-hover a{
+.side-nav a{
     text-decoration: none;
     color: black;
 }
@@ -104,12 +96,26 @@ body, html {
 
 .categories-nav {
     position: relative;
-    height: 50vh;
-    width: 20%;
+    height: 100vh;
+    // width: 95%;
     background-color: white;
-    box-shadow: 0px 0px 0.6rem rgb(197, 197, 197);
     border-radius: 0 0 0.3rem 0.3rem;
-    margin: 0 0.6rem 0 ;
+    margin-top: 1rem;
+    margin-right:1rem;
+    border-right: 1px solid rgb(197, 197, 197);
+    
+}
+.transition {
+    transition: all 1.5s ease;
+}
+
+.w-0 {
+    width:0;
+}
+
+.text-overflow {
+    overflow: hidden;
+    white-space: nowrap;
 }
 
 .top-function-name {

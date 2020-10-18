@@ -31,7 +31,7 @@ const Editable = ({
         <button className="btn btn-link" title="Remove from list" onClick={handleDelete}><img src="/assets/delete.png" className="icon-xsmall" alt="delete" /></button>
       </div>
       ) : (
-        <div onDoubleClick={() => setEditing(true)}>
+          <div onDoubleClick={() => setEditing(true)}>
           {type === "checkbox"?
             <span id={id} className={className}>
               {text || "Editable content"}

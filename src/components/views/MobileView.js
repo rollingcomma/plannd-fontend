@@ -5,6 +5,8 @@ import Nav from '../shared/Nav';
 import PrivateRoute from '../../services/PrivateRoute';
 import Dashboard from '../features/Dashboard';
 import NotFound from '../features/NotFound';
+import MobileProfile from './MobileProfile';
+import Project from '../features/Project';
 import { getGallery, getNotes, getTodos, getLinks } from '../../services/apiAction'
 import { useUserState } from '../../context/customerHook';
 
@@ -101,6 +103,12 @@ const MobileView = () => {
       <Switch>
         <PrivateRoute path="/user/dashboard" >
           <Dashboard />
+        </PrivateRoute>
+        <PrivateRoute path='/user/profile'>
+          <MobileProfile />
+        </PrivateRoute>
+        <PrivateRoute path='/user/project'>
+          <Project />
         </PrivateRoute>
         <PrivateRoute path="/user/feature" >
           {feature && <Nav feature={feature} />}

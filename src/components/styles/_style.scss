@@ -31,6 +31,11 @@
   margin: 0.2rem 1.2rem ;
 }
 
+.icon-navbar {
+  width:1.5rem;
+  height:1.5rem;
+}
+
 .icon-xsmall {
   width:1.2rem;
   height:1.2rem;
@@ -97,15 +102,22 @@ p {
     background-color: white;
 }
 
-.profile-container {
+.profile-sub-container {
   display:flex;
   flex-direction: row;
   min-height: 40vh;
   height:fit-content;
   width: 40%;
-  height:65vh;
+  height:70vh;
+  margin: 0 0.6rem 0 0.6rem;
 }
 
+.profile-container {
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
 .profile-banner {
   position: relative;
 }
@@ -238,7 +250,7 @@ p {
 }
 
 .dashboard-banner{
-  width: 100%;
+  width: 90%;
   height:11rem;
  }
 
@@ -269,8 +281,10 @@ p {
 
 .dashboard-container {
   display:flex;
+  justify-content: center;
+  align-items: center;
   flex-direction: column ;
-  width: 65%;
+  width: 90%;
 }
 
 .countdown-container {
@@ -282,7 +296,7 @@ p {
 }
 
 .dashboard-features-container {
-  width:100%;
+  width:90%;
   display:flex;
   flex-wrap: wrap;
   justify-content: center;
@@ -292,16 +306,19 @@ p {
 
 .dashboard-feature-container {
   margin:1rem;
-  width: 100%;
-  //height:auto;
-  max-height:25rem;
+  width: 46%;
+  height:60vh;
+  max-height:40rem;
   overflow: scroll;
 }
 
 .nav-container {
   display: flex;
   flex-direction: row;
-  width:75%;
+  width:100%;
+  // padding:1rem;
+  border-top: 1px solid rgb(197, 197, 197);
+  position: relative;
 }
 
 .classic-primary {
@@ -361,8 +378,8 @@ p {
   position: relative;
   display:flex;
   flex-direction: column;
-  height: 65vh;
-  width: 20%;
+  height: 70vh;
+  width: 22%;
   margin: 0 0.6rem 0 0.6rem;
 }
 
@@ -393,6 +410,11 @@ p {
   min-height:85vh;
 }
 
+.main-container {
+  width: 95%;
+  display:flex;
+  justify-content: center;
+}
 .selected {
   background-color: #F6F8FF;
 }
@@ -556,7 +578,9 @@ p {
   }
 
 .feature-container{
-  width:50vw;
+  display:flex;
+  justify-content: center;
+  width:100%;
   background-color: white;
   // box-shadow: 0px 0px 0.6rem rgb(197, 197, 197);
   // border-radius: 0.3rem;

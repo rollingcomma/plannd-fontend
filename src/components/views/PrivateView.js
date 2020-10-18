@@ -18,12 +18,6 @@ const PrivateView = ({className}) => {
     <div className={className}>
       <Header />
       <Switch>
-        <PrivateRoute path='/user/profile'>
-          {width > 600 ? <Profile /> : <MobileProfile />}
-        </PrivateRoute>
-        <PrivateRoute path='/user/project'>
-          <Project />
-        </PrivateRoute>
         <PrivateRoute>
           {width > 600? <DesktopView /> : <MobileView />}
         </PrivateRoute>

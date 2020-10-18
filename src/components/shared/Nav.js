@@ -7,8 +7,11 @@ import Links from '../features/Links';
 import Album from '../features/Album';
 import Editable from '../shared/Editable';
 import NotFound from '../features/NotFound';
+import Burger from '../mobiles/Burger';
+import { BarIcon, CloseIcon } from '../features/NavIcon';
 import PrivateRoute from '../../services/PrivateRoute';
 import { useUserState, useWindowDimensions } from '../../context/customerHook';
+
 import { updateAlbum, updateCategory, updateChecklist, updateNotebook, 
         deleteNotebook, deleteCategory, deleteChecklist, deleteAlbum,
         addNotebook, addCategory, addChecklist, addAlbum, addPin, deletePin } from '../../services/apiAction'
@@ -30,6 +33,7 @@ const Nav = ({feature}) => {
   const [newListState, setNewListState] = useState({title:""})
   const [addFormState, setAddFormState] = useState({open:false})
   const [pinState, setPinState] = useState(pins || {})
+  const [navMenuOpen, setNavMenuOpen] = useState(false);
 
   const toggleAddFormHandler = () => {
     setAddFormState({open:!addFormState.open})
@@ -231,61 +235,74 @@ const Nav = ({feature}) => {
      </div>
     
   const normal_nav = 
-    <div className="categories-nav">
-      <div className="top-function-name">
-        <div className={"rectangle-" + content.name}></div>
-        <p id={content._id} className="function-name">{content.name}</p>
-        <div className={"text-banner-" + content.name}></div>
-      </div>
-      <div className="saved-elements-list pt-2">
-        {content.contentArr.length > 0 &&
-          content.contentArr.map((element, index) =>
-            <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${content.currentContent && element._id === content.currentContent._id ? "selected" : ""}`}>
-              <div className='my-3'>
-                <Editable
-                  text={element.title}
-                  childRef={inputRef}
-                  type="text"
-                  index={index}
-                  className="pointer"
-                  handleDelete={() => handleDelete(index)}
-                  onClick={() => handleClickSideNavList(element._id, content.contentArr)}
-                >
-                  <input
-                    id={element._id}
-                    ref={inputRef}
+    <div className={`d-flex flex-column mt-5 transition w-100`}>
+      <div className={`categories-nav text-overflow transition ${navMenuOpen? "w-100":"w-0"}`}>
+        <div className="top-function-name">
+          <div className={"rectangle-" + content.name}></div>
+          <p id={content._id} className="function-name">{content.name}</p>
+          <div className={"text-banner-" + content.name}></div>
+        </div>
+        <div className="saved-elements-list pt-2">
+          {content.contentArr.length > 0 &&
+            content.contentArr.map((element, index) =>
+              <div key={element._id} className={`d-flex align-items-center border-bottom border-secondary ${content.currentContent && element._id === content.currentContent._id ? "selected" : ""}`}>
+                <div className='my-3'>
+                  <Editable
+                    text={element.title}
+                    childRef={inputRef}
                     type="text"
-                    name="title"
-                    value={inputState.title || element.title}
-                    onChange={e => {
-                      setInputState({ title: e.target.value })
-                    }}
-                    onKeyDown={(evt) => { if (evt.key === "Enter") handleOnKeyDown(index) }}
-                  />
-                </Editable>
+                    index={index}
+                    className="pointer text-overflow"
+                    handleDelete={() => handleDelete(index)}
+                    onClick={() => handleClickSideNavList(element._id, content.contentArr)}
+                  >
+                    <input
+                      id={element._id}
+                      ref={inputRef}
+                      type="text"
+                      name="title"
+                      value={inputState.title || element.title}
+                      onChange={e => {
+                        setInputState({ title: e.target.value })
+                      }}
+                      onKeyDown={(evt) => { if (evt.key === "Enter") handleOnKeyDown(index) }}
+                    />
+                  </Editable>
+                </div>
+                {/* <hr/> */}
               </div>
-              {/* <hr/> */}
+            )}
+          <div className="mt-2 text-overflow">
+            {addFormState.open &&
+              <input type="text" name="title" placeholder={`Enter a title`}
+                onChange={e => {
+                  setNewListState({ title: e.target.value })
+                }}
+                onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }} />}
+            <div className="create-icon">
+              <button className="btn btn-link text-dark" onClick={() => toggleAddFormHandler()}>
+                <img src="/assets/add-icon.svg" alt="add" />Create</button>
             </div>
-          )}
-        <div className="mt-2">
-          {addFormState.open &&
-            <input type="text" name="title" placeholder={`Enter a title`}
-              onChange={e => {
-                setNewListState({ title: e.target.value })
-              }}
-              onKeyDown={(evt) => { if (evt.key === "Enter") handleCreateNewList() }} />}
-          <div className="create-icon">
-            <button className="btn btn-link text-dark" onClick={() => toggleAddFormHandler()}>
-              <img src="/assets/add-icon.svg" alt="add" />Create</button>
           </div>
         </div>
       </div>
+      
     </div>
   
   
   return (
     <div className="nav-container">
-      {width > 800? normal_nav:dropdown_nav}
+      {width > 800? 
+        <div className={`transition ${navMenuOpen ? "w-25" : "w-0"}`}>
+            <Burger
+              open={navMenuOpen}
+              setOpen={setNavMenuOpen}
+            />
+          
+          {normal_nav}
+        </div>
+      :
+        dropdown_nav}
       <div className="feature-container">
         <Switch>
           <PrivateRoute path="/user/feature/notes">

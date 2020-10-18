@@ -49,7 +49,7 @@ const ProfileDashboard = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-sub-container">
       <div className="div-shadow profile-content">
         <div className="profile-banner">
           <div className="top-function-name">
@@ -59,7 +59,7 @@ const ProfileDashboard = () => {
           </div>
         </div>
         <div className="d-flex flex-column overflow-auto m-4 checklist-switch">
-          <div className="form-check my-4">
+          <div className="form-check my-3">
             <input className=" form-check-input switch" type="checkbox" 
               name="notes"
               defaultChecked={userState.user.dashboard.notes} 
@@ -68,7 +68,7 @@ const ProfileDashboard = () => {
               Notes
             </label>
           </div>
-          <div className="form-check my-4">
+          <div className="form-check my-3">
             <input className=" form-check-input switch" type="checkbox" 
               name="todos"
               defaultChecked={userState.user.dashboard.todos} 
@@ -77,7 +77,7 @@ const ProfileDashboard = () => {
               To-Dos
             </label>
           </div>
-          <div className="form-check my-4">
+          <div className="form-check my-3">
             <input className=" form-check-input switch" type="checkbox" 
               name="links" 
               defaultChecked={userState.user.dashboard.links} 
@@ -86,7 +86,7 @@ const ProfileDashboard = () => {
               Links
             </label>
           </div>
-          <div className="form-check my-4">
+          <div className="form-check my-3">
             <input className=" form-check-input switch" type="checkbox" 
               name="gallery"
               defaultChecked={userState.user.dashboard.gallery} 
@@ -95,7 +95,7 @@ const ProfileDashboard = () => {
               Image Collection
             </label>
           </div>
-          <div className="form-check my-4">
+          <div className={countdownFormState.open ?"form-check mt-3":"form-check my-3"}>
             <input className=" form-check-input switch" type="checkbox" 
               name="countdown"
               defaultChecked={userState.user.dashboard.countdown} 

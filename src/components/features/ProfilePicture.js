@@ -69,7 +69,7 @@ const ProfilePicture = () => {
   }
 
   return (
-    <div className="profile-container">
+    <div className="profile-sub-container">
       <div className="div-shadow profile-content">
         <div className="profile-banner">
           <div className="top-function-name">

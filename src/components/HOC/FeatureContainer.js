@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FeatureContainer = (Component) => ( ({featureName, content, isPined, handlePinClick}) => {
+const FeatureContainer = (Component) => ( ({featureName, content, isPined, handlePinClick, toolbarTheme}) => {
   
   return (
     <div className="content">
@@ -27,7 +27,7 @@ const FeatureContainer = (Component) => ( ({featureName, content, isPined, handl
         <div className="date-created"><p>{content && content.created_at.substr(0,10)}</p></div>
         <hr />
         <div className="d-flex h-75">
-          <Component content={content}></Component>
+          <Component content={content} toolbarTheme={toolbarTheme}></Component>
         </div>
       </div>
     </div>

@@ -5,20 +5,20 @@ import FeatureContainer from '../HOC/FeatureContainer';
 import { useUserState } from '../../context/customerHook'
 import { updateNotebook } from '../../services/apiAction'
 
-const Editor = ({content}) =>{
+const Editor = ({ content, toolbarTheme}) =>{
   // const Font = ReactQuill.Quill.import('formats/font'); // <<<< ReactQuill exports it
   // Font.whitelist = ['mirza', 'roboto']; // allow ONLY these fonts and the default
   // ReactQuill.Quill.register(Font, true);
-  const editRef = useRef();
-  const initialState = 
-  {
-    content,
-    theme: 'snow'
-  }
+  // const editRef = useRef();
+  // const initialState = 
+  // {
+  //   content,
+  //   theme: 'bubble'
+  // }
 
   const [notebookState, setNotebookState] = useState(content)
   // const [noteState, setNoteState] = useState({note:notebookState.note})
-  const [themeState, setThemeState] = useState({theme:"snow"})
+  const [themeState, setThemeState] = useState({ theme: toolbarTheme || "bubble"})
   const [userState] = useUserState()
   useEffect(() => {
     if(content)
@@ -56,9 +56,9 @@ const Editor = ({content}) =>{
   }
 
     return (
-      <div>
+      <div className="editor-container">
         <ReactQuill
-          theme={themeState.theme || 'snow'}
+          theme={themeState.theme || 'bubble'}
           onChange={handleChange}
           onBlur={handleBlur}
           value={notebookState.note ||''}
@@ -67,14 +67,14 @@ const Editor = ({content}) =>{
           bounds={'.app'}
           placeholder="Start typing something..."
         />
-        <div className="themeSwitcher">
+        {/* <div className="themeSwitcher">
           <label>Theme </label>
           <select onChange={(e) =>
             handleThemeChange(e.target.value)}>
             <option value="snow">Snow</option>
             <option value="bubble">Bubble</option>
           </select>
-        </div>
+        </div> */}
       </div>
     )
   }
@@ -83,11 +83,13 @@ Editor.modules = {
   toolbar: [
     [{ 'header': '1' }, { 'header': '2' }, { 'font': [] }],
     [{ size: [] }],
+    [{ scrollingContainer: '.dashboard-features-container'}],
     ['bold', 'italic', 'underline', 'strike', 'blockquote'],
     [{ 'list': 'ordered' }, { 'list': 'bullet' },
     { 'indent': '-1' }, { 'indent': '+1' }],
     // ['link', 'image', 'video'],
-    ['clean']
+    ['clean'],
+    
   ],
   clipboard: {
     // toggle to add extra line breaks when pasting HTML:
