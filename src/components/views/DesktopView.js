@@ -114,13 +114,13 @@ const DesktopView = () => {
   
   const sideMenu =
     <div className="side-nav text-overflow">
-      <Link to="/user/dashboard" className="d-flex flex-row"><img alt="" src="/assets/dashboard-icon.svg" className={`icon-navbar mr-3 ${pathname === "dashboard" ? "filter-gallery" : ""}`} /> Dashboard</Link>
-      <Link to="/user/feature/notes" className="d-flex flex-row" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon mr-3 ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /> Notes </Link>
-      <Link to="/user/feature/todos" className="d-flex flex-row" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon mr-3 ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /> Todos </Link>
-      <Link to="/user/feature/links" className="d-flex flex-row" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon mr-3 ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /> Links </Link>
-      <Link to="/user/feature/gallery" className="d-flex flex-row" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon mr-3 ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /> Gallery</Link>
-      <Link to="/user/profile" className="d-flex flex-row"><img alt="" src="/assets/gear.png" className={`icon-navbar mr-3 ${pathname === "profile" ? "filter-todos" : ""}`}/> Setting</Link>
-      <Link to="/login" className="d-flex flex-row" onClick={() => handleLogout()}><img alt="" src="/assets/signs.png" className="icon-navbar mr-3 " /> Log Out</Link>
+      <Link to="/user/dashboard" className="d-flex flex-row"><img alt="" src="/assets/dashboard-icon.svg" className={`image-icon icon-navbar mr-3 ${pathname === "dashboard" ? "filter-gallery" : ""}`} /> Dashboard</Link>
+      <Link to="/user/feature/notes" className="d-flex flex-row mt-4" onClick={() => handleFeatureSwitch("notes")}><img alt="" className={`note-icon mr-3 ${pathname === "feature" || pathname === "notes" ? "filter-notes" : ""}`} src="/assets/note-icon.svg" /> Notes </Link>
+      <Link to="/user/feature/todos" className="d-flex flex-row mt-4" onClick={() => handleFeatureSwitch("todos")}><img alt="" className={`todo-icon mr-3 ${pathname === "todos" ? "filter-todos" : ""}`} src="/assets/checkbox-icon.svg" /> Todos </Link>
+      <Link to="/user/feature/links" className="d-flex flex-row mt-4" onClick={() => handleFeatureSwitch("links")}><img alt="" className={`link-icon mr-3 ${pathname === "links" ? "filter-links" : ""}`} src="/assets/link-icon.svg" /> Links </Link>
+      <Link to="/user/feature/gallery" className="d-flex flex-row mt-4" onClick={() => handleFeatureSwitch("gallery")}><img alt="" className={`image-icon mr-3 ${pathname === "gallery" ? "filter-gallery" : ""}`} src="/assets/image-icon.svg" /> Gallery</Link>
+      <Link to="/user/profile" className="d-flex flex-row mt-4"><img alt="" src="/assets/gear.png" className={`todo-icon icon-navbar mr-3 ${pathname === "profile" ? "filter-todos" : ""}`}/> Setting</Link>
+      <Link to="/login" className="d-flex flex-row mt-4" onClick={() => handleLogout()}><img alt="" src="/assets/signs.png" className="link-icon icon-navbar mr-3 " /> Log Out</Link>
       
     </div>
   

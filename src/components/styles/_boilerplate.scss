@@ -34,7 +34,6 @@ body, html {
     flex-direction: column;
     justify-content: flex-start; 
     padding-top: 1.5rem;
-    row-gap: 1.5rem;
     padding-left: 0.6rem;
     align-items: flex-start;
     width: 3rem;
@@ -168,9 +167,9 @@ body, html {
     cursor: pointer;
 }
 
-hr {
-    border: 0.0.3rem solid black;
-}
+// hr {
+//     border: 0.0.3rem solid black;
+// }
 
 .create-icon {
     display: flex;
