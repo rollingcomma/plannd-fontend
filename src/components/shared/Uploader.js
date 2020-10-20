@@ -9,7 +9,7 @@ const Uploader = (
     albumId, 
     handleFormState, 
     handleUpdateState}) => {
-  const baseUrl = "http://craiglist2.s3-website.ca-central-1.amazonaws.com"
+  const baseUrl = "https://craiglist2.s3.amazonaws.com"
   
   const [message, setMessage] = useState("")
   const { handleSubmit} = useForm();
